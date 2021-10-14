@@ -1,0 +1,30 @@
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea {
+  border-radius: toRem(12);
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+select {
+  border: 1px solid $borders;
+}
+
+textarea {
+  width: 100%;
+  min-height: toRem(130);
+  resize: none;
+}

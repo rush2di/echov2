@@ -1,0 +1,66 @@
+.btn {
+  background-color: $color--primary;
+  color: $color--p-0-lighter;
+  border-radius: toRem(12);
+  transition: background-color 0.4s ease-out;
+  @include add-borders($color--p-4);
+  // txt-btn max-w-sm py-1.5 px-6 rounded-md border;
+
+  &:hover &:focus &:active {
+    background-color: darken($color--primary, 15%);
+  }
+
+  &--rounded {
+    border-radius: toRem(18);
+  }
+
+  &--flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &--flex::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 1px;
+    background-color: inherit;
+  }
+
+  &--google {
+    background-color: $color-google-red;
+    @include add-borders(darken($color-google-red, 20%));
+  }
+
+  &--google:hover &--google:focus &--google:active {
+    background-color: darken($color-google-red, 15%);
+  }
+
+  &--facebook {
+    background-color: $color-facebook-blue;
+    @include add-borders(darken($color-facebook-blue, 20%));
+  }
+
+  &--facebook:hover &--facebook:focus &--facebook:active {
+    background-color: darken($color-facebook-blue, 15%);
+  }
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  @extend .btn;
+}
+
+a.btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  @include respond-to("x-small") {
+    width: 100%;
+    justify-content: center;
+  }
+}

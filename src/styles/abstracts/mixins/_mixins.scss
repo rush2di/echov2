@@ -1,0 +1,36 @@
+// Drop shadows
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow; // i-o-s <4.3 & Android <4.1
+  box-shadow: $shadow;
+}
+
+// Placeholder text
+@mixin placeholder($color: $color-placeholders) {
+  &:-moz-placeholder {
+    color: $color;
+  } // Firefox 4-18
+  &::-moz-placeholder {
+    color: $color;
+  } // Firefox 19+
+  &:-ms-input-placeholder {
+    color: $color;
+  } // Internet- Explorer 10+
+  &::-webkit-input-placeholder {
+    color: $color;
+  } // Safari and- Chrome
+}
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+          + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+@mixin add-borders($color) {
+  border: 1px solid $color;
+}
