@@ -1,5 +1,5 @@
 // Drop shadows
-@mixin box-shadow($shadow) {
+@mixin add-shadow($shadow) {
   -webkit-box-shadow: $shadow; // i-o-s <4.3 & Android <4.1
   box-shadow: $shadow;
 }
@@ -31,6 +31,20 @@
   }
 }
 
-@mixin add-borders($color) {
+@mixin add-borders($color, $bg, $radius: $structure-radius-lg) {
   border: 1px solid $color;
+  border-radius: $radius;
+  background-color: $bg;
+}
+
+@mixin add-wrapper($type: "prim", $radius: true) {
+  @if ($type == "prim") {
+    @include add-borders($color-borders, $color-p-3);
+  }
+  @if ($type == "sec") {
+    @include add-borders($color-p-1, $color-p-4);
+  }
+  @if ($radius == false ) {
+    border-radius: 0;
+  }
 }

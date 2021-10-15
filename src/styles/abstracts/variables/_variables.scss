@@ -1,7 +1,7 @@
 /* Color Variabls */
-$color-highlight-1: #5f72a3;
-$color-highlight-2: #5f72a3;
-$color-hover-1: #06080d;
+$color-highlight-1: #6073a41a;
+$color-highlight-2: #6073a426;
+$color-hover-1: #06080d26;
 $color-p-4: #181720;
 $color-p-3: #1f1d2b;
 $color-p-2: #252936;
@@ -22,8 +22,8 @@ $color-facebook-blue: #1e5196;
 $text-h1: 2rem;
 $text-h2: 1.88rem;
 $text-h3: 1.75rem;
-$text-h4: 1.5rem;
-$text-h5: 1.31rem;
+$text-h4: 1.4rem;
+$text-h5: 1.3rem;
 $text-h6: 1.12rem;
 $text-buttons: 1rem;
 $text-paragraphs: 1rem;
@@ -53,6 +53,14 @@ $effect-smooth-shadow-l3: 0px 1.902095913887024px 2.7625679969787598px #0000001a
 $effect-shadow-md-1: 0px 8.640000343322754px 15.09000015258789px #0000001a;
 $effect-shadow-md-2: 0px 12.640000343322754px 25.09000015258789px #00000047;
 $effect-shadow-md-3: 0px 17.639999389648438px 25.09000015258789px #00000054;
+
+$structure-radius-xlg: 1.55rem;
+$structure-radius-lg: 1.25rem;
+$structure-radius-md: 0.85rem;
+$structure-radius-sm: 0.65rem;
+$structure-radius-xsm: 0.35rem;
+
+$easing-expo: cubic-bezier(0.04, 1, 0.85, 1.01);
 
 $breakpoints: (
   "x-small": 500px,

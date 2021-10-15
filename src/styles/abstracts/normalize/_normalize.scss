@@ -4,6 +4,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $color-p-4;
+  color: $color-p-0;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {  
+  height: -webkit-fill-available;
 }
 
 *,
@@ -24,4 +31,5 @@ a:visited,
 button {
   cursor: pointer;
   text-decoration: none;
+  color: inherit;
 }
