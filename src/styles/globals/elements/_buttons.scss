@@ -1,13 +1,13 @@
 .btn {
-  background-color: $color--primary;
-  color: $color--p-0-lighter;
+  background-color: $color-p-2;
+  color: $color-p-0-lighter;
   border-radius: toRem(12);
   transition: background-color 0.4s ease-out;
-  @include add-borders($color--p-4);
+  @include add-borders($color-p-4, $color-p-3);
   // txt-btn max-w-sm py-1.5 px-6 rounded-md border;
 
   &:hover &:focus &:active {
-    background-color: darken($color--primary, 15%);
+    background-color: darken($color-p-2, 15%);
   }
 
   &--rounded {

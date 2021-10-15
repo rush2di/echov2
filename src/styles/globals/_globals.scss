@@ -1,3 +1,5 @@
+@import "./elements/separators";
+
 #root {
   display: flex;
   height: 100vh;
@@ -5,10 +7,19 @@
 }
 
 .app {
-  width: 100%;
-  height: calc(100vh - 4rem);
+  width: 97%;
   max-width: 1270px;
   min-height: 550px;
-  @extend .box-prim;
+  height: calc(100vh - 4rem);
+  position: relative;
+  overflow: hidden;
+  @include add-shadow($effect-smooth-shadow-l2);
+  @include add-wrapper();
   @extend .m-auto;
+
+  @include respond-to("small") {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
 }

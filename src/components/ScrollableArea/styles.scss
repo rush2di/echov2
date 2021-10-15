@@ -1,0 +1,25 @@
+@import "../../styles/abstracts/mixins/mixins";
+@import "../../styles/abstracts/variables/variables";
+
+.scrollable {
+  height: 100%;
+  min-height: -webkit-fill-available;
+  overflow-y: scroll;
+  overflow-y: clip;
+
+  &::-webkit-scrollbar-track {
+    background-color: $color-p-3;
+  }
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color:  $color-p-4;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    margin-top: -0.25rem;
+  }
+}
