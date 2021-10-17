@@ -1,15 +1,18 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Test from "containers/Tests"
+import Layout from "containers/common/Layout";
+import Test from "containers/Tests";
 
 const App = () => (
   <Router>
     <div className="app">
-      <Switch>
-        <Route path="/tests">
-          <Test />
-        </Route>
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route path="/tests">
+            <Test />
+          </Route>
+        </Switch>
+      </Layout>
     </div>
   </Router>
 );

@@ -5,7 +5,7 @@
   height: 100%;
   min-height: -webkit-fill-available;
   overflow-y: scroll;
-  overflow-y: clip;
+  overflow-x: clip;
 
   &::-webkit-scrollbar-track {
     background-color: $color-p-3;

@@ -1,8 +1,8 @@
 import { v4 as uuid } from "uuid";
 
 import ScrollableArea from "components/ScrollableArea";
-import ToggleButton from "./ToggleBtn";
-import MenuItem from "./MenuItem";
+import ToggleButton from "components/ToggleBtn";
+import MenuItem from "components/MenuItem";
 
 import { menuItemsAccount, menuItemsMenu, sideNavText } from "./constants";
 import "./styles.scss";
@@ -22,8 +22,8 @@ const SideNav = () => {
               return <MenuItem key={uuid()} {...item} />;
             })}
           </div>
-          <hr className="mx-0" />
-          <div className="sideNav__body mt-3 mt-md-2">
+          <hr className="mx-0 my-2" />
+          <div className="sideNav__body">
             <h2 className="txt-sm-caps">{sideNavText.account}</h2>
             {menuItemsAccount.map((item) => {
               return <MenuItem key={uuid()} {...item} />;

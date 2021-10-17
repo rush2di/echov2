@@ -1,11 +1,5 @@
-import SideNav from "components/SideNav";
-
-const Test = () => {
-  return (
-    <>
-      <SideNav />
-    </>
-  );
-};
+const Test = () => (
+  <div style={{ width: "100%", height: "100%", border: "1px solid red" }} />
+);
 
 export default Test;
