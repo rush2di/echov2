@@ -1,4 +1,4 @@
-import { MenuItemProps } from "./MenuItem";
+import { MenuItemProps } from "components/MenuItem";
 
 const sideNavText = {
   logo: "Echoboard",

@@ -8,11 +8,14 @@
 
 .app {
   width: 97%;
+  display: grid;
   max-width: 1270px;
   min-height: 550px;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 2rem);
   position: relative;
   overflow: hidden;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto toRem(90);
   @include add-shadow($effect-smooth-shadow-l2);
   @include add-wrapper();
   @extend .m-auto;
