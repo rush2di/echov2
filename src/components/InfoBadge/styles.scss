@@ -1,0 +1,22 @@
+@import "../../styles/abstracts/variables/variables";
+
+.infoBadge {
+  background-color: #0d111bcc;
+  border-radius: $structure-radius-xsm;
+  padding: 0.25rem 0.35rem;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+
+  &__text {
+    color: $color-p-0-lighter;
+  }
+
+  &.--top {
+    margin: 0 0 auto auto;
+  }
+
+  &.--bottom {
+    margin: auto 0 0 auto;
+  }
+}

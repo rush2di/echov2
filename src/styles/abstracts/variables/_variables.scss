@@ -2,6 +2,7 @@
 $color-highlight-1: #6073a41a;
 $color-highlight-2: #6073a426;
 $color-hover-1: #06080d26;
+$color-p-5: #262431;
 $color-p-4: #181720;
 $color-p-3: #1f1d2b;
 $color-p-2: #252936;
@@ -27,8 +28,8 @@ $text-h5: 1.3rem;
 $text-h6: 1.12rem;
 $text-buttons: 1rem;
 $text-paragraphs: 1rem;
-$text-paragraphs-small: 0.88rem;
-$text-small-caps: 0.81rem;
+$text-paragraphs-small: 0.8rem;
+$text-small-caps: 0.8rem;
 $text-line-height-lg: 1.7;
 $text-line-height-md: 1.65;
 $text-line-height-sm: 1.55;
@@ -63,7 +64,7 @@ $structure-radius-xsm: 0.35rem;
 $easing-expo: cubic-bezier(0.04, 1, 0.85, 1.01);
 
 $breakpoints: (
-  "x-small": 500px,
+  "x-small": 660px,
   "small": 767px,
   "medium": 992px,
   "large": 1200px,
