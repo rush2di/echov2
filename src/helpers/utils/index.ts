@@ -20,4 +20,15 @@ const resolveReactionIcon = (
   return !!isHeart ? heartReaction : "fas";
 };
 
-export { toPercentage, toRangePercentage, resolveReactionIcon };
+const parseFeaturedArtists = (artists: string[], separetor: string = ", ") => {
+  return artists.length > 3
+    ? artists.slice(0, 3).join(separetor)
+    : artists.join(separetor);
+};
+
+export {
+  toPercentage,
+  toRangePercentage,
+  resolveReactionIcon,
+  parseFeaturedArtists,
+};

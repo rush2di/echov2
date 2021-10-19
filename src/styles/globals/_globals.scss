@@ -26,3 +26,13 @@
     border-radius: 0;
   }
 }
+
+.container {
+  &__fluid {
+    display: block;
+    padding: 0 2.5rem;
+    @include respond-to("medium") {
+      padding: 0 2rem;
+    }
+  }
+}

@@ -1,0 +1,123 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/mixins/mixins";
+
+.playlistCover {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  @include add-borders($color-borders, $color-p-5, $structure-radius-md);
+  @include add-shadow($effect-smooth-shadow-l2);
+  &.--stacked {
+    height: 200px;
+    max-height: 200px;
+    @include respond-to("x-small") {
+      height: 170px;
+    }
+  }
+  &.--card {
+    height: 255px;
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+    @include respond-to("x-small") {
+      height: 180px;
+    }
+  }
+
+  &.--stacked &__background {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  &.--card &__background {
+    height: 120px;
+    width: 100%;
+    @include respond-to("x-small") {
+      height: 90px;
+    }
+  }
+
+  &__background img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__background .overlay {
+    width: inherit;
+    height: inherit;
+    background: linear-gradient(90deg, #0d111b 3%, #0d111b00 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__flexible {
+    padding: 1rem 1.5rem;
+  }
+
+  &.--stacked &__flexible {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &.--card &__flexible {
+    display: block;
+    position: initial;
+    height: 100%;
+  }
+
+  &.--stacked &__flexible .content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-right: 1rem;
+    width: 50%;
+    @include respond-to("x-small") {
+      width: 100%;
+      .txt-h6 {
+        width: 60%;
+      }
+    }
+  }
+
+  &.--card &__flexible .content {
+    position: initial;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &.--card &__flexible .content .txt-sm {
+    @include truncate($text-paragraphs-small, $text-line-height-md, 2);
+    @include respond-to("x-small") {
+      @include truncate($text-paragraphs-small, $text-line-height-md, 1);
+    }
+  }
+
+  &.--card .infoBadge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;    
+  }
+
+  &.--stacked .infoBadge {
+    @include respond-to("x-small") {
+      position: absolute;
+      right: 1rem;
+    }
+  }
+}
