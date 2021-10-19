@@ -35,22 +35,27 @@
 }
 .txt {
   font-size: $text-paragraphs;
-  line-height: $text-line-height-lg;
+  line-height: $text-line-height-md;
+  font-weight: 400;
+}
+.txt-md {
+  font-size: $text-paragraphs-md;
+  line-height: $text-line-height-md;
   font-weight: 400;
 }
 .txt-sm {
   font-size: $text-paragraphs-small;
-  line-height: $text-line-height-lg;
+  line-height: $text-line-height-md;
   font-weight: 400;
 }
 .txt-sm-bold {
   font-size: $text-paragraphs-small;
-  line-height: $text-line-height-lg;
+  line-height: $text-line-height-md;
   font-weight: 600;
 }
 .txt-sm-caps {
   font-size: $text-paragraphs-small;
-  line-height: $text-line-height-lg;
+  line-height: $text-line-height-md;
   text-transform: uppercase;
   font-weight: 400;
 }

@@ -70,6 +70,10 @@ $_icon_colors: #e24c1d, #1976d2, #77ad1c, #f9a825, #d52b28, #673ab7, #00897b;
     min-width: 70px;
     width: 0%;
   }
+  @include respond-to("x-small") {
+    max-width: 55px;
+    min-width: 55px;
+  }
 
   &__body {
     margin-left: -0.5rem;
@@ -95,6 +99,19 @@ $_icon_colors: #e24c1d, #1976d2, #77ad1c, #f9a825, #d52b28, #673ab7, #00897b;
   &__head h1 {
     @include respond-to("medium") {
       visibility: hidden;
+    }
+  }
+
+  .scrollable {
+    @include respond-to("x-small") {
+      overflow-y: hidden;
+    }
+  }
+
+  .scrollable > div {
+    @include respond-to("x-small") {
+      padding-left: 0.65rem !important;
+      padding-right: 0.65rem !important;
     }
   }
 }
@@ -125,5 +142,8 @@ $_icon_colors: #e24c1d, #1976d2, #77ad1c, #f9a825, #d52b28, #673ab7, #00897b;
     position: absolute;
     font-size: 16px;
     right: -0.25rem;
+  }
+  @include respond-to("x-small") {
+    right: 0;
   }
 }

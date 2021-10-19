@@ -1,4 +1,16 @@
 import { PlaylistCoverProps } from "components/PlaylistCover";
+import { PlaylistItemProps } from "components/PlaylistItem";
+
+const cover =
+  "https://static.overlay-tech.com/assets/f7933cfb-ae5e-4070-bd43-c054b3b9e13e.png";
+
+const playlistTest: PlaylistItemProps[] = [...new Array(100)].map(() => ({
+  rank: "001",
+  image: cover,
+  title: "Blinding lights",
+  artist: "The Weekend",
+  isLiked: false,
+}));
 
 const testProps: PlaylistCoverProps[] = [
   {
@@ -27,4 +39,4 @@ const testProps: PlaylistCoverProps[] = [
   },
 ];
 
-export { testProps };
+export { testProps, playlistTest };

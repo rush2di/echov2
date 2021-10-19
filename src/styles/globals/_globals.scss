@@ -34,5 +34,8 @@
     @include respond-to("medium") {
       padding: 0 2rem;
     }
+    @include respond-to("small") {
+      padding: 0 1.5rem;
+    }
   }
 }
