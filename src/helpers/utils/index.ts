@@ -26,9 +26,14 @@ const parseFeaturedArtists = (artists: string[], separetor: string = ", ") => {
     : artists.join(separetor);
 };
 
+const rankLeftFill = (rank: number) => {
+  return rank.toString().padStart(3, "0");
+};
+
 export {
   toPercentage,
   toRangePercentage,
   resolveReactionIcon,
   parseFeaturedArtists,
+  rankLeftFill
 };

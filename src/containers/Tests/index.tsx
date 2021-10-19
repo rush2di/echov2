@@ -1,6 +1,8 @@
 import PlaylistCover from "components/PlaylistCover";
+import PlaylistItem from "components/PlaylistItem";
 import ScrollableArea from "components/ScrollableArea";
-import { testProps } from "./constants";
+import { rankLeftFill } from "helpers/utils";
+import { playlistTest, testProps } from "./constants";
 
 const Test = () => (
   <ScrollableArea>
@@ -8,6 +10,20 @@ const Test = () => (
       style={{ border: "1px solid red", paddingTop: "1.5rem" }}
       className="container__fluid"
     >
+      <div className="py-4">
+        <div className="row w-100">
+          <div className="col-8 col-sm-12 col-xsm-12">
+            {playlistTest.map((props, i) => {
+              return (
+                <div key={"p" + i}>
+                  <PlaylistItem {...{ ...props, rank: rankLeftFill(i + 1) }} />
+                  <hr className="my-0 w-100 bg-muted"/>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
       <div className="row">
         <div className="col-7 col-md-7 col-sm-6 col-xsm-12">
           <PlaylistCover
