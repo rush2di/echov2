@@ -1,10 +1,7 @@
 import { InfoBadgeDefaults } from "./constants";
+import { InfoBadgeProps } from "./types";
 import "./styles.scss";
 
-export interface InfoBadgeProps {
-  text?: string;
-  position?: "top" | "bottom";
-}
 
 const InfoBadge = ({
   text = InfoBadgeDefaults.text,

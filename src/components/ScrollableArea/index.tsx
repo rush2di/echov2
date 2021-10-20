@@ -1,10 +1,5 @@
-import { ReactNode } from "react";
-
+import { ScrollableAreaProps } from "./types";
 import "./styles.scss";
-
-interface ScrollableAreaProps {
-  children: ReactNode;
-}
 
 const ScrollableArea = ({ children }: ScrollableAreaProps) => {
   return <div className="scrollable">{children}</div>;

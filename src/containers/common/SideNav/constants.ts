@@ -1,9 +1,9 @@
-import { MenuItemProps } from "components/MenuItem";
+import { MenuItemProps } from "components/MenuItem/types";
 
 const sideNavText = {
+  account: "Account",
   logo: "Echoboard",
   menu: "Menu",
-  account: "Account",
 };
 
 const menuItemsMenu: Array<MenuItemProps> = [

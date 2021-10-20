@@ -1,14 +1,8 @@
 import InfoBadge from "components/InfoBadge";
-import { parseFeaturedArtists } from "helpers/utils";
-import "./styles.scss";
 
-export interface PlaylistCoverProps {
-  type: "stacked" | "card";
-  title: string;
-  text?: string;
-  artists: string[];
-  img: string;
-}
+import { parseFeaturedArtists } from "./utils";
+import { PlaylistCoverProps } from "./types";
+import "./styles.scss";
 
 const PlaylistCover = ({
   type,
@@ -17,7 +11,11 @@ const PlaylistCover = ({
   artists,
   img,
 }: PlaylistCoverProps) => {
-  const featuredArtists = parseFeaturedArtists(artists);
+  const featuredArtists = parseFeaturedArtists({
+    pattern: "Featuring #...",
+    modifier: "#",
+    artists,
+  });
 
   return (
     <div className={`playlistCover --${type}`}>
@@ -28,7 +26,7 @@ const PlaylistCover = ({
       <div className="playlistCover__flexible">
         <div className="content">
           <p className="txt-h6 txt-prim">{title}</p>
-          <p className="txt-sm txt-prim">Featuring {featuredArtists}...</p>
+          <p className="txt-sm txt-prim">{featuredArtists}</p>
         </div>
         <InfoBadge text={text} />
       </div>

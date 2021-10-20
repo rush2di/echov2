@@ -1,4 +1,4 @@
-import { InfoBadgeProps } from "./index";
+import { InfoBadgeProps } from "./types";
 
 const InfoBadgeDefaults: InfoBadgeProps = {
   text: "100 tracks",

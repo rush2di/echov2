@@ -1,8 +1,4 @@
-export interface PlayerInfoProps {
-  image: string;
-  title: string;
-  artist: string;
-}
+import { PlayerInfoProps } from "./types";
 
 const PlayerInfo = ({ image, title, artist }: PlayerInfoProps) => {
   return (

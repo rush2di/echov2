@@ -47,8 +47,8 @@
   align-items: center;
 
   img {
-    width: toRem(58);
-    height: toRem(58);
+    width: toRem(45);
+    height: toRem(45);
     object-fit: cover;
     object-position: center;
     border-radius: 0.5rem;
@@ -133,7 +133,7 @@
     height: inherit;
     position: absolute;
     background-color: $color-primary;
-    transition: all 0.5s ease-out;
+    transition: all 0.25s ease-out;
     @include add-shadow($effect-progress-glow);
     position: absolute;
     z-index: 5;
@@ -159,6 +159,12 @@
     z-index: 5;
     top: 0;
     left: 0;
+  }
+
+  .pointer {
+    display: inline-block;
+    width: toRem(20);
+    height: toRem(17);
   }
 
   svg {

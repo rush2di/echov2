@@ -3,6 +3,7 @@ export interface AudioPlayerState {
   currentTrackDuration: number;
   hasError: boolean;
   isPlaying: boolean;
+  isMuted: boolean;
   playerVolume: number | null;
 }
 

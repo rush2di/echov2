@@ -6,6 +6,7 @@ const initState: AudioPlayerState = {
   currentTrackDuration: 0,
   hasError: false,
   isPlaying: false,
+  isMuted: false,
   playerVolume: 1,
 };
 
@@ -17,6 +18,9 @@ const audioPlayerReducer = (state = initState, action: any) => {
       return { ...state, isPlaying: false };
     case playerActions.USER_SET_VOLUME:
       return { ...state, playerVolume: action.payload };
+    case playerActions.USER_MUTE_VOLUME:
+      console.log("called")
+      return { ...state, isMuted: !state.isMuted };
     case playerActions.SET_TRACK_STATE:
       return { ...state, ...action.payload };
     default:

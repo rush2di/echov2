@@ -1,21 +1,17 @@
-import { IconName } from "@fortawesome/fontawesome-common-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 
-export interface MenuItemProps {
-  icon: IconName;
-  text: string;
-  color: string;
-  link?: string;
-}
+import { MenuItemProps } from "./types";
 
 const MenuItem = ({ icon, text, color, link }: MenuItemProps) => {
-  return !!link ? (
-    <NavLink exact to={link} activeClassName="menuItem--active">
-      <Item {...{ icon, text, color }} />
-    </NavLink>
+  const componentProps = { icon, text, color };
+
+  return !link ? (
+    <Item {...componentProps} />
   ) : (
-    <Item {...{ icon, text, color }} />
+    <NavLink exact to={link} activeClassName="menuItem--active">
+      <Item {...componentProps} />
+    </NavLink>
   );
 };
 

@@ -40,6 +40,12 @@ const userSetVolume = (payload: number) => {
   };
 };
 
+const userMuteVolume = () => {
+  return {
+    type: playerActions.USER_MUTE_VOLUME,
+  };
+};
+
 const setTrackState = (payload: SetTrackStatePayload) => {
   return {
     type: playerActions.SET_TRACK_STATE,
@@ -54,5 +60,6 @@ export {
   userChangeAlbum,
   userSetPosition,
   userSetVolume,
-  setTrackState
+  setTrackState,
+  userMuteVolume
 };

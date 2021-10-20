@@ -1,14 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { checkIcon, dropdownIcon } from "./constants";
+import { AvatarProps } from "./types";
 import "./styles.scss";
-
-export interface AvatarProps {
-  includeLabels: boolean;
-  size: "lg" | "sm";
-  image: string;
-  title: string;
-  songNames?: string;
-}
 
 const Avatar = ({
   includeLabels,
@@ -23,7 +17,7 @@ const Avatar = ({
         <img src={image} alt={title} />
         {includeLabels && (
           <div>
-            <FontAwesomeIcon icon={["fas", "check"]} />
+            <FontAwesomeIcon icon={checkIcon} />
           </div>
         )}
       </div>
@@ -32,7 +26,7 @@ const Avatar = ({
           <h4 className="txt-btn txt-sec mr-1">{title}</h4>
           {!includeLabels && (
             <button className="btn-naked txt-btn">
-              <FontAwesomeIcon icon={["fas", "chevron-down"]} />
+              <FontAwesomeIcon icon={dropdownIcon} />
             </button>
           )}
         </div>

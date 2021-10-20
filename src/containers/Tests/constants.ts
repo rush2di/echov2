@@ -1,6 +1,6 @@
-import { AvatarProps } from "components/Avatar";
-import { PlaylistCoverProps } from "components/PlaylistCover";
-import { PlaylistItemProps } from "components/PlaylistItem";
+import { AvatarProps } from "components/Avatar/types";
+import { PlaylistCoverProps } from "components/PlaylistCover/types";
+import { PlaylistItemProps } from "components/PlaylistItem/types";
 
 const cover =
   "https://static.overlay-tech.com/assets/f7933cfb-ae5e-4070-bd43-c054b3b9e13e.png";

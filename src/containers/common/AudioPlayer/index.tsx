@@ -1,7 +1,8 @@
-import { useRef, MutableRefObject } from "react";
+import { useRef, MutableRefObject, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import PlayerButton, { PlayerButtonProps } from "components/PlayerBtn";
+import { PlayerButtonProps } from "components/PlayerBtn/types";
+import PlayerButton from "components/PlayerBtn";
 import PlayerInfo from "components/PlayerInfo";
 import Progress from "components/Progress";
 import Volume from "components/Volume";
@@ -11,10 +12,16 @@ import {
   playerButtonsDefaults,
   playerReactionsDefaults,
 } from "./contants";
-import "./styles.scss";
-import { AudioPlayerState } from "./types";
-import { setTrackState, userPauseTrack, userPlayTrack } from "./actions";
+import {
+  setTrackState,
+  userMuteVolume,
+  userPauseTrack,
+  userPlayTrack,
+  userSetVolume,
+} from "./actions";
 import { toPercentage } from "helpers/utils";
+import { AudioPlayerState } from "./types";
+import "./styles.scss";
 
 const audio =
   "https://cdns-preview-f.dzcdn.net/stream/c-fd9572c7a11401267a6c5c3402254160-3.mp3";
@@ -22,10 +29,10 @@ const audio =
 const AudioPlayer = () => {
   const dispatch = useDispatch();
 
-  const { isPlaying, currentTrackDuration } = useSelector(
-    (state: { player: AudioPlayerState }) => state.player
-  );
+  const { isPlaying, currentTrackDuration, playerVolume, isMuted } =
+    useSelector((state: { player: AudioPlayerState }) => state.player);
 
+  const savedVolumePositionRef = useRef() as MutableRefObject<any>;
   const savedVolumeRef = useRef() as MutableRefObject<any>;
   const animationRef = useRef() as MutableRefObject<any>;
   const progressRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -34,6 +41,7 @@ const AudioPlayer = () => {
 
   const handleMetada = () => {
     savedVolumeRef.current = audioRef.current.volume;
+    savedVolumePositionRef.current = `100%`;
     dispatch(
       setTrackState({
         currentTrackID: 1,
@@ -78,15 +86,38 @@ const AudioPlayer = () => {
     }
   };
 
-  const handleSeekTo = (event) => {
-    const inputRange = (audioRef.current.duration / 100) * event.target.value;
+  const handleSeekTo = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputRange =
+      (audioRef.current.duration / 100) * parseInt(event.currentTarget.value);
     audioRef.current.currentTime = inputRange;
     changeProgressCurrentTime(inputRange);
   };
 
-  const handleVolumeChange = (event) => {
-    volumeRef.current.style.width = `${event.target.value}%`;
-    audioRef.current.volume = event.target.value / 100;
+  const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const clickValue = event.currentTarget.value;
+    const newVolumeValue = parseInt(event.currentTarget.value) / 100;
+
+    savedVolumePositionRef.current = `${clickValue}%`;
+    volumeRef.current.style.width = `${clickValue}%`;
+    audioRef.current.volume = newVolumeValue;
+    dispatch(userSetVolume(newVolumeValue));
+  };
+
+  const toggleMuteVolume = () => {
+    const savedPosition = savedVolumePositionRef.current;
+    const currentPosition = volumeRef.current.style.width;
+
+    console.log({ savedPosition, currentPosition, ref: volumeRef.current });
+
+    if (isMuted) {
+      volumeRef.current.style.width = savedPosition;
+      audioRef.current.volume = playerVolume || 1;
+    } else {
+      savedVolumePositionRef.current = currentPosition;
+      volumeRef.current.style.width = `0%`;
+      audioRef.current.volume = 0;
+    }
+    dispatch(userMuteVolume());
   };
 
   const playButtonProps: PlayerButtonProps = {
@@ -119,7 +150,12 @@ const AudioPlayer = () => {
           <Progress ref={progressRef} onChange={handleSeekTo} />
         </div>
         <div className="audioPlayer__volume">
-          <Volume ref={volumeRef} onChange={handleVolumeChange} />
+          <Volume
+            ref={volumeRef}
+            isMuted={isMuted}
+            onChange={handleVolumeChange}
+            onClick={toggleMuteVolume}
+          />
         </div>
         <div className="audioPlayer__reactions">
           <PlayerButton {...playerReactionsDefaults[0]} />
