@@ -1,14 +1,16 @@
-import { forwardRef, SyntheticEvent } from "react";
+import { forwardRef } from "react";
 
-interface ProgressProps {
-  onClick?: (e: SyntheticEvent) => void;
-  onChange?: (e: SyntheticEvent) => void;
-}
+import { PROGRESS_DEFAULT_VALUE, PROGRESS_TYPE } from "./constants";
+import { ProgressProps } from "./types";
 
-const Progress = forwardRef(({ onClick, onChange }: ProgressProps, ref: any) => {
+const Progress = forwardRef(({ onChange }: ProgressProps, ref: any) => {
   return (
     <div className="progress">
-      <input onChange={onChange} type="range" defaultValue="0" />
+      <input
+        defaultValue={PROGRESS_DEFAULT_VALUE}
+        type={PROGRESS_TYPE}
+        onChange={onChange}
+      />
       <div
         ref={(elem) => (ref.current = elem)}
         className="progress__playedTime"

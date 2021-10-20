@@ -1,5 +1,5 @@
-import { PlayerButtonProps } from "components/PlayerBtn";
-import { PlayerInfoProps } from "components/PlayerInfo";
+import { PlayerButtonProps } from "components/PlayerBtn/types";
+import { PlayerInfoProps } from "components/PlayerInfo/types";
 
 import image from "assets/album_cover.png";
 
@@ -27,8 +27,9 @@ const playerActions = {
   USER_PAUSE_TRACK: "USER_PAUSE_TRACK",
   USER_CHANGE_TRACK: "USER_CHANGE_TRACK",
   USER_CHANGE_ALBUM: "USER_CHANGE_ALBUM",
-  USER_SET_POSITION: "USER_SEEK_INPUT",
-  USER_SET_VOLUME: "USER_VOLUME_INPUT",
+  USER_SET_POSITION: "USER_SET_POSITION",
+  USER_MUTE_VOLUME: "USER_MUTE_VOLUME",
+  USER_SET_VOLUME: "USER_SET_VOLUME",
   SET_TRACK_STATE: "SET_TRACK_STATE",
 };
 

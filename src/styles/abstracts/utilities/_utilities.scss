@@ -95,7 +95,9 @@
 .elevation-3 {
   box-shadow: $effect-smooth-shadow-l3;
 }
-
+.pointer {
+  cursor: pointer;
+}
 .btn-naked {
   border: 0;
   background-color: transparent;

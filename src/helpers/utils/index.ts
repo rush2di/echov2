@@ -20,12 +20,6 @@ const resolveReactionIcon = (
   return !!isHeart ? heartReaction : "fas";
 };
 
-const parseFeaturedArtists = (artists: string[], separetor: string = ", ") => {
-  return artists.length > 3
-    ? artists.slice(0, 3).join(separetor)
-    : artists.join(separetor);
-};
-
 const rankLeftFill = (rank: number) => {
   return rank.toString().padStart(3, "0");
 };
@@ -43,7 +37,6 @@ export {
   toPercentage,
   toRangePercentage,
   resolveReactionIcon,
-  parseFeaturedArtists,
   rankLeftFill,
   artistsNumberToText,
 };

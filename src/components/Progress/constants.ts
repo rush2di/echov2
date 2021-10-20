@@ -1,0 +1,5 @@
+const PROGRESS_TYPE = "range";
+
+const PROGRESS_DEFAULT_VALUE = "100";
+
+export { PROGRESS_TYPE, PROGRESS_DEFAULT_VALUE };

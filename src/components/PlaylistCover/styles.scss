@@ -3,10 +3,21 @@
 
 .playlistCover {
   width: 100%;
-  overflow: hidden;
   position: relative;
   @include add-borders($color-borders, $color-p-5, $structure-radius-md);
-  @include add-shadow($effect-smooth-shadow-l2);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    border-radius: $structure-radius-md;
+    @include add-shadow($effect-smooth-shadow-l2);
+  }
+
   &.--stacked {
     height: 200px;
     max-height: 200px;
@@ -25,12 +36,15 @@
   }
 
   &.--stacked &__background {
+    border-radius: $structure-radius-md;
     position: relative;
     height: 100%;
     width: 100%;
   }
 
   &.--card &__background {
+    border-top-left-radius: $structure-radius-md;
+    border-top-right-radius: $structure-radius-md;
     height: 120px;
     width: 100%;
     @include respond-to("x-small") {
@@ -38,16 +52,56 @@
     }
   }
 
+  &.--stacked &__background img {
+    border-radius: $structure-radius-md;
+  }
+
   &__background img {
     width: inherit;
     height: inherit;
     object-fit: cover;
     object-position: center;
+    border-top-left-radius: $structure-radius-md;
+    border-top-right-radius: $structure-radius-md;
+  }
+
+  &.--stacked &__background {
+    border-radius: $structure-radius-md;
+  }
+
+  &.--stacked &__background .overlay {
+    border-radius: $structure-radius-md;
+  }
+
+  &.--stacked &__background .overlay:after {
+    border-radius: $structure-radius-md;
+  }
+  
+  &.--card &__background .overlay:after {
+    border-top-left-radius: $structure-radius-md;
+    border-top-right-radius: $structure-radius-md;
+  }
+
+  &__background .overlay:after {
+    content: "";
+    position: absolute;
+    background-color: #7ea7ff00;
+    transition: background-color .25s $easing-expo;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &:hover &__background .overlay:after {
+    background-color: #7ea6ff21;
   }
 
   &__background .overlay {
     width: inherit;
     height: inherit;
+    border-top-left-radius: $structure-radius-md;
+    border-top-right-radius: $structure-radius-md;
     background: linear-gradient(90deg, #0d111b 3%, #0d111b00 100%);
     position: absolute;
     top: 0;
@@ -111,7 +165,7 @@
   &.--card .infoBadge {
     position: absolute;
     top: 1rem;
-    right: 1rem;    
+    right: 1rem;
   }
 
   &.--stacked .infoBadge {

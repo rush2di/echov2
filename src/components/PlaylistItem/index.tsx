@@ -1,15 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { ICON_HEART, itemDecorator, itemIconDownload } from "./constants";
 import { resolveReactionIcon } from "helpers/utils";
-
+import { PlaylistItemProps } from "./types";
 import "./styles.scss";
-
-export interface PlaylistItemProps {
-  rank: string;
-  image: string;
-  title: string;
-  artist: string;
-  isLiked: boolean;
-}
 
 const PlaylistItem = ({
   rank,
@@ -24,19 +18,19 @@ const PlaylistItem = ({
     <div className="playlistItem">
       <div className="playlistItem__flex">
         <div className="playlistItem__head txt-btn">
-          <p  className="txt-md txt-sec">{rank}</p>
+          <p className="txt-md txt-sec">{rank}</p>
           <img src={image} alt={title} />
-          <FontAwesomeIcon icon={["fas", "caret-right"]} />
+          <FontAwesomeIcon icon={itemDecorator} />
         </div>
         <div className="playlistItem__body txt-btn">
           <p className="txt-md">{title}</p>
           <p className="txt-md">{artist}</p>
           <div className="reactions">
             <button className="like">
-              <FontAwesomeIcon icon={[iconPrefix, "heart"]} />
+              <FontAwesomeIcon icon={[iconPrefix, ICON_HEART]} />
             </button>
             <button className="download">
-              <FontAwesomeIcon icon={["fas", "download"]} />
+              <FontAwesomeIcon icon={itemIconDownload} />
             </button>
           </div>
         </div>
