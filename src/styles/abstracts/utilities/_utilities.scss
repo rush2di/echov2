@@ -59,6 +59,9 @@
   text-transform: uppercase;
   font-weight: 400;
 }
+.txt-label {
+  color: $color-borders;
+}
 .txt-muted {
   color: $color-p-0;
 }
@@ -67,6 +70,9 @@
 }
 .txt-sec {
   color: $color-p-0-light;
+}
+.txt-no-wrap {
+  white-space: nowrap;
 }
 .bg-prim {
   background-color: $color-p-3;
@@ -88,4 +94,10 @@
 }
 .elevation-3 {
   box-shadow: $effect-smooth-shadow-l3;
+}
+
+.btn-naked {
+  border: 0;
+  background-color: transparent;
+  display: inline-block;
 }

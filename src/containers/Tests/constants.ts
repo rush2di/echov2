@@ -1,8 +1,17 @@
+import { AvatarProps } from "components/Avatar";
 import { PlaylistCoverProps } from "components/PlaylistCover";
 import { PlaylistItemProps } from "components/PlaylistItem";
 
 const cover =
   "https://static.overlay-tech.com/assets/f7933cfb-ae5e-4070-bd43-c054b3b9e13e.png";
+
+const avatarTest: AvatarProps = {
+  includeLabels: true,
+  title: "Kelyan Mbappe",
+  image: cover,
+  size: "sm",
+  songNames: "Blinding Lights, Dance Floor",
+};
 
 const playlistTest: PlaylistItemProps[] = [...new Array(100)].map(() => ({
   rank: "001",
@@ -39,4 +48,4 @@ const testProps: PlaylistCoverProps[] = [
   },
 ];
 
-export { testProps, playlistTest };
+export { testProps, playlistTest, avatarTest };

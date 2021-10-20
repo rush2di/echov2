@@ -1,0 +1,64 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/helpers/helpers";
+@import "../../styles/abstracts/mixins/mixins";
+
+.avatar {
+  $avatar_img_lg: toRem(65);
+  $avatar_img_sm: toRem(40);
+
+  display: flex;
+  align-items: center;
+
+  &__head {
+    position: relative;
+  }
+
+  &__head svg {
+    @include add-borders($color-p-3, $color-primary, $structure-radius-circle);
+    color: $color-p-0-light;
+    position: absolute;
+    font-size: toRem(10);
+    padding: 0.15rem;
+    right: -2px;
+    bottom: 3px;
+  }
+
+  &__head img {
+    border-radius: 50%;
+    object-position: center;
+    object-fit: cover;
+  }
+
+  &.--lg &__head img {
+    height: $avatar_img_lg;
+    width: $avatar_img_lg;
+  }
+
+  &.--sm &__head img {
+    height: $avatar_img_sm;
+    width: $avatar_img_sm;
+  }
+
+  &__body .content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__body p {
+    @include truncate($text-paragraphs-small, $text-line-height-md, 1);
+  }
+
+  &__body button {
+    transition: color 0.4s $easing-expo;
+  }
+
+  &__body button:hover {
+    color: $color-p-0-light;
+  }
+
+  &__body button:active,
+  &__body button:focus,
+  &__body button:focus-within {
+    color: $color-p-0-lighter;
+  }
+}
