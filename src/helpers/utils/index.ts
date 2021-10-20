@@ -30,10 +30,20 @@ const rankLeftFill = (rank: number) => {
   return rank.toString().padStart(3, "0");
 };
 
+const artistsNumberToText = (
+  pattern: string,
+  modifier: string,
+  artistsNumber: number | string
+) => {
+  const modified = artistsNumber.toString();
+  return pattern.replace(modifier, modified);
+};
+
 export {
   toPercentage,
   toRangePercentage,
   resolveReactionIcon,
   parseFeaturedArtists,
-  rankLeftFill
+  rankLeftFill,
+  artistsNumberToText,
 };
