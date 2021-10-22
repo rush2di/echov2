@@ -1,12 +1,13 @@
 import InfoBadge from "components/InfoBadge";
 
+import { BADGE_TEXT, STACKED_UI } from "./constants";
 import { parseFeaturedArtists } from "./utils";
 import { PlaylistCoverProps } from "./types";
 import "./styles.scss";
 
 const PlaylistCover = ({
+  text = BADGE_TEXT,
   type,
-  text,
   title,
   artists,
   img,
@@ -17,6 +18,8 @@ const PlaylistCover = ({
     artists,
   });
 
+  const headingStyles = type === STACKED_UI ? "txt-h6 txt-prim" : "txt txt-sec";
+
   return (
     <div className={`playlistCover --${type}`}>
       <div className="playlistCover__background">
@@ -25,8 +28,8 @@ const PlaylistCover = ({
       </div>
       <div className="playlistCover__flexible">
         <div className="content">
-          <p className="txt-h6 txt-prim">{title}</p>
-          <p className="txt-sm txt-prim">{featuredArtists}</p>
+          <p className={headingStyles}>{title}</p>
+          <p className="txt-sm txt-sec">{featuredArtists}</p>
         </div>
         <InfoBadge text={text} />
       </div>

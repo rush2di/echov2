@@ -19,8 +19,8 @@
   }
 
   &.--stacked {
-    height: 200px;
-    max-height: 200px;
+    height: 210px;
+    max-height: 210px;
     @include respond-to("x-small") {
       height: 170px;
     }
@@ -73,27 +73,23 @@
     border-radius: $structure-radius-md;
   }
 
-  &.--stacked &__background .overlay:after {
+  &.--card:after,
+  &.--stacked:after {
     border-radius: $structure-radius-md;
   }
-  
-  &.--card &__background .overlay:after {
-    border-top-left-radius: $structure-radius-md;
-    border-top-right-radius: $structure-radius-md;
-  }
 
-  &__background .overlay:after {
+  &:after {
     content: "";
     position: absolute;
     background-color: #7ea7ff00;
-    transition: background-color .25s $easing-expo;
+    transition: background-color 0.25s $easing-expo;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
   }
 
-  &:hover &__background .overlay:after {
+  &:hover:after {
     background-color: #7ea6ff21;
   }
 
@@ -110,6 +106,10 @@
 
   &__flexible {
     padding: 1rem 1.5rem;
+  }
+
+  &.--stacked &__flexible .content .txt-h6 {
+    max-width: 120px;
   }
 
   &.--stacked &__flexible {
@@ -140,9 +140,6 @@
     width: 50%;
     @include respond-to("x-small") {
       width: 100%;
-      .txt-h6 {
-        width: 60%;
-      }
     }
   }
 
@@ -156,7 +153,8 @@
   }
 
   &.--card &__flexible .content .txt-sm {
-    @include truncate($text-paragraphs-small, $text-line-height-md, 2);
+    opacity: 0.6;
+    @include truncate($text-paragraphs-small, $text-line-height-md, 1);
     @include respond-to("x-small") {
       @include truncate($text-paragraphs-small, $text-line-height-md, 1);
     }
@@ -164,6 +162,7 @@
 
   &.--card .infoBadge {
     position: absolute;
+    z-index: 10;
     top: 1rem;
     right: 1rem;
   }
@@ -171,6 +170,7 @@
   &.--stacked .infoBadge {
     @include respond-to("x-small") {
       position: absolute;
+      z-index: 10;
       right: 1rem;
     }
   }

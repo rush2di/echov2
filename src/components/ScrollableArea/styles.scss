@@ -17,9 +17,9 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color:  $color-p-4;
-    border-top-left-radius: .25rem;
-    border-bottom-left-radius: .25rem;
+    background-color: $color-p-4;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
     margin-top: -0.25rem;
   }
 }

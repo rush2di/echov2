@@ -1,7 +1,7 @@
 import { PlayerButtonProps } from "components/PlayerBtn/types";
 import { PlayerInfoProps } from "components/PlayerInfo/types";
 
-import image from "assets/album_cover.png";
+import image from "assets/images/album_cover.png";
 
 const playerInfoDefaults: PlayerInfoProps = {
   image,

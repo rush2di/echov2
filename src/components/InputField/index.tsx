@@ -20,7 +20,7 @@ const InputField = ({
   onChange,
   onClick,
 }: InputFieldProps) => {
-  const iconExits = !!icon && name === inputFieldPassword.name;
+  const iconExits = !!icon;
   const isPassword = name === inputFieldPassword.name;
 
   const iconNotice = (
