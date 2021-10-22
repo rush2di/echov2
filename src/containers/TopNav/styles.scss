@@ -1,0 +1,13 @@
+@import "../../styles/abstracts/mixins/mixins";
+@import "../../styles/abstracts/variables/variables";
+
+.topNav {
+  //   position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $color-p-3;
+  top: 0;
+  left: 0;
+  right: 0;
+}

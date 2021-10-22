@@ -1,4 +1,5 @@
 import { IconPrefix } from "@fortawesome/fontawesome-common-types";
+import { buildUrl } from "cloudinary-build-url";
 
 const toPercentage = (fistValue: number, secondValue: number): number => {
   const percentage = (fistValue / secondValue) * 100;

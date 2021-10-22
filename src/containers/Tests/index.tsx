@@ -6,6 +6,7 @@ import { inputFieldPassword } from "components/InputField/constants";
 import PlaylistCover from "components/PlaylistCover";
 import PlaylistItem from "components/PlaylistItem";
 import ScrollableArea from "components/ScrollableArea";
+import { inputFieldSearchBar } from "containers/TopNav/constants";
 import { artistsNumberToText, rankLeftFill } from "helpers/utils";
 import { avatarTest, playlistTest, testProps } from "./constants";
 
@@ -13,26 +14,24 @@ const Test = () => {
   const styles = { border: "1px solid red", height: "100%" };
 
   return (
-    <ScrollableArea>
-      <div style={styles} className="container__fluid pt-2">
-        <DropdownMenu>
-          <div>hello world</div>
-          <div>hello world</div>
-          <div>hello world</div>
-          <div>hello world</div>
-        </DropdownMenu>
-        {/* <SearchBarTesting /> */}
-        {/* <ArtistTableTesting /> */}
-        {/* <Avatar {...avatarTest} /> */}
-        {/* <PlaylistTesting /> */}
-        {/* <CoversTesting />  */}
-      </div>
-    </ScrollableArea>
+    <div style={styles} className="container__fluid pt-2">
+      <DropdownMenu>
+        <div>hello world</div>
+        <div>hello world</div>
+        <div>hello world</div>
+        <div>hello world</div>
+      </DropdownMenu>
+      <SearchBarTesting />
+      <ArtistTableTesting />
+      <Avatar {...avatarTest} />
+      <PlaylistTesting />
+      <CoversTesting /> 
+    </div>
   );
 };
 
 const SearchBarTesting = () => {
-  return <InputField {...inputFieldPassword} />;
+  return <InputField {...inputFieldSearchBar} />;
 };
 
 const ArtistTableTesting = () => (

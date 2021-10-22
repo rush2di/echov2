@@ -9,13 +9,6 @@ const inputFieldStats = {
   error: "error" as StateTypes,
 };
 
-const inputFieldSearchBar: InputFieldProps = {
-  name: "search",
-  type: "text",
-  icon: ["fas", "search"],
-  placeholder: "Search...",
-};
-
 const inputFieldEmail: InputFieldProps = {
   label: "Email",
   name: "email",
@@ -35,7 +28,6 @@ const inputFieldPassword: InputFieldProps = {
 export {
   inputFieldStats,
   inputFieldErrorIcon,
-  inputFieldSearchBar,
   inputFieldEmail,
   inputFieldPassword,
 };
