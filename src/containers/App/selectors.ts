@@ -1,6 +1,5 @@
-import { AppContentType } from "./types";
+import { AppStateType } from "./types";
 
-const selectAppContent = (globalState): AppContentType[] =>
-  globalState.app.data;
+const selectAppContent = (globalState): AppStateType => globalState.app;
 
 export { selectAppContent };

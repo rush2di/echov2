@@ -1,0 +1,24 @@
+.homeError {
+  &__wrapper {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__wrapper span,
+  &__wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 430px !important;
+    min-height: 250px !important;
+    max-height: 322px !important;
+    background-size: cover !important;
+    background-position: center !important;
+    object-fit: cover;
+    object-position: center;
+  }
+}

@@ -6,4 +6,6 @@ export interface PlaylistCoverProps {
   text?: string;
   artists: string[];
   img: string;
+  imgPlaceholder?: string;
+  id: string | number;
 }

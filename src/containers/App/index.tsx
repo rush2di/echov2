@@ -1,15 +1,32 @@
+import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { selectAppContent } from "./selectors";
-import { AppContentType, AppStateType } from "./types";
+import { requestPlaylistsData, setSerializedState } from "./actions";
+import { AppStateType, PlaylistDataType } from "./types";
 
 import Layout from "containers/Layout";
-import Test from "containers/Tests";
+// import Test from "containers/Tests";
 import HomePage from "pages/home";
+import PlaylistPage from "pages/playlist";
 
 const App = () => {
-  const appData = useSelector<AppStateType, AppContentType[]>(selectAppContent);
+  const dispatch = useDispatch();
+  const { data, isLoading, isError } = useSelector<AppStateType, AppStateType>(
+    selectAppContent
+  );
+
+  useEffect(() => {
+    const storedData = sessionStorage.getItem("echoState") as string;
+    const parsedData: { data: PlaylistDataType } = JSON.parse(storedData);
+
+    if (parsedData && parsedData.data !== null) {
+      dispatch(setSerializedState(parsedData));
+    } else {
+      dispatch(requestPlaylistsData());
+    }
+  }, []);
 
   return (
     <Router>
@@ -17,10 +34,10 @@ const App = () => {
         <Layout>
           <Switch>
             <Route exact path="/">
-              <HomePage appData={appData} />
+              <HomePage {...{ data, isLoading, isError }} />
             </Route>
-            <Route path="/tests">
-              <Test />
+            <Route path="/platlist/:id">
+              <PlaylistPage {...{ data, isLoading, isError }} />
             </Route>
           </Switch>
         </Layout>

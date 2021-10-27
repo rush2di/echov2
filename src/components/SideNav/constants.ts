@@ -7,7 +7,7 @@ const sideNavText = {
 };
 
 const menuItemsMenu: Array<MenuItemProps> = [
-  { icon: "home", text: "Discover", color: "color-1", link: "/tests" },
+  { icon: "home", text: "Discover", color: "color-1", link: "/" },
   { icon: "star", text: "Trending", color: "color-2" },
   { icon: "headphones", text: "Streaming", color: "color-3" },
   { icon: "bookmark", text: "Bookmark", color: "color-4" },

@@ -1,7 +1,7 @@
 import ScrollableArea from "components/ScrollableArea";
 import AudioPlayerContainer from "containers/AudioPlayer";
-import SideNavContainer from "containers/SideNav";
-import TopNav from "containers/TopNav";
+import SideNavContainer from "components/SideNav";
+import TopNav from "components/TopNav";
 import { LayoutProps } from "./types";
 import "./styles.scss";
 

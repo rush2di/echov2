@@ -1,10 +1,9 @@
-import content from "assets/content/data.json";
-import { AppContentType } from "./types";
-
-const appData = content.data as AppContentType[];
-
 const appActions = {
   USER_SELECT_PLAYLIST: "USER_SELECT_PLAYLIST",
+  REQUEST_PLAYLISTS_DATA: "REQUEST_PLAYLISTS_DATA",
+  REQUEST_PLAYLISTS_DATA_SUCCESS: "REQUEST_PLAYLISTS_DATA_SUCCESS",
+  REQUEST_PLAYLISTS_DATA_ERROR: "REQUEST_PLAYLISTS_DATA_ERROR",
+  RETRIEVE_SERIALIZED_STATE: "RETRIEVE_SERIALIZED_STATE",
 };
 
-export { appActions, appData };
+export { appActions };

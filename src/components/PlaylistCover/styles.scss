@@ -26,7 +26,7 @@
     }
   }
   &.--card {
-    height: 255px;
+    height: 220px;
     max-height: none;
     display: flex;
     flex-direction: column;
@@ -52,17 +52,25 @@
     }
   }
 
+  &.--stacked &__background .lazy-load-image-loading,
+  &.--stacked &__background .lazy-load-image-loaded,
+  &.--stacked &__background span,
   &.--stacked &__background img {
     border-radius: $structure-radius-md;
   }
 
+  &__background .lazy-load-image-loading,
+  &__background .lazy-load-image-loaded,
+  &__background span,
   &__background img {
-    width: inherit;
-    height: inherit;
-    object-fit: cover;
-    object-position: center;
+    width: inherit !important;
+    height: inherit !important;
+    object-fit: cover !important;
+    object-position: center !important;
     border-top-left-radius: $structure-radius-md;
     border-top-right-radius: $structure-radius-md;
+    background-size: cover !important;
+    background-position: center !important;
   }
 
   &.--stacked &__background {

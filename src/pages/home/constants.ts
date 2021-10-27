@@ -1,4 +1,3 @@
-const FIRST_HEADING = "Discover";
-const SECOND_HEADING = "Explore other tastes of the World";
+const mainCoverCountries: [string, string] = ["Worldwide", "Morocco"];
 
-export { FIRST_HEADING, SECOND_HEADING };
+export { mainCoverCountries };
