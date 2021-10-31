@@ -8,8 +8,12 @@ const MenuItem = ({ icon, text, color, link }: MenuItemProps) => {
 
   return !link ? (
     <Item {...componentProps} />
-  ) : (
+  ) : link === "/" ? (
     <NavLink exact to={link} activeClassName="menuItem--active">
+      <Item {...componentProps} />
+    </NavLink>
+  ) : (
+    <NavLink to={link} activeClassName="menuItem--active">
       <Item {...componentProps} />
     </NavLink>
   );

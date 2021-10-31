@@ -1,0 +1,35 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/mixins/mixins";
+
+hr {
+  @include respond-to("small") {
+    margin-left: 0.5rem !important;
+  }
+}
+
+.item-wrapper-1 {
+  display: flex;
+  flex-direction: column;
+  width: -webkit-fill-available;
+}
+
+.item-wrapper-1 .playlistItem {
+  width: auto;
+}
+
+.item-wrapper-2 {
+  display: flex;
+  position: sticky;
+  top: 1rem;
+  @include respond-to("small") {
+    position: static;
+    margin-left: -0.5rem;
+  }
+}
+
+.no-wrap {
+  flex-wrap: nowrap !important;
+  @include respond-to("small") {
+    flex-wrap: wrap-reverse !important;
+  }
+}

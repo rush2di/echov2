@@ -4,4 +4,8 @@ const checkIcon: IconProp = ["fas", "check"];
 
 const dropdownIcon: IconProp = ["fas", "chevron-down"];
 
-export { checkIcon, dropdownIcon };
+const SM_SIZE = "sm";
+
+const LG_SIZE = "lg";
+
+export { SM_SIZE, LG_SIZE, checkIcon, dropdownIcon };

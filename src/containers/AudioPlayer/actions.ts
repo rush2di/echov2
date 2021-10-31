@@ -1,5 +1,5 @@
-import { playerActions } from "./contants";
-import { SetTrackStatePayload } from "./types";
+import { playerActions, playerButtonsDirections } from "./contants";
+import { SetPlayerStatePayload } from "./types";
 
 const userPlayTrack = () => {
   return {
@@ -13,9 +13,9 @@ const userPauseTrack = () => {
   };
 };
 
-const userChangeTrack = (payload: "forward" | "backward") => {
+const userChangeTrack = (payload: number) => {
   return {
-    type: playerActions.USER_PAUSE_TRACK,
+    type: playerActions.USER_CHANGE_TRACK,
     payload,
   };
 };
@@ -46,7 +46,7 @@ const userMuteVolume = () => {
   };
 };
 
-const setTrackState = (payload: SetTrackStatePayload) => {
+const setPlayerState = (payload: SetPlayerStatePayload) => {
   return {
     type: playerActions.SET_TRACK_STATE,
     payload,
@@ -60,6 +60,6 @@ export {
   userChangeAlbum,
   userSetPosition,
   userSetVolume,
-  setTrackState,
-  userMuteVolume
+  setPlayerState,
+  userMuteVolume,
 };

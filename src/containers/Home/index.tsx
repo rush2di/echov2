@@ -2,7 +2,7 @@ import PlaylistCover from "components/PlaylistCover";
 
 import { CARD_UI, STACKED_UI } from "components/PlaylistCover/constants";
 import { FIRST_HEADING, SECOND_HEADING } from "./constants";
-import { extractFeaturedArtists } from "./utils";
+import { extractFeaturedArtists, extractImageSizes } from "./utils";
 
 const HomeContainer = ({ worldwideCover, moroccoCover, data }) => (
   <div className="py-1">
@@ -12,9 +12,10 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => (
         <PlaylistCover
           id={worldwideCover.id}
           type={STACKED_UI}
-          img={worldwideCover.picture}
-          imgPlaceholder={worldwideCover.picture_small}
           title={worldwideCover.title}
+          src={worldwideCover.picture}
+          placeholder={worldwideCover.picture_small}
+          srcSet={extractImageSizes(worldwideCover)}
           artists={extractFeaturedArtists(worldwideCover.tracks)}
         />
       </div>
@@ -22,9 +23,10 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => (
         <PlaylistCover
           id={moroccoCover.id}
           type={STACKED_UI}
-          img={moroccoCover.picture}
-          imgPlaceholder={moroccoCover.picture_small}
           title={moroccoCover.title}
+          src={moroccoCover.picture}
+          placeholder={moroccoCover.picture_small}
+          srcSet={extractImageSizes(moroccoCover)}
           artists={extractFeaturedArtists(moroccoCover.tracks)}
         />
       </div>
@@ -39,9 +41,10 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => (
           <PlaylistCover
             id={data.id}
             type={CARD_UI}
-            img={data.picture}
-            imgPlaceholder={data.picture_small}
             title={data.title}
+            src={data.picture}
+            placeholder={data.picture_small}
+            srcSet={extractImageSizes(data)}
             artists={extractFeaturedArtists(data.tracks)}
           />
         </div>

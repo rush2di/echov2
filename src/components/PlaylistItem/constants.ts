@@ -6,4 +6,14 @@ const itemIconDownload: IconProp = ["fas", "download"];
 
 const ICON_HEART: IconName = "heart";
 
-export { ICON_HEART, itemDecorator, itemIconDownload };
+const ACTIVE_CLASSNAME = "--is-playing";
+
+const DEFAULT_CLASSNAME = "--is-default";
+
+export {
+  ICON_HEART,
+  itemDecorator,
+  itemIconDownload,
+  ACTIVE_CLASSNAME,
+  DEFAULT_CLASSNAME,
+};

@@ -19,7 +19,7 @@ const HomePage = ({ data, isLoading, isError }: HomePageProps) => {
 
   return (
     <PageError {...{ isLoading, isError }}>
-      {data && (
+      {!!data && (
         <HomeContainer
           worldwideCover={data[worldwidePlaylist]}
           moroccoCover={data[moroccoPlaylist]}

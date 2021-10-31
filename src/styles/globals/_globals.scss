@@ -26,6 +26,11 @@
     height: 100vh;
     border-radius: 0;
   }
+
+  @include respond-to("small") {
+    grid-template-rows: toRem(70) 1fr toRem(88);
+    border: 0;
+  }
 }
 
 .container {

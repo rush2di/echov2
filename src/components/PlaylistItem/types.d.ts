@@ -1,7 +1,12 @@
+import { MouseEventHandler } from "react";
+
 export interface PlaylistItemProps {
+  id?: string;
+  isActive: boolean;
   rank: string;
   image: string;
   title: string;
   artist: string;
   isLiked: boolean;
+  onClick?(e: MouseEvent<HTMLDivElement>): void;
 }

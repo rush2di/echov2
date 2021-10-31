@@ -23,4 +23,6 @@ export interface TrackDataType {
   title: string;
   yt_link: string;
   yt_title: string;
+  preview: string;
+  image?: string;
 }

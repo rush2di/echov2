@@ -3,11 +3,11 @@ import { PlayerInfoProps } from "components/PlayerInfo/types";
 
 import image from "assets/images/album_cover.png";
 
-const playerInfoDefaults: PlayerInfoProps = {
+const playerInfoDefaults = {
   image,
-  title: "Blinding Lights",
-  artist: "The Weekend",
-};
+  title: "loading...",
+  artist: "loading...",
+} as PlayerInfoProps;
 
 const playerButtonsDefaults: PlayerButtonProps[] = [
   { type: "sm", icon: "random" },
@@ -33,9 +33,15 @@ const playerActions = {
   SET_TRACK_STATE: "SET_TRACK_STATE",
 };
 
+const playerButtonsDirections = {
+  forward: "forward",
+  backward: "backward",
+};
+
 export {
   playerInfoDefaults,
   playerButtonsDefaults,
   playerReactionsDefaults,
   playerActions,
+  playerButtonsDirections
 };

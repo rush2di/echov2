@@ -18,3 +18,8 @@ export const parseFeaturedArtists = ({
 
   return pattern.replace(modifier, parsedString);
 };
+
+export const generatTitle = (str: string) => {
+  const [titleMatch] = str.match(/(?<=Top\s).*/gi) as string[];
+  return `Top \nMusic Tracks ${titleMatch}`;
+};

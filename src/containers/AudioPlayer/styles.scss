@@ -11,9 +11,19 @@
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid $color-borders;
-
   @include respond-to("small") {
     height: initial;
+    padding: 0 2rem;
+  }
+  @include respond-to("x-small") {
+    position: relative;
+    padding: 0;
+  }
+
+  &__head {
+    @include respond-to("small") {
+      display: none;
+    }
   }
 
   &__body {
@@ -21,6 +31,16 @@
     align-items: center;
     justify-content: space-between;
     width: calc(100% - 280px);
+    @include respond-to("medium") {
+      width: calc(100% - 220px);
+    }
+    @include respond-to("small") {
+      width: calc(100% - 2rem);
+    }
+    @include respond-to("x-small") {
+      justify-content: center;
+      width: 100%;
+    }
   }
 
   &__buttons {
@@ -28,10 +48,26 @@
     grid-template-columns: repeat(5, auto);
     align-items: center;
     gap: 1rem;
+    @include respond-to("x-small") {
+      position: relative;
+      z-index: 100;
+    }
   }
 
   &__progress {
     width: 100%;
+    @include respond-to("x-small") {
+      margin: 0 !important;
+      position: absolute;
+      z-index: 10;
+      top: -0.5rem;
+    }
+  }
+
+  &__volume {
+    @include respond-to("x-small") {
+      display: none;
+    }
   }
 
   &__reactions {
@@ -40,6 +76,17 @@
     align-items: center;
     padding: 0 2rem;
     gap: 1.5rem;
+    @include respond-to("medium") {
+      padding: 0;
+      padding-right: 2rem;
+    }
+    @include respond-to("x-small") {
+      position: absolute;
+      width: calc(100vw - 4rem);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 !important;
+    }
   }
 }
 
@@ -61,10 +108,14 @@
 
   &__text p:first-child {
     color: $color-p-0-light;
+    max-width: 150px !important;
+    @include truncate($text-buttons, $text-line-height-sm, 2);
   }
 
   &__text p:last-child {
     color: $color-p-0;
+    max-width: 150px !important;
+    @include truncate($text-paragraphs-small, $text-line-height-md, 1);
   }
 }
 
@@ -129,6 +180,9 @@
   position: relative;
   background-color: $color-p-1;
   cursor: pointer;
+  @include respond-to("medium") {
+    min-width: 100px;
+  }
 
   &__playedTime {
     height: inherit;
@@ -150,7 +204,13 @@
 
   &__track {
     position: relative;
-    @extend .progress;
+    width: 100%;
+    height: toRem(8);
+    background-color: $color-p-1;
+    cursor: pointer;
+    @include respond-to("medium") {
+      max-width: 60px !important;
+    }
   }
 
   &__value {

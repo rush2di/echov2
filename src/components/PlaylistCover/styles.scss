@@ -31,7 +31,7 @@
     display: flex;
     flex-direction: column;
     @include respond-to("x-small") {
-      height: 180px;
+      height: 190px;
     }
   }
 
@@ -117,7 +117,9 @@
   }
 
   &.--stacked &__flexible .content .txt-h6 {
-    max-width: 120px;
+    white-space: pre-wrap;
+    max-width: 130px;
+    min-width: 120px;
   }
 
   &.--stacked &__flexible {

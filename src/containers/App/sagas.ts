@@ -6,7 +6,7 @@ import {
   setSerializedState,
 } from "./actions";
 import { appActions } from "./constants";
-import { getPlaylists } from "config/axios";
+import { getPlaylists } from "service/axios";
 import { serilizeData } from "./utils";
 
 function* playlistsSaga() {

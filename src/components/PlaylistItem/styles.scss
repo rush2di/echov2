@@ -17,6 +17,7 @@
     background-color: $color-hover-1;
   }
 
+  &.--is-playing,
   &:active {
     background-color: $color-highlight-1;
   }
@@ -28,7 +29,8 @@
   &:hover svg,
   &:focus svg,
   &:focus-within svg,
-  &:active svg {
+  &:active svg,
+  &.--is-playing {
     color: $color-p-0-light;
   }
 
@@ -52,7 +54,7 @@
   }
 
   &__head {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: toRem(28) 1fr auto;
     gap: 1rem;
     @include respond-to("medium") {
       display: block;

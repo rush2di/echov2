@@ -53,7 +53,7 @@
   display: block;
   display: -webkit-box;
   max-width: 400px;
-  height: $font-size * $line-height * $lines-to-show;
+  max-height: $font-size * $line-height * $lines-to-show;
   font-size: $font-size;
   line-height: $line-height;
   -webkit-line-clamp: $lines-to-show;

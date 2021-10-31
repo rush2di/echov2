@@ -31,16 +31,16 @@ const App = () => {
   return (
     <Router>
       <div className="app">
-        <Layout>
-          <Switch>
+        <Switch>
+          <Layout>
             <Route exact path="/">
               <HomePage {...{ data, isLoading, isError }} />
             </Route>
-            <Route path="/platlist/:id">
+            <Route path="/playlist/:id">
               <PlaylistPage {...{ data, isLoading, isError }} />
             </Route>
-          </Switch>
-        </Layout>
+          </Layout>
+        </Switch>
       </div>
     </Router>
   );

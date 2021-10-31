@@ -2,7 +2,8 @@ import { playerActions } from "./contants";
 import { AudioPlayerState } from "./types";
 
 const initState: AudioPlayerState = {
-  currentTrackID: null,
+  currentPlaylistID: null,
+  currentTrackIndex: null,
   currentTrackDuration: 0,
   hasError: false,
   isPlaying: false,
@@ -19,8 +20,9 @@ const audioPlayerReducer = (state = initState, action: any) => {
     case playerActions.USER_SET_VOLUME:
       return { ...state, playerVolume: action.payload };
     case playerActions.USER_MUTE_VOLUME:
-      console.log("called")
       return { ...state, isMuted: !state.isMuted };
+    case playerActions.USER_CHANGE_TRACK:
+      return { ...state, currentTrackIndex: action.payload };
     case playerActions.SET_TRACK_STATE:
       return { ...state, ...action.payload };
     default:

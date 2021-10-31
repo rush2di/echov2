@@ -1,4 +1,4 @@
-import { TrackDataType } from "containers/App/types";
+import { PlaylistDataType, TrackDataType } from "containers/App/types";
 import _ from "lodash";
 
 const ITERATION_LIMIT = 12;
@@ -11,4 +11,8 @@ const extractFeaturedArtists = (tracks: TrackDataType[]) => {
   return _.uniq(artistsArray);
 };
 
-export { extractFeaturedArtists };
+const extractImageSizes = (data: PlaylistDataType) => {
+  return `${data.picture_medium} 320w, ${data.picture_big} 700w, ${data.picture_xl} 2000w`;
+};
+
+export { extractFeaturedArtists, extractImageSizes };

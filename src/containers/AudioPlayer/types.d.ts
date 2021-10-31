@@ -1,5 +1,9 @@
+import { PlaylistDataType, TrackDataType } from "containers/App/types";
+import { MutableRefObject } from "react";
+
 export interface AudioPlayerState {
-  currentTrackID: string | null;
+  currentPlaylistID: string | number | null;
+  currentTrackIndex: number | null;
   currentTrackDuration: number;
   hasError: boolean;
   isPlaying: boolean;
@@ -7,8 +11,17 @@ export interface AudioPlayerState {
   playerVolume: number | null;
 }
 
-export interface SetTrackStatePayload {
-  currentTrackID: number | null;
-  currentTrackDuration: number;
-  hasError: boolean;
+export interface SetPlayerStatePayload {
+  currentPlaylistID?: string | number | null;
+  currentTrackIndex?: number | null;
+  currentTrackDuration?: number;
+  hasError?: boolean;
+}
+
+export interface UtilsResetAudioArgs {
+  progressRef: MutableRefObject<HTMLDivElement> | any;
+  audioRef: MutableRefObject<HTMLAudioElement> | any;
+  playlistID: number | string | null;
+  isPlaying?: boolean;
+  dispatch?: any;
 }
