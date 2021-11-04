@@ -7,6 +7,22 @@ hr {
   }
 }
 
+.main-wrapper {
+  width: initial;
+  margin-left: -1rem;
+  @include respond-to("small") {
+    margin-left: 0;
+  }
+  @include respond-to("x-small") {
+    width: calc(100% + 1rem);
+  }
+}
+
+.info-wrapper p {
+  margin-left: 0.5rem;
+  margin-top: -1px;
+}
+
 .item-wrapper-1 {
   display: flex;
   flex-direction: column;

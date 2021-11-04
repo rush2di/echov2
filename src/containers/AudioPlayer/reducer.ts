@@ -13,6 +13,8 @@ const initState: AudioPlayerState = {
 
 const audioPlayerReducer = (state = initState, action: any) => {
   switch (action.type) {
+    case playerActions.USER_SELECT_PLAYLIST:
+      return { ...state, currentPlaylistID: action.payload };
     case playerActions.USER_PLAY_TRACK:
       return { ...state, isPlaying: true };
     case playerActions.USER_PAUSE_TRACK:

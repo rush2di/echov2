@@ -19,8 +19,12 @@ const PageError = ({ isLoading, isError, children }: pageErrorProps) => {
             {(src) => <img src={src} alt={IMAGE_ALT} />}
           </ProgressiveImage>
           <div className="mt-2">
-            <h1 className="txt-h6 txt-sec mb-1">{HEADING}</h1>
-            <p className="txt-btn txt-muted">{PARAGRAPH}</p>
+            {children || (
+              <>
+                <h1 className="txt-h6 txt-sec mb-1">{HEADING}</h1>
+                <p className="txt-btn txt-muted">{PARAGRAPH}</p>
+              </>
+            )}
           </div>
         </div>
       ) : (

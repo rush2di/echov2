@@ -3,7 +3,6 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import {
   requestPlaylistsDataError,
   requestPlaylistsDataSuccess,
-  setSerializedState,
 } from "./actions";
 import { appActions } from "./constants";
 import { getPlaylists } from "service/axios";

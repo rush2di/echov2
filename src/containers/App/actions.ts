@@ -27,15 +27,7 @@ const requestPlaylistsDataError = (payload) => {
   };
 };
 
-const userSelectPlaylist = (payload) => {
-  return {
-    type: appActions.USER_SELECT_PLAYLIST,
-    payload,
-  };
-};
-
 export {
-  userSelectPlaylist,
   requestPlaylistsData,
   requestPlaylistsDataSuccess,
   requestPlaylistsDataError,

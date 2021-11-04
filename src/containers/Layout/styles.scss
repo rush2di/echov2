@@ -1,4 +1,17 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/mixins/mixins";
+
 .appWrapper {
   grid-column: 2/3;
   grid-row: 1/3;
+
+  @include respond-to("medium") {
+    width: calc(100% - 4.5rem);
+    margin-left: auto;
+  }
+
+  @include respond-to("x-small") {
+    width: calc(100% - 3.5rem);
+    margin-left: auto;
+  }
 }

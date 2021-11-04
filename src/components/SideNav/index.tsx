@@ -4,16 +4,24 @@ import ScrollableArea from "components/ScrollableArea";
 import ToggleButton from "components/ToggleBtn";
 import MenuItem from "components/MenuItem";
 
-import { menuItemsAccount, menuItemsMenu, sideNavText } from "./constants";
+import {
+  CLASSNAMES_CLOSED,
+  CLASSNAMES_OPENED,
+  menuItemsAccount,
+  menuItemsMenu,
+  sideNavText,
+} from "./constants";
 import "./styles.scss";
 
-const SideNav = () => {
+const SideNav = ({ onClick, isOpen }) => {
+  const classNames = isOpen ? CLASSNAMES_OPENED : CLASSNAMES_CLOSED;
+
   return (
-    <div className="sideNav">
+    <div className={`sideNav ${classNames}`}>
       <ScrollableArea>
         <div className="px-2 px-md-1 py-2">
           <div className="sideNav__head">
-            <ToggleButton />
+            <ToggleButton onClick={onClick} />
             <h1 className="txt-h5 txt-prim">{sideNavText.logo}</h1>
           </div>
           <div className="sideNav__body mt-3 mt-md-2">

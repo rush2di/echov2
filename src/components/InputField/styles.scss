@@ -16,6 +16,7 @@
 
   &__wrapper {
     outline: none;
+    overflow: hidden;
     position: relative;
     width: -webkit-fill-available;
     color: $color-p-0-light;
@@ -95,7 +96,6 @@
   }
 
   .show-icon {
-    margin-right: 0.5rem;
     cursor: pointer;
   }
 }

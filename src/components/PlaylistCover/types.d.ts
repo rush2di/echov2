@@ -10,4 +10,11 @@ export interface PlaylistCoverProps {
   srcSet: string;
   sizes?: string;
   id: string | number;
+  onClick(id: string | number): void;
+}
+
+export interface parseFeaturedArtistsArgs {
+  pattern: string;
+  modifier: string;
+  artists: string[];
 }

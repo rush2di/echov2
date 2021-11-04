@@ -14,13 +14,15 @@ const PlaylistCover = ({
   type,
   title,
   artists,
+  onClick,
   src,
   srcSet,
   placeholder,
   sizes = IMAGE_SIZES,
   text = BADGE_TEXT,
 }: PlaylistCoverProps) => {
-  const headingStyles: string = type === STACKED_UI ? "txt-h6 txt-prim" : "txt txt-sec";
+  const headingStyles: string =
+    type === STACKED_UI ? "txt-h6 txt-prim" : "txt txt-sec";
 
   const featuredArtists: string = parseFeaturedArtists({
     pattern: "Featuring #...",
@@ -29,19 +31,18 @@ const PlaylistCover = ({
   });
 
   return (
-    <Link to={`/playlist/${id}`}>
+    <div onClick={() => onClick(id)}>
       <div className={`playlistCover --${type}`}>
         <div className="playlistCover__background">
           <ProgressiveImage
             src={src}
             placeholder={placeholder}
-            srcSetData={{ srcSet, sizes }}
           >
             {(src, _, srcSetData) => (
               <img
                 src={src}
-                srcSet={srcSetData.srcSet}
-                sizes={srcSetData.sizes}
+                srcSet={srcSet}
+                sizes={sizes}
                 alt={title}
               />
             )}
@@ -56,7 +57,7 @@ const PlaylistCover = ({
           <InfoBadge text={text} />
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

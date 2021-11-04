@@ -14,10 +14,11 @@ import {
   changeProgressCurrentTime,
   resetAudio,
   toPercentage,
-  playlistFilter
+  playlistFilter,
+  startDownload,
 } from "helpers/utils";
 import { selectAppContent } from "containers/App/selectors";
-import { AppStateType } from "containers/App/types";
+import { AppStateType, PlaylistDataType } from "containers/App/types";
 
 import {
   setPlayerState,
@@ -32,18 +33,20 @@ import { findAudioSrc, findTrackInfo } from "./utils";
 import { selectPlayerState } from "./selectors";
 import { AudioPlayerState } from "./types";
 import "./styles.scss";
+import { getDownloadTrack } from "service/axios";
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<{ id: string }>("/playlist/:id");
   const { data } = useSelector<AppStateType, AppStateType>(selectAppContent);
   const {
+    isMuted,
+    hasError,
+    isPlaying,
+    playerVolume,
     currentPlaylistID,
     currentTrackIndex,
-    isPlaying,
     currentTrackDuration,
-    playerVolume,
-    isMuted,
   } = useSelector<AudioPlayerState, AudioPlayerState>(selectPlayerState);
 
   const savedVolumePositionRef = useRef() as MutableRefObject<any>;
@@ -53,8 +56,6 @@ const AudioPlayer = () => {
   const volumeRef = useRef() as MutableRefObject<HTMLInputElement>;
   const playlistRef = useRef() as MutableRefObject<string>;
   const audioRef = useRef() as MutableRefObject<HTMLAudioElement>;
-
-  console.log({currentPlaylistID})
 
   const handleMetada = () => {
     savedVolumeRef.current = audioRef.current.volume;
@@ -70,8 +71,6 @@ const AudioPlayer = () => {
   const handleError = () => {
     dispatch(
       setPlayerState({
-        currentTrackIndex: null,
-        currentTrackDuration: 0,
         hasError: true,
       })
     );
@@ -172,23 +171,24 @@ const AudioPlayer = () => {
     dispatch(userMuteVolume());
   };
 
+  const handleDownload = () => {
+    if (currentPlaylistID === null || data === null) return;
+    const currentPlaylist = playlistFilter(data, currentPlaylistID);
+    const currentTrack = currentPlaylist.tracks[currentTrackIndex as number];
+    startDownload(currentTrack.id);
+  };
+
   useEffect(() => {
     const playlistID = match && match.params.id;
-    const doHyderate = currentPlaylistID === null;
-    const doUpdate =
-      playlistID !== playlistRef.current && currentPlaylistID !== null;
+    const doUpdate = playlistID !== playlistRef.current;
 
     if (match !== null) {
+      playlistRef.current = `${playlistID}`;
       const newState = {
         currentPlaylistID: playlistID,
         currentTrackIndex: 0,
       };
-      if (doHyderate) {
-        playlistRef.current = `${playlistID}`;
-        dispatch(setPlayerState(newState));
-      }
       if (doUpdate) {
-        playlistRef.current = `${playlistID}`;
         resetAudio({
           playlistID: currentPlaylistID,
           progressRef,
@@ -199,6 +199,10 @@ const AudioPlayer = () => {
       }
     }
   }, [match]);
+
+  useEffect(() => {
+    if (hasError) handleNextButton();
+  }, [hasError]);
 
   const playButtonProps: PlayerButtonProps = {
     ...playerButtonsDefaults[2],
@@ -259,7 +263,10 @@ const AudioPlayer = () => {
         </div>
         <div className="audioPlayer__reactions">
           <PlayerButton {...playerReactionsDefaults[0]} />
-          <PlayerButton {...playerReactionsDefaults[1]} />
+          <PlayerButton
+            {...playerReactionsDefaults[1]}
+            onClick={handleDownload}
+          />
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ const InputField = ({
   placeholder,
   onChange,
   onClick,
+  onBlur,
 }: InputFieldProps) => {
   const iconExits = !!icon;
   const isPassword = name === inputFieldPassword.name;
@@ -38,6 +39,7 @@ const InputField = ({
         <input
           placeholder={placeholder}
           onChange={onChange}
+          onBlur={onBlur}
           name={name}
           type={type}
         />

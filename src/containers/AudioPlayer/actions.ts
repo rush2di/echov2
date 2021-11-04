@@ -20,9 +20,10 @@ const userChangeTrack = (payload: number) => {
   };
 };
 
-const userChangeAlbum = () => {
+const userSelectPlaylist = (payload: string | number) => {
   return {
-    type: playerActions.USER_CHANGE_ALBUM,
+    type: playerActions.USER_SELECT_PLAYLIST,
+    payload
   };
 };
 
@@ -57,7 +58,7 @@ export {
   userPlayTrack,
   userPauseTrack,
   userChangeTrack,
-  userChangeAlbum,
+  userSelectPlaylist,
   userSetPosition,
   userSetVolume,
   setPlayerState,

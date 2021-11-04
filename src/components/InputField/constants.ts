@@ -9,9 +9,22 @@ const inputFieldStats = {
   error: "error" as StateTypes,
 };
 
+const defaultFields = {
+  fullname: "fullname",
+  email: "email",
+  password: "password",
+};
+
+const inputFieldName: InputFieldProps = {
+  label: "Fullname",
+  name: defaultFields.fullname,
+  type: "text",
+  placeholder: "Your name...",
+};
+
 const inputFieldEmail: InputFieldProps = {
   label: "Email",
-  name: "email",
+  name: defaultFields.email,
   type: "email",
   icon: ["fas", "envelope"],
   placeholder: "Example@exampl.com...",
@@ -19,7 +32,7 @@ const inputFieldEmail: InputFieldProps = {
 
 const inputFieldPassword: InputFieldProps = {
   label: "Password",
-  name: "password",
+  name: defaultFields.password,
   type: "password",
   icon: ["fas", "eye"],
   placeholder: "Write your password...",
@@ -30,4 +43,6 @@ export {
   inputFieldErrorIcon,
   inputFieldEmail,
   inputFieldPassword,
+  inputFieldName,
+  defaultFields,
 };

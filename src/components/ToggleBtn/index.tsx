@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { toggleBtnIcon } from "./constants";
 
-const ToggleButton = () => {
+const ToggleButton = ({ onClick }) => {
   return (
-    <button className="toggleButton">
+    <button className="toggleButton" onClick={onClick}>
       <FontAwesomeIcon icon={toggleBtnIcon} />
     </button>
   );

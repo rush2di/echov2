@@ -6,17 +6,19 @@ import { MenuItemProps } from "./types";
 const MenuItem = ({ icon, text, color, link }: MenuItemProps) => {
   const componentProps = { icon, text, color };
 
-  return !link ? (
-    <Item {...componentProps} />
-  ) : link === "/" ? (
-    <NavLink exact to={link} activeClassName="menuItem--active">
-      <Item {...componentProps} />
-    </NavLink>
-  ) : (
-    <NavLink to={link} activeClassName="menuItem--active">
-      <Item {...componentProps} />
-    </NavLink>
-  );
+  if (!link) {
+    return <Item {...componentProps} />;
+  } else {
+    return link === "/" ? (
+      <NavLink exact to={link} activeClassName="menuItem--active">
+        <Item {...componentProps} />
+      </NavLink>
+    ) : (
+      <NavLink to={link} activeClassName="menuItem--active">
+        <Item {...componentProps} />
+      </NavLink>
+    );
+  }
 };
 
 const Item = ({ icon, text, color }: MenuItemProps) => (

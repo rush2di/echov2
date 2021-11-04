@@ -3,15 +3,7 @@
 @import "../../styles/abstracts/mixins/mixins";
 
 .artistsTable {
-  $paddings: 1rem 1.25rem 1.5rem;
-
-  @include add-borders($color-p-1, $color-p-4, $structure-radius-md);
-  @include add-shadow($effect-smooth-shadow-l1);
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: $paddings;
-  width: 100%;
+  @include add-dark-wrapper;
 
   &__head,
   &__head > div {

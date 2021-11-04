@@ -1,5 +1,8 @@
 import { MenuItemProps } from "components/MenuItem/types";
 
+const CLASSNAMES_OPENED = "--open";
+const CLASSNAMES_CLOSED = "--close";
+
 const sideNavText = {
   account: "Account",
   logo: "Echoboard",
@@ -9,7 +12,12 @@ const sideNavText = {
 const menuItemsMenu: Array<MenuItemProps> = [
   { icon: "home", text: "Discover", color: "color-1", link: "/" },
   { icon: "star", text: "Trending", color: "color-2" },
-  { icon: "headphones", text: "Streaming", color: "color-3", link: "/playlist/"  },
+  {
+    icon: "headphones",
+    text: "Streaming",
+    color: "color-3",
+    link: "/playlist/"
+  },
   { icon: "bookmark", text: "Bookmark", color: "color-4" },
 ];
 
@@ -19,4 +27,10 @@ const menuItemsAccount: Array<MenuItemProps> = [
   { icon: "ticket-alt", text: "Copouns", color: "color-7" },
 ];
 
-export { sideNavText, menuItemsMenu, menuItemsAccount };
+export {
+  sideNavText,
+  menuItemsMenu,
+  menuItemsAccount,
+  CLASSNAMES_OPENED,
+  CLASSNAMES_CLOSED,
+};

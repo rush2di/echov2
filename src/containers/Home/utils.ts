@@ -11,7 +11,7 @@ const extractFeaturedArtists = (tracks: TrackDataType[]) => {
   return _.uniq(artistsArray);
 };
 
-const extractImageSizes = (data: PlaylistDataType) => {
+const extractImageSizes = (data: PlaylistDataType): string => {
   return `${data.picture_medium} 320w, ${data.picture_big} 700w, ${data.picture_xl} 2000w`;
 };
 

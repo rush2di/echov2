@@ -1,14 +1,36 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+
 import InputField from "components/InputField";
-import { inputFieldSearchBar } from "./constants";
+
+import {
+  authLoginDefaults,
+  authRegisterDefaults,
+  inputFieldSearchBar,
+} from "./constants";
+import { TopNavItemProps, TopNavProps } from "./types";
 import "./styles.scss";
 
-const TopNav = () => (
+const TopNav = ({ userLoggedin }: TopNavProps) => (
   <div className="container__fluid py-1 topNav">
     <div className="row">
-      <div className="col-4">
+      <div className="col-4 col-xsm-12">
         <InputField {...inputFieldSearchBar} />
       </div>
+      <div className="topNav__auth ml-auto mt-1">
+        <TopNavItem {...{ ...authLoginDefaults }} />
+        <TopNavItem {...{ ...authRegisterDefaults }} />
+      </div>
     </div>
+  </div>
+);
+
+const TopNavItem = ({ icon, link, label }: TopNavItemProps) => (
+  <div className="topNav__auth-item ml-2">
+    <Link to={link} className="txt-btn">
+      <FontAwesomeIcon icon={["fas", icon]} />
+      <p className="txt-btn">{label}</p>
+    </Link>
   </div>
 );
 

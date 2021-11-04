@@ -1,0 +1,28 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/helpers/helpers";
+@import "../../styles/abstracts/mixins/mixins";
+
+.authForm {
+  @include add-dark-wrapper;
+  max-width: 300px;
+
+  &__body .inputField__wrapper.--default,
+  &__body .inputField__wrapper.--success,
+  &__body .inputField__wrapper.--error {
+    border-radius: $structure-radius-xsm !important;
+  }
+
+  &__notice {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  &__notice::after,
+  &__notice::before {
+      content: "";
+      width: 100%;
+      height: 1px;
+      background-color: $color-p-0;
+  }
+}

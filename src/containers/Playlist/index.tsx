@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { SyntheticEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -11,7 +12,6 @@ import { generateTitle } from "helpers/utils/playerStringUtils";
 import { AudioPlayerState } from "containers/AudioPlayer/types";
 import { setPlayerState } from "containers/AudioPlayer/actions";
 import { selectPlayerState } from "containers/AudioPlayer/selectors";
-import { PlaylistDataType, TrackDataType } from "containers/App/types";
 
 import {
   resetAudio,
@@ -20,9 +20,14 @@ import {
   artistsNumberToText,
 } from "helpers/utils";
 import { artistsSum, topArtistsTracks } from "./utils";
+import {
+  ARGS_REPLACER,
+  ARGS_TEMPLATE,
+  INFO_TEXT,
+  INFO_ICON,
+} from "./constants";
 import fallbackImage from "assets/images/album_cover.png";
 import "./styles.scss";
-import { ARGS_REPLACER, ARGS_TEMPLATE } from "./constants";
 
 const PlaylistContainer = ({ data }) => {
   const dispatch = useDispatch();
@@ -48,14 +53,16 @@ const PlaylistContainer = ({ data }) => {
     });
   };
 
-  console.log(data, data.title);
-
   return (
     <>
       <h2 className="txt-h6 txt-sec my-1">
         {!!currentPlaylistID && generateTitle(playlistTitle)}
       </h2>
-      <div className="py-1">
+      <div className="info-wrapper d-flex mb-1">
+        <FontAwesomeIcon className="txt-md" icon={INFO_ICON} />
+        <p className="txt-sm">{INFO_TEXT}</p>
+      </div>
+      <div className="py-1 main-wrapper">
         <div className="row no-wrap">
           <div className="col-8 col-sm-12 col-xsm-12">
             {!!currentPlaylistID &&
@@ -87,7 +94,7 @@ const PlaylistContainer = ({ data }) => {
                     artistsSum(playlistTracks)
                   )}
                 >
-                  {topArtistsTracks(playlistTracks).map((val) => {
+                  {topArtistsTracks(playlistTracks)?.map((val) => {
                     return (
                       <Avatar
                         includeLabels

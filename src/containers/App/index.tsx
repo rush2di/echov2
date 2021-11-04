@@ -1,15 +1,21 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAppContent } from "./selectors";
+import Layout from "containers/Layout";
 import { requestPlaylistsData, setSerializedState } from "./actions";
 import { AppStateType, PlaylistDataType } from "./types";
+import { selectAppContent } from "./selectors";
 
-import Layout from "containers/Layout";
-// import Test from "containers/Tests";
-import HomePage from "pages/home";
 import PlaylistPage from "pages/playlist";
+import HomePage from "pages/home";
+import AuthPage from "pages/auth";
+import { LOGIN_AUTH_TYPE, REGISTER_AUTH_TYPE } from "pages/auth/constants";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,8 +42,21 @@ const App = () => {
             <Route exact path="/">
               <HomePage {...{ data, isLoading, isError }} />
             </Route>
+            <Route exact path="/playlist">
+              {data !== null ? (
+                <Redirect to={`/playlist/${data[0].id}`} />
+              ) : (
+                <PlaylistPage {...{ data, isLoading }} isError />
+              )}
+            </Route>
             <Route path="/playlist/:id">
               <PlaylistPage {...{ data, isLoading, isError }} />
+            </Route>
+            <Route exact path="/login">
+              <AuthPage type={LOGIN_AUTH_TYPE} />
+            </Route>
+            <Route exact path="/register">
+              <AuthPage type={REGISTER_AUTH_TYPE} />
             </Route>
           </Layout>
         </Switch>

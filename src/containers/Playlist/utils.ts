@@ -6,8 +6,8 @@ import {
   UTILS_PARAMS_UNIQUE_PROP,
 } from "./constants";
 
-const artistsSum = (tracks: TrackDataType[] | undefined) => {
-  if (!tracks) return;
+const artistsSum = (tracks: TrackDataType[] | undefined): number => {
+  if (!tracks) return -1;
 
   const playlistChunk = _.uniqBy(tracks, UTILS_PARAMS_UNIQUE_PROP);
 
@@ -18,8 +18,15 @@ const artistsSum = (tracks: TrackDataType[] | undefined) => {
   return sum;
 };
 
-const topArtistsTracks = (tracks: TrackDataType[] | undefined) => {
-  if (!tracks) return;
+type topArtistsTracksReturn = {
+  tracks: string;
+  artist_name: string;
+}[];
+
+const topArtistsTracks = (
+  tracks: TrackDataType[] | undefined
+): topArtistsTracksReturn | null => {
+  if (!tracks) return null;
 
   const uniqueArtists = _.uniqBy(
     tracks.slice(0, UTILS_PARAMS_SLICE_LIMIT),
