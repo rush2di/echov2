@@ -5,23 +5,23 @@ import {
   authRegisterError,
   authLoginSuccess,
   authLoginError,
+  authLogoutSuccess,
+  authLogoutError,
 } from "./actions";
 import { authActionTypes } from "./constants";
-import { login, register } from "service/firebaseAuth";
+import { login, logout, register } from "service/firebaseAuth";
 import { getUserData, saveUserToDB } from "service/axios";
 
 function* authSaga() {
-  yield takeLatest(
-    authActionTypes.REQUEST_AUTH_LOGIN_START,
-    postLoginAuthSchema
-  );
+  yield takeLatest(authActionTypes.REQUEST_AUTH_LOGIN_START, postAuthLogin);
   yield takeLatest(
     authActionTypes.REQUEST_AUTH_REGISTER_START,
-    postRegisterAuthSchema
+    postAuthRegister
   );
+  yield takeLatest(authActionTypes.REQUEST_AUTH_LOGOUT_START, postAuthLogout);
 }
 
-function* postRegisterAuthSchema(action) {
+function* postAuthRegister(action) {
   try {
     const response = yield call(register, action.payload);
     const userData = yield call(
@@ -35,13 +35,22 @@ function* postRegisterAuthSchema(action) {
   }
 }
 
-function* postLoginAuthSchema(action) {
+function* postAuthLogin(action) {
   try {
     const response = yield call(login, action.payload);
     const userData = yield call(getUserData, response.user);
     yield put(authLoginSuccess(userData.data));
   } catch (err) {
     yield put(authLoginError());
+  }
+}
+
+function* postAuthLogout() {
+  try {
+    yield call(logout);
+    yield put(authLogoutSuccess());
+  } catch (err) {
+    yield put(authLogoutError());
   }
 }
 

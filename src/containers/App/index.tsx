@@ -49,7 +49,7 @@ const App = () => {
     onAuthStateChanged(auth, (user) => {
       if (!user) return;
       getUserData(user).then((res) => {
-        dispatch(authLoginSuccess(res.data));
+        dispatch(authLoginSuccess(res.data, false));
       });
     });
   }, []);

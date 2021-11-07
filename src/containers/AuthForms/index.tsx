@@ -118,14 +118,11 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
 
   useEffect(() => {
     if (isUserOnline) {
-      toast.success("Successfully logged in");
       timeout = setTimeout(() => {
         history.push("/");
       }, 5000);
     }
-    if (isSubmiting) toast.info("Submited");
-    if (isAuthError) toast.error("Something bad happened");
-
+    
     return () => {
       clearTimeout(timeout);
     };

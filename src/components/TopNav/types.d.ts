@@ -1,6 +1,7 @@
 import { IconName } from "@fortawesome/fontawesome-common-types";
 
 export interface TopNavProps {
+  handleLogout?(e: MouseEvent<HTMLDivElement>): void;
   isUserConnected: boolean;
   userInfo?: any;
 }

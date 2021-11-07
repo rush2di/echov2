@@ -11,9 +11,10 @@ import { LayoutProps } from "./types";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthcurrentUser, selectAuthUserState } from "./selectors";
+import { authLogoutStart } from "containers/AuthForms/actions";
 
 const Layout = ({ children }: LayoutProps) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const isUserConnected = useSelector(selectAuthUserState);
   const userInfo = useSelector(selectAuthcurrentUser);
 
@@ -22,17 +23,11 @@ const Layout = ({ children }: LayoutProps) => {
 
   const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
 
-  const handleMenuToggle = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleMenuToggle = () => setIsOpen(!isOpen);
 
-  const handleMenuItemClick = () => {
-    if (isOpen) setIsOpen(false);
-  };
+  const handleMenuItemClick = () => isOpen && setIsOpen(false);
 
-  const handleLogout = () => {
-    // dispatch(authLogoutStart())
-  }
+  const handleLogout = () => dispatch(authLogoutStart());
 
   useLayoutEffect(() => {
     const childElem = wrapperRef.current.children[0];
@@ -49,7 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
       />
       <div ref={wrapperRef} className="appWrapper">
         <ScrollableArea>
-          <TopNav isUserConnected={isUserConnected} userInfo={userInfo} />
+          <TopNav isUserConnected={isUserConnected} userInfo={userInfo} handleLogout={handleLogout}/>
           <div className="container__fluid">{children}</div>
         </ScrollableArea>
       </div>

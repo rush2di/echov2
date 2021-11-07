@@ -11,7 +11,7 @@ const DropdownMenu = ({ children }: DropdownMenuProps) => {
           Children.map(children, (child) => (
             <li className="dropdownMenu__list-item">
               {cloneElement(child as ReactElement<any>, {
-                className: "txt-btn",
+                className: "txt-sm",
               })}
               <hr />
             </li>

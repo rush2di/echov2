@@ -75,6 +75,29 @@ const authReducer = (state = initState, action) => {
         hasError: true,
         isSubmiting: false,
       };
+    case authActionTypes.REQUEST_AUTH_LOGOUT_START:
+      return {
+        ...state,
+        isSubmiting: true,
+      };
+    case authActionTypes.REQUEST_AUTH_LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isSubmiting: false,
+        isOnline: true,
+        currentUser: {
+          fullname: null,
+          avatar: null,
+          likedTracks: null,
+          downloadedTracks: null,
+        },
+      };
+    case authActionTypes.REQUEST_AUTH_LOGOUT_ERROR:
+      return {
+        ...state,
+        isSubmiting: false,
+        hasError: true,
+      };
     default:
       return state;
   }
