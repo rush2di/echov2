@@ -15,13 +15,22 @@ const getPlaylistData = async (playlistID: string | number) =>
 const getDownloadTrack = async (trackID: string | number) =>
   await request.get(`/api/track/${trackID}`);
 
-const saveUserToDB = (user) => {
+const getUserData = async (user: any) =>
+  await request.get(`/users/auth/${user.uid}`);
+
+const saveUserToDB = async (user: any, displayName: string) => {
   const payload = {
     uid: user.uid,
-    fullname: user.displayName,
+    fullname: displayName,
     email: user.email,
   };
-  request.post(`/register/users/`, payload);
+  return await request.post(`/users/register/${user.uid}`, payload);
 };
 
-export { getPlaylists, getPlaylistData, getDownloadTrack, saveUserToDB };
+export {
+  getPlaylists,
+  getPlaylistData,
+  getDownloadTrack,
+  saveUserToDB,
+  getUserData,
+};

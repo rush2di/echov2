@@ -1,6 +1,9 @@
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import _ from "lodash";
 
 import { LOGIN_AUTH_TYPE, REGISTER_AUTH_TYPE } from "pages/auth/constants";
@@ -25,24 +28,35 @@ import {
   setFieldValidator,
 } from "./utils";
 import {
+  ErrorStateType,
   AuthFormFieldsType,
   AuthFormsContainerProps,
-  ErrorStateType,
 } from "./type";
-import { makeSelectFormFields, makeSelectFormSubmitState } from "./selectors";
+import {
+  makeSelectUserState,
+  makeSelectFormFields,
+  makeSelectFormSubmitState,
+  makeSelectAuthError,
+} from "./selectors";
 import { authRegisterStart, authLoginStart, onAuthInput } from "./actions";
 import "./styles.scss";
 
+const liveAuthState = createStructuredSelector({
+  formFields: makeSelectFormFields(),
+  isSubmiting: makeSelectFormSubmitState(),
+  isUserOnline: makeSelectUserState(),
+  isAuthError: makeSelectAuthError(),
+});
+
 const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
+  let timeout: any = null;
   const isRegister = type === REGISTER_AUTH_TYPE;
 
+  const { formFields, isSubmiting, isUserOnline, isAuthError } =
+    useSelector(liveAuthState);
+
+  const history = useHistory();
   const dispatch = useDispatch();
-  const formFields = useSelector<any, AuthFormFieldsType<string | null>>(
-    makeSelectFormFields()
-  );
-  const isSubmiting = useSelector<any, boolean | null>(
-    makeSelectFormSubmitState()
-  );
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorFields, setErrorFields] = useState<ErrorStateType>({
@@ -101,6 +115,21 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (isUserOnline) {
+      toast.success("Successfully logged in");
+      timeout = setTimeout(() => {
+        history.push("/");
+      }, 5000);
+    }
+    if (isSubmiting) toast.info("Submited");
+    if (isAuthError) toast.error("Something bad happened");
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isSubmiting, isUserOnline, isAuthError]);
 
   return (
     <form className="authForm" autoComplete="off" onSubmit={handleSubmit}>

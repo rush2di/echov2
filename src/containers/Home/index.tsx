@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import {
+  setDefaultPlaylist,
   userChangeTrack,
   userSelectPlaylist,
 } from "containers/AudioPlayer/actions";
@@ -9,6 +10,7 @@ import { CARD_UI, STACKED_UI } from "components/PlaylistCover/constants";
 import { extractFeaturedArtists, extractImageSizes } from "./utils";
 import { FIRST_HEADING, SECOND_HEADING } from "./constants";
 import PlaylistCover from "components/PlaylistCover";
+import { useEffect } from "react";
 
 const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
   const dispatch = useDispatch();
@@ -19,7 +21,11 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
     dispatch(userSelectPlaylist(id));
     history.push(`/playlist/${id}`);
   };
-  
+
+  useEffect(() => {
+    dispatch(setDefaultPlaylist(worldwideCover.id));
+  }, []);
+
   return (
     <div className="py-1">
       <h1 className="txt-h4 txt-prim mb-2">{FIRST_HEADING}</h1>
@@ -30,7 +36,10 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
             type={STACKED_UI}
             title={worldwideCover.title}
             src={worldwideCover.picture}
-            placeholder={worldwideCover.picture_small}
+            placeholder={worldwideCover.picture_small.replace(
+              "q_95",
+              "q_50,w_50"
+            )}
             srcSet={extractImageSizes(worldwideCover)}
             artists={extractFeaturedArtists(worldwideCover.tracks)}
             onClick={handleClick}
@@ -42,7 +51,10 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
             type={STACKED_UI}
             title={moroccoCover.title}
             src={moroccoCover.picture}
-            placeholder={moroccoCover.picture_small}
+            placeholder={moroccoCover.picture_small.replace(
+              "q_95",
+              "q_50,w_50"
+            )}
             srcSet={extractImageSizes(moroccoCover)}
             artists={extractFeaturedArtists(moroccoCover.tracks)}
             onClick={handleClick}
@@ -61,7 +73,7 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
               type={CARD_UI}
               title={data.title}
               src={data.picture}
-              placeholder={data.picture_small}
+              placeholder={data.picture_small.replace("q_95", "q_50,w_50")}
               srcSet={extractImageSizes(data)}
               artists={extractFeaturedArtists(data.tracks)}
               onClick={handleClick}

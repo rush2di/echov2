@@ -1,5 +1,4 @@
 import ProgressiveImage from "react-progressive-graceful-image";
-import { Link } from "react-router-dom";
 
 import { generateTitle } from "helpers/utils/playerStringUtils";
 import InfoBadge from "components/InfoBadge";
@@ -37,15 +36,21 @@ const PlaylistCover = ({
           <ProgressiveImage
             src={src}
             placeholder={placeholder}
+            srcSetData={{
+              srcSet: srcSet,
+              sizes: sizes,
+            }}
           >
-            {(src, _, srcSetData) => (
-              <img
-                src={src}
-                srcSet={srcSet}
-                sizes={sizes}
-                alt={title}
-              />
-            )}
+            {(src, _, srcSetData) => {
+              return (
+                <img
+                  src={src}
+                  srcSet={srcSetData.srcSet}
+                  sizes={srcSetData.sizes}
+                  alt={title}
+                />
+              );
+            }}
           </ProgressiveImage>
           <div className="overlay" />
         </div>

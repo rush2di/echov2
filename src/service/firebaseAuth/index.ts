@@ -1,12 +1,13 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 import { AuthFormFieldsType } from "containers/AuthForms/type";
 import { auth } from "../../firebase";
 
-const signUp = async ({
+const register = async ({
   fullname,
   email,
   password,
@@ -22,8 +23,8 @@ const login = async ({
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
-const logout = () => {
-  auth.signOut();
+const logout = async () => {
+  return await auth.signOut();
 };
 
-export { signUp, login, logout };
+export { register, login, logout };

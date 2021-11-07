@@ -1,7 +1,7 @@
 import _ from "lodash";
 import {
   EMAIL_PATTERN,
-  PASSWORD_PATTERN,
+  PASS_PATTERN,
   WRONG_FIELD_PATTERN,
   SHORT_FIELD_FEEDBACK,
   PASSWORD_FIELD_FEEDBACK,
@@ -59,14 +59,14 @@ const fieldsValidator = (fieldName: fieldsValidatorArgs, value: string) => {
       }
       break;
     case defaultFields.password:
-      if (PASSWORD_PATTERN.test(trimmedValue)) {
+      if (PASS_PATTERN.test(trimmedValue)) {
         return {
           success: true,
           error: false,
           feedback: "",
         };
       }
-      if (!PASSWORD_PATTERN.test(trimmedValue)) {
+      if (!PASS_PATTERN.test(trimmedValue)) {
         return {
           success: false,
           error: true,
@@ -104,7 +104,6 @@ const authFormSuccessCheck = (state: ErrorStateType) => {
   const result = _.every(omitFields, ["success", true]);
   return result;
 };
-
 
 export {
   fieldsValidator,

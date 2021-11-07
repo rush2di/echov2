@@ -23,7 +23,7 @@ const userChangeTrack = (payload: number) => {
 const userSelectPlaylist = (payload: string | number) => {
   return {
     type: playerActions.USER_SELECT_PLAYLIST,
-    payload
+    payload,
   };
 };
 
@@ -54,6 +54,13 @@ const setPlayerState = (payload: SetPlayerStatePayload) => {
   };
 };
 
+const setDefaultPlaylist = (payload: string | number) => {
+  return {
+    type: playerActions.SET_DEFAULT_PLAYLIST,
+    payload,
+  };
+};
+
 export {
   userPlayTrack,
   userPauseTrack,
@@ -63,4 +70,5 @@ export {
   userSetVolume,
   setPlayerState,
   userMuteVolume,
+  setDefaultPlaylist
 };

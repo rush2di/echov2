@@ -8,12 +8,13 @@ import {
   CLASSNAMES_CLOSED,
   CLASSNAMES_OPENED,
   menuItemsAccount,
+  menuItemsAuth,
   menuItemsMenu,
   sideNavText,
 } from "./constants";
 import "./styles.scss";
 
-const SideNav = ({ onClick, isOpen }) => {
+const SideNav = ({ onItemClick, onClick, isOpen, isUserConnected }) => {
   const classNames = isOpen ? CLASSNAMES_OPENED : CLASSNAMES_CLOSED;
 
   return (
@@ -27,15 +28,23 @@ const SideNav = ({ onClick, isOpen }) => {
           <div className="sideNav__body mt-3 mt-md-2">
             <h2 className="txt-sm-caps">{sideNavText.menu}</h2>
             {menuItemsMenu.map((item) => {
-              return <MenuItem key={uuid()} {...item} />;
+              return <MenuItem onClick={onItemClick} key={uuid()} {...item} />;
             })}
           </div>
           <hr className="mx-0 my-2" />
           <div className="sideNav__body">
             <h2 className="txt-sm-caps">{sideNavText.account}</h2>
-            {menuItemsAccount.map((item) => {
-              return <MenuItem key={uuid()} {...item} />;
-            })}
+            {isUserConnected
+              ? menuItemsAccount.map((item) => {
+                  return (
+                    <MenuItem onClick={onItemClick} key={uuid()} {...item} />
+                  );
+                })
+              : menuItemsAuth.map((item) => {
+                  return (
+                    <MenuItem onClick={onItemClick} key={uuid()} {...item} />
+                  );
+                })}
           </div>
         </div>
       </ScrollableArea>

@@ -31,6 +31,7 @@ const playerActions = {
   USER_MUTE_VOLUME: "USER_MUTE_VOLUME",
   USER_SET_VOLUME: "USER_SET_VOLUME",
   SET_TRACK_STATE: "SET_TRACK_STATE",
+  SET_DEFAULT_PLAYLIST: "SET_DEFAULT_PLAYLIST",
 };
 
 const playerButtonsDirections = {

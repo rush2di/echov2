@@ -17,8 +17,8 @@ import {
   playlistFilter,
   startDownload,
 } from "helpers/utils";
-import { selectAppContent } from "containers/App/selectors";
-import { AppStateType, PlaylistDataType } from "containers/App/types";
+import { selectAppState } from "containers/App/selectors";
+import { AppStateType } from "containers/App/types";
 
 import {
   setPlayerState,
@@ -33,12 +33,11 @@ import { findAudioSrc, findTrackInfo } from "./utils";
 import { selectPlayerState } from "./selectors";
 import { AudioPlayerState } from "./types";
 import "./styles.scss";
-import { getDownloadTrack } from "service/axios";
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<{ id: string }>("/playlist/:id");
-  const { data } = useSelector<AppStateType, AppStateType>(selectAppContent);
+  const { data } = useSelector<AppStateType, AppStateType>(selectAppState);
   const {
     isMuted,
     hasError,

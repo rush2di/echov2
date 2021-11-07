@@ -19,4 +19,22 @@ const makeSelectFormSubmitState = () => {
   );
 };
 
-export { selectAuthState, makeSelectFormFields, makeSelectFormSubmitState };
+const makeSelectUserState = () => {
+  return createSelector(selectAuthState, (authForms: AuthFormsReducerType) => {
+    return authForms.isOnline;
+  });
+};
+
+const makeSelectAuthError = () => {
+  return createSelector(selectAuthState, (authForms: AuthFormsReducerType) => {
+    return authForms.hasError;
+  })
+}
+
+export {
+  selectAuthState,
+  makeSelectFormFields,
+  makeSelectFormSubmitState,
+  makeSelectUserState,
+  makeSelectAuthError
+};

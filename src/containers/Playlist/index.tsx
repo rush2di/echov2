@@ -28,16 +28,18 @@ import {
 } from "./constants";
 import fallbackImage from "assets/images/album_cover.png";
 import "./styles.scss";
+import { useParams } from "react-router-dom";
 
 const PlaylistContainer = ({ data }) => {
   const dispatch = useDispatch();
+  const { id: pageID } = useParams<{ id: string }>();
 
   const { currentPlaylistID, currentTrackIndex, isPlaying } = useSelector<
     AudioPlayerState,
     AudioPlayerState
   >(selectPlayerState);
 
-  const currentPlaylist = playlistFilter(data, currentPlaylistID);
+  const currentPlaylist = playlistFilter(data, currentPlaylistID || pageID);
   const playlistTracks = currentPlaylist.tracks;
   const playlistTitle = currentPlaylist.title;
 

@@ -15,9 +15,10 @@ const authRegisterStart = (payload: AuthFormFieldsType<string | null>) => {
   };
 };
 
-const authRegisterSuccess = () => {
+const authRegisterSuccess = (payload: any) => {
   return {
     type: authActionTypes.REQUEST_AUTH_REGISTER_SUCCESS,
+    payload,
   };
 };
 
@@ -34,15 +35,36 @@ const authLoginStart = (payload: AuthFormFieldsType<string | null>) => {
   };
 };
 
-const authLoginSuccess = () => {
+const authLoginSuccess = (payload: any) => {
   return {
     type: authActionTypes.REQUEST_AUTH_LOGIN_SUCCESS,
+    payload,
   };
 };
 
 const authLoginError = () => {
   return {
     type: authActionTypes.REQUEST_AUTH_LOGIN_ERROR,
+  };
+};
+
+const authLogoutStart = (payload: AuthFormFieldsType<string | null>) => {
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGOUT_START,
+    payload,
+  };
+};
+
+const authLogoutSuccess = (payload: any) => {
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGOUT_SUCCESS,
+    payload,
+  };
+};
+
+const authLogoutError = () => {
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGOUT_ERROR,
   };
 };
 
@@ -54,4 +76,7 @@ export {
   authLoginStart,
   authLoginSuccess,
   authLoginError,
+  authLogoutStart,
+  authLogoutSuccess,
+  authLogoutError,
 };

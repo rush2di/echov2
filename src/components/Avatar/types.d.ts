@@ -1,5 +1,5 @@
 export interface AvatarProps {
-  includeLabels: boolean;
+  includeLabels?: boolean;
   size: "lg" | "sm";
   image: string;
   title: string;

@@ -1,10 +1,11 @@
 import { saveUserToDB } from "./axios";
 
 const structureUserDB = (response: any, displayName: any): any => {
+  console.log("called", response, displayName);
   response.user.updateProfile({
     displayName,
   });
-  saveUserToDB(response.user);
+  // return saveUserToDB(response.user);
 };
 
 export { structureUserDB };

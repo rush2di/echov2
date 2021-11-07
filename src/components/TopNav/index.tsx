@@ -10,16 +10,18 @@ import {
 } from "./constants";
 import { TopNavItemProps, TopNavProps } from "./types";
 import "./styles.scss";
+import Avatar from "components/Avatar";
 
-const TopNav = ({ userLoggedin }: TopNavProps) => (
+const TopNav = ({ isUserConnected, userInfo }: TopNavProps) => (
   <div className="container__fluid py-1 topNav">
     <div className="row">
       <div className="col-4 col-xsm-12">
         <InputField {...inputFieldSearchBar} />
       </div>
       <div className="topNav__auth ml-auto mt-1">
-        <TopNavItem {...{ ...authLoginDefaults }} />
-        <TopNavItem {...{ ...authRegisterDefaults }} />
+        {isUserConnected && (
+          <Avatar size="sm" title={userInfo.fullname} image={userInfo.avatar} />
+        )}
       </div>
     </div>
   </div>

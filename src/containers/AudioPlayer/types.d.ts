@@ -2,6 +2,7 @@ import { PlaylistDataType, TrackDataType } from "containers/App/types";
 import { MutableRefObject } from "react";
 
 export interface AudioPlayerState {
+  defaultPlaylistID: string | number | null;
   currentPlaylistID: string | number | null;
   currentTrackIndex: number | null;
   currentTrackDuration: number;

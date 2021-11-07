@@ -5,4 +5,5 @@ export interface MenuItemProps {
   text: string;
   color: string;
   link?: string;
+  onClick?(e: SyntheticEvent<MouseEvent>): void;
 }

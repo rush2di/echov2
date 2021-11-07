@@ -1,27 +1,35 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 
-import { authRegisterSuccess, authRegisterError } from "./actions";
+import {
+  authRegisterSuccess,
+  authRegisterError,
+  authLoginSuccess,
+  authLoginError,
+} from "./actions";
 import { authActionTypes } from "./constants";
-import { signUp } from "service/firebaseAuth";
-import { structureUserDB } from "service";
+import { login, register } from "service/firebaseAuth";
+import { getUserData, saveUserToDB } from "service/axios";
 
 function* authSaga() {
   yield takeLatest(
-    authActionTypes.REQUEST_AUTH_REGISTER_START,
-    postRegisterAuthSchema
-  );
-  yield takeLatest(
     authActionTypes.REQUEST_AUTH_LOGIN_START,
     postLoginAuthSchema
+  );
+  yield takeLatest(
+    authActionTypes.REQUEST_AUTH_REGISTER_START,
+    postRegisterAuthSchema
   );
 }
 
 function* postRegisterAuthSchema(action) {
   try {
-    const response = yield call(signUp, action.payload);
-    yield call(structureUserDB, response, action.payload.displayName);
-    // yield call(serilizeData, response.data);
-    // yield put(authSubmitSuccess(response.data));
+    const response = yield call(register, action.payload);
+    const userData = yield call(
+      saveUserToDB,
+      response.user,
+      action.payload.fullname
+    );
+    yield put(authRegisterSuccess(userData.data));
   } catch (err) {
     yield put(authRegisterError());
   }
@@ -29,13 +37,11 @@ function* postRegisterAuthSchema(action) {
 
 function* postLoginAuthSchema(action) {
   try {
-    const response = yield call(signUp, action.payload);
-    console.log({ response });
-    // yield call(saveUserToDB, response);
-    // yield call(serilizeData, response.data);
-    // yield put(authSubmitSuccess(response.data));
+    const response = yield call(login, action.payload);
+    const userData = yield call(getUserData, response.user);
+    yield put(authLoginSuccess(userData.data));
   } catch (err) {
-    yield put(authRegisterError());
+    yield put(authLoginError());
   }
 }
 

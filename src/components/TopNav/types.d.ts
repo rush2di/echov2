@@ -1,7 +1,8 @@
 import { IconName } from "@fortawesome/fontawesome-common-types";
 
 export interface TopNavProps {
-  userLoggedin?: boolean;
+  isUserConnected: boolean;
+  userInfo?: any;
 }
 
 export interface TopNavItemProps {
