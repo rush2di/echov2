@@ -20,12 +20,14 @@ const PlaylistItem = ({
   isLiked,
   isActive,
   onClick,
+  handleDownload,
+  handleLikeReaction,
 }: PlaylistItemProps) => {
   const iconPrefix = resolveReactionIcon(true, isLiked);
   const stylesLogic = isActive ? ACTIVE_CLASSNAME : DEFAULT_CLASSNAME;
 
   return (
-    <div id={id} className={`playlistItem ${stylesLogic}`} onClick={onClick} >
+    <div id={id} className={`playlistItem ${stylesLogic}`} onClick={onClick}>
       <div className="playlistItem__flex">
         <div className="playlistItem__head txt-btn">
           <p className="txt-md txt-sec">{rank}</p>
@@ -36,10 +38,10 @@ const PlaylistItem = ({
           <p className="txt-md">{title}</p>
           <p className="txt-md">{artist}</p>
           <div className="reactions">
-            <button className="like">
+            <button className="like" onClick={(e) => handleLikeReaction(e, id)}>
               <FontAwesomeIcon icon={[iconPrefix, ICON_HEART]} />
             </button>
-            <button className="download">
+            <button className="download" onClick={handleDownload}>
               <FontAwesomeIcon icon={itemIconDownload} />
             </button>
           </div>

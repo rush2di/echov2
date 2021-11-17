@@ -84,7 +84,7 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         isSubmiting: false,
-        isOnline: true,
+        isOnline: false,
         currentUser: {
           fullname: null,
           avatar: null,

@@ -10,7 +10,6 @@ const artistsSum = (tracks: TrackDataType[] | undefined): number => {
   if (!tracks) return -1;
 
   const playlistChunk = _.uniqBy(tracks, UTILS_PARAMS_UNIQUE_PROP);
-
   const sum = playlistChunk.map((val: TrackDataType) => {
     return val[UTILS_PARAMS_UNIQUE_PROP];
   }).length;
@@ -21,6 +20,7 @@ const artistsSum = (tracks: TrackDataType[] | undefined): number => {
 type topArtistsTracksReturn = {
   tracks: string;
   artist_name: string;
+  artist_picture: string;
 }[];
 
 const topArtistsTracks = (
@@ -33,7 +33,7 @@ const topArtistsTracks = (
     UTILS_PARAMS_UNIQUE_PROP
   );
 
-  const chunks = uniqueArtists.map(({ artist_name }) => {
+  const chunks = uniqueArtists.map(({ artist_name, artist_picture }) => {
     let newTracks: TrackDataType[] | null = null;
 
     const foundTracks = tracks.filter((track: TrackDataType) => {
@@ -48,7 +48,7 @@ const topArtistsTracks = (
 
     const tracksTitles = newTracks.map((track: TrackDataType) => track.title);
 
-    return { artist_name, tracks: tracksTitles };
+    return { artist_name, artist_picture, tracks: tracksTitles };
   });
 
   const sortedResults = _.sortBy(chunks, (val) => val.tracks.length)

@@ -1,17 +1,23 @@
-import { MutableRefObject, useLayoutEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import {
+  MutableRefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 
+import { authLogoutStart } from "containers/AuthForms/actions";
 import AudioPlayerContainer from "containers/AudioPlayer";
 import ScrollableArea from "components/ScrollableArea";
 import SideNavContainer from "components/SideNav";
 import TopNav from "components/TopNav";
 
+import { selectAuthcurrentUser, selectAuthUserState } from "./selectors";
 import { scrollParams } from "./constatns";
 import { LayoutProps } from "./types";
 import "./styles.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAuthcurrentUser, selectAuthUserState } from "./selectors";
-import { authLogoutStart } from "containers/AuthForms/actions";
 
 const Layout = ({ children }: LayoutProps) => {
   const dispatch = useDispatch();
@@ -20,6 +26,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const location = useLocation<Location>();
+  const history = useHistory<History>();
 
   const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
 
@@ -34,6 +41,12 @@ const Layout = ({ children }: LayoutProps) => {
     if (!!childElem) childElem.scrollTo(scrollParams);
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (isUserConnected !== null) {
+      history.push("/");
+    }
+  }, [isUserConnected]);
+
   return (
     <>
       <SideNavContainer
@@ -44,7 +57,11 @@ const Layout = ({ children }: LayoutProps) => {
       />
       <div ref={wrapperRef} className="appWrapper">
         <ScrollableArea>
-          <TopNav isUserConnected={isUserConnected} userInfo={userInfo} handleLogout={handleLogout}/>
+          <TopNav
+            isUserConnected={isUserConnected}
+            userInfo={userInfo}
+            handleLogout={handleLogout}
+          />
           <div className="container__fluid">{children}</div>
         </ScrollableArea>
       </div>

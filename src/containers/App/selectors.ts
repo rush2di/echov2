@@ -1,5 +1,6 @@
-import { AudioPlayerState } from "containers/AudioPlayer/types";
 import { createSelector } from "reselect";
+
+import { AudioPlayerState } from "containers/AudioPlayer/types";
 import { AppStateType } from "./types";
 
 const selectAppState = (globalState): AppStateType => globalState.app;

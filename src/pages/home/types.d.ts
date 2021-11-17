@@ -1,3 +1,5 @@
-import { AppContentType, AppStateType } from "containers/App/types";
+import { PlaylistDataType } from "containers/App/types";
 
-export interface HomePageProps extends AppStateType {}
+export interface HomePageProps {
+  data: PlaylistDataType[];
+}

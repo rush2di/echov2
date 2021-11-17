@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { SyntheticEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import PlaylistItem from "components/PlaylistItem";
 import ArtistsTable from "components/ArtistsTable";
+import AdsBanner from "components/AdsBanner";
 import Avatar from "components/Avatar";
 
 import { SM_SIZE } from "components/Avatar/constants";
@@ -18,6 +20,7 @@ import {
   rankLeftFill,
   playlistFilter,
   artistsNumberToText,
+  startDownload,
 } from "helpers/utils";
 import { artistsSum, topArtistsTracks } from "./utils";
 import {
@@ -25,10 +28,10 @@ import {
   ARGS_TEMPLATE,
   INFO_TEXT,
   INFO_ICON,
+  ADVERTISMENT_IMAGE,
+  ADVERTISMENT_ALT,
 } from "./constants";
-import fallbackImage from "assets/images/album_cover.png";
 import "./styles.scss";
-import { useParams } from "react-router-dom";
 
 const PlaylistContainer = ({ data }) => {
   const dispatch = useDispatch();
@@ -42,6 +45,18 @@ const PlaylistContainer = ({ data }) => {
   const currentPlaylist = playlistFilter(data, currentPlaylistID || pageID);
   const playlistTracks = currentPlaylist.tracks;
   const playlistTitle = currentPlaylist.title;
+
+  const handleLikeReaction = (e: SyntheticEvent<HTMLDivElement, MouseEvent>, id: string) => {
+    e.stopPropagation();
+    console.log("liked song id ==>", id)
+  }
+
+  const handleDownload = (e: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    const currentPlaylist = playlistFilter(data, currentPlaylistID);
+    const currentTrack = currentPlaylist.tracks[currentTrackIndex as number];
+    startDownload(currentTrack.id);
+  };
 
   const handleClick = (e: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
     const newtrackIndex = parseInt(e.currentTarget.id);
@@ -72,11 +87,13 @@ const PlaylistContainer = ({ data }) => {
                 return (
                   <div className="item-wrapper-1" key={uuidv4()}>
                     <PlaylistItem
-                      id={`${track.rank - 1}`}
+                      id={track.id}
                       isActive={currentTrackIndex === index}
                       rank={rankLeftFill(track.rank)}
+                      handleDownload={handleDownload}
+                      handleLikeReaction={handleLikeReaction}
                       artist={track.artist_name}
-                      image={fallbackImage}
+                      image={track.cover_medium}
                       onClick={handleClick}
                       title={track.title}
                       isLiked={false}
@@ -88,27 +105,36 @@ const PlaylistContainer = ({ data }) => {
           </div>
           <div className="col-4 col-sm-12 col-xsm-12">
             <div className="item-wrapper-2">
-              {!!playlistTracks && (
-                <ArtistsTable
-                  label={artistsNumberToText(
-                    ARGS_TEMPLATE,
-                    ARGS_REPLACER,
-                    artistsSum(playlistTracks)
-                  )}
-                >
-                  {topArtistsTracks(playlistTracks)?.map((val) => {
-                    return (
-                      <Avatar
-                        includeLabels
-                        image={fallbackImage}
-                        title={val.artist_name}
-                        songNames={val.tracks}
-                        size={SM_SIZE}
-                      />
-                    );
-                  })}
-                </ArtistsTable>
-              )}
+              <div>
+                {!!playlistTracks && (
+                  <ArtistsTable
+                    label={artistsNumberToText(
+                      ARGS_TEMPLATE,
+                      ARGS_REPLACER,
+                      artistsSum(playlistTracks)
+                    )}
+                  >
+                    {topArtistsTracks(playlistTracks)?.map((val) => {
+                      return (
+                        <Avatar
+                          key={uuidv4()}
+                          includeLabels
+                          image={val.artist_picture}
+                          title={val.artist_name}
+                          songNames={val.tracks}
+                          size={SM_SIZE}
+                        />
+                      );
+                    })}
+                  </ArtistsTable>
+                )}
+              </div>
+              <div className="mt-1">
+                <AdsBanner
+                  imageSrc={ADVERTISMENT_IMAGE}
+                  imageAlt={ADVERTISMENT_ALT}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -2,8 +2,6 @@ import { playlistFilter } from "helpers/utils/";
 import { PlayerInfoProps } from "components/PlayerInfo/types";
 import { playerInfoDefaults } from "./contants";
 
-import fallbackCover from "assets/images/album_cover.png";
-
 const findAudioSrc = (data, currentPlaylistID, currentTrackIndex) => {
   if (data === null || currentPlaylistID === null) return "";
 
@@ -14,13 +12,14 @@ const findAudioSrc = (data, currentPlaylistID, currentTrackIndex) => {
 const findTrackInfo = (data, currentPlaylistID, currentTrackIndex) => {
   if (data === null || currentPlaylistID === null) return playerInfoDefaults;
 
-  const newPlaylist = playlistFilter(data, currentPlaylistID);
-  const {
-    artist_name,
+  const currentPlaylist = playlistFilter(data, currentPlaylistID).tracks[currentTrackIndex];
+  const { artist_name, title, cover_medium } = currentPlaylist;
+
+  return {
     title,
-    image = fallbackCover,
-  } = newPlaylist.tracks[currentTrackIndex];
-  return { artist: artist_name, title, image } as PlayerInfoProps;
+    artist: artist_name,
+    image: cover_medium,
+  } as PlayerInfoProps;
 };
 
 export { findAudioSrc, findTrackInfo };

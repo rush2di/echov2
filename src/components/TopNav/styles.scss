@@ -10,6 +10,11 @@
   left: 0;
   right: 0;
 
+  &__auth {
+    position: relative;
+    z-index: 1000;
+  }
+
   &__auth,
   &__auth-item a {
     display: flex;

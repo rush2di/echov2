@@ -1,0 +1,36 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/mixins/mixins";
+
+.authPage__wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: -webkit-fill-available;
+  @include respond-to("x-small") {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.authPage__wrapper .authForm {
+  align-self: center;
+  @include respond-to("x-small") {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    max-width: initial;
+  }
+}
+
+.authPage__wrapper img {
+  align-self: flex-end;
+  height: 540px;
+  margin-right: -3rem;
+  width: 60%;
+  object-fit: cover;
+  margin-left: 2rem;
+  border-top-left-radius: $structure-radius-md;
+
+  @include respond-to("x-small") {
+    display: none;
+  }
+}

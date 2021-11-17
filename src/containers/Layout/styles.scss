@@ -29,7 +29,6 @@
     z-index: 3;
   }
 
-  .hover-area:hover,
   .hover-area:hover .dropdownMenu,
   .dropdownMenu:hover {
     opacity: 1;
@@ -46,6 +45,7 @@
   z-index: 100;
   top: 3.35rem;
   left: 3rem;
+  z-index: -10;
   transform: translateY(1rem);
   transition: all .4s $easing-expo
 }

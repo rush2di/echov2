@@ -44,18 +44,13 @@ import "./styles.scss";
 const liveAuthState = createStructuredSelector({
   formFields: makeSelectFormFields(),
   isSubmiting: makeSelectFormSubmitState(),
-  isUserOnline: makeSelectUserState(),
-  isAuthError: makeSelectAuthError(),
 });
 
 const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
-  let timeout: any = null;
   const isRegister = type === REGISTER_AUTH_TYPE;
 
-  const { formFields, isSubmiting, isUserOnline, isAuthError } =
-    useSelector(liveAuthState);
+  const { formFields, isSubmiting } = useSelector(liveAuthState);
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -115,18 +110,6 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
       });
     }
   }, []);
-
-  useEffect(() => {
-    if (isUserOnline) {
-      timeout = setTimeout(() => {
-        history.push("/");
-      }, 5000);
-    }
-    
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isSubmiting, isUserOnline, isAuthError]);
 
   return (
     <form className="authForm" autoComplete="off" onSubmit={handleSubmit}>

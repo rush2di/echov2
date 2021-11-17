@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 
 export interface PlaylistItemProps {
-  id?: string;
+  id: string;
   isActive: boolean;
   rank: string;
   image: string;
@@ -9,4 +9,6 @@ export interface PlaylistItemProps {
   artist: string;
   isLiked: boolean;
   onClick?(e: MouseEvent<HTMLDivElement>): void;
+  handleDownload(e: MouseEvent<HTMLDivElement>): void;
+  handleLikeReaction(e: MouseEvent<HTMLDivElement>, id: string): void;
 }

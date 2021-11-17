@@ -10,7 +10,6 @@ const onAuthInput = (payload: AuthFormSingleFieldType) => {
 };
 
 const authRegisterStart = (payload: AuthFormFieldsType<string | null>) => {
-  toast.info("Registring you in");
   return {
     type: authActionTypes.REQUEST_AUTH_REGISTER_START,
     payload,
@@ -33,7 +32,6 @@ const authRegisterError = () => {
 };
 
 const authLoginStart = (payload: AuthFormFieldsType<string | null>) => {
-  toast.info("loging you in");
   return {
     type: authActionTypes.REQUEST_AUTH_LOGIN_START,
     payload,

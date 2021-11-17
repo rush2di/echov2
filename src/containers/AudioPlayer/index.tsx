@@ -106,7 +106,6 @@ const AudioPlayer = () => {
   };
 
   const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (currentPlaylistID === null || data === null) return;
     const clickValue = event.currentTarget.value;
     const newVolumeValue = parseInt(event.currentTarget.value) / 100;
 
@@ -155,7 +154,6 @@ const AudioPlayer = () => {
   };
 
   const toggleMuteVolume = () => {
-    if (currentPlaylistID === null) return;
     const savedPosition = savedVolumePositionRef.current;
     const currentPosition = volumeRef.current.style.width;
 
