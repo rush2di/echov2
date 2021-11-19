@@ -1,6 +1,6 @@
 const IMAGE_ALT = "Iternal Error";
 
-const HEADING = "We are sorry, try again later";
-const PARAGRAPH = "Iternal server error occured, our team is trying to fix it";
+const HEADING = "We are sorry, something went bad";
+const PARAGRAPH = "Please check your internet network, or try again later.";
 
 export { IMAGE_ALT, HEADING, PARAGRAPH };

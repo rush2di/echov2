@@ -2,10 +2,9 @@ import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
 import _ from "lodash";
 
+import { authRegisterStart, authLoginStart } from "containers/App/actions";
 import { LOGIN_AUTH_TYPE, REGISTER_AUTH_TYPE } from "pages/auth/constants";
 import InputField from "components/InputField";
 import Button from "components/Button";
@@ -32,13 +31,8 @@ import {
   AuthFormFieldsType,
   AuthFormsContainerProps,
 } from "./type";
-import {
-  makeSelectUserState,
-  makeSelectFormFields,
-  makeSelectFormSubmitState,
-  makeSelectAuthError,
-} from "./selectors";
-import { authRegisterStart, authLoginStart, onAuthInput } from "./actions";
+import { makeSelectFormFields, makeSelectFormSubmitState } from "./selectors";
+import { onAuthInput } from "./actions";
 import "./styles.scss";
 
 const liveAuthState = createStructuredSelector({
@@ -49,9 +43,8 @@ const liveAuthState = createStructuredSelector({
 const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
   const isRegister = type === REGISTER_AUTH_TYPE;
 
-  const { formFields, isSubmiting } = useSelector(liveAuthState);
-
   const dispatch = useDispatch();
+  const { formFields, isSubmiting } = useSelector(liveAuthState);
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorFields, setErrorFields] = useState<ErrorStateType>({
@@ -70,7 +63,7 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
     const successCheck = authFormSuccessCheck(errorFields);
     const newFormFields = formFields as AuthFormFieldsType<string>;
     if (successCheck) {
-      type === "login"
+      type === LOGIN_AUTH_TYPE
         ? dispatch(authLoginStart(newFormFields))
         : dispatch(authRegisterStart(newFormFields));
     }
@@ -161,13 +154,6 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
         label={GOOGLE_BTN_TEXT}
         classNames={"btn--flex btn--facebook btn--fluid mt-1"}
       />
-      {/* <Button
-        label={defaultBtnText[type]}
-        type="submit"
-        classNames={"mt-1 btn--fluid"}
-      >
-        <FontAwesomeIcon icon={["fas", "circle-notch"]} spin size="lg" />
-      </Button> */}
     </form>
   );
 };

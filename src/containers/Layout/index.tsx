@@ -8,7 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
-import { authLogoutStart } from "containers/AuthForms/actions";
+import { authLogoutStart } from "containers/App/actions";
 import AudioPlayerContainer from "containers/AudioPlayer";
 import ScrollableArea from "components/ScrollableArea";
 import SideNavContainer from "components/SideNav";

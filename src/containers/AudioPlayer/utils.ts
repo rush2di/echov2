@@ -1,18 +1,29 @@
 import { playlistFilter } from "helpers/utils/";
 import { PlayerInfoProps } from "components/PlayerInfo/types";
 import { playerInfoDefaults } from "./contants";
+import { AudioPlayerUtilsArgs } from "./types";
 
-const findAudioSrc = (data, currentPlaylistID, currentTrackIndex) => {
+const findAudioSrc = ({
+  data,
+  currentPlaylistID,
+  currentTrackIndex,
+}: AudioPlayerUtilsArgs) => {
   if (data === null || currentPlaylistID === null) return "";
 
   const newPlaylist = playlistFilter(data, currentPlaylistID);
-  return newPlaylist.tracks[currentTrackIndex].preview;
+  return newPlaylist.tracks[currentTrackIndex as number].preview;
 };
 
-const findTrackInfo = (data, currentPlaylistID, currentTrackIndex) => {
+const findTrackInfo = ({
+  data,
+  currentPlaylistID,
+  currentTrackIndex,
+}: AudioPlayerUtilsArgs) => {
   if (data === null || currentPlaylistID === null) return playerInfoDefaults;
 
-  const currentPlaylist = playlistFilter(data, currentPlaylistID).tracks[currentTrackIndex];
+  const currentPlaylist = playlistFilter(data, currentPlaylistID).tracks[
+    currentTrackIndex as number
+  ];
   const { artist_name, title, cover_medium } = currentPlaylist;
 
   return {
@@ -22,4 +33,15 @@ const findTrackInfo = (data, currentPlaylistID, currentTrackIndex) => {
   } as PlayerInfoProps;
 };
 
-export { findAudioSrc, findTrackInfo };
+const resolveTrackID = ({
+  data,
+  currentPlaylistID,
+  currentTrackIndex,
+}: AudioPlayerUtilsArgs) => {
+  if (data === null || currentPlaylistID === null) return null;
+  return playlistFilter(data, currentPlaylistID).tracks[
+    currentTrackIndex as number
+  ].id;
+};
+
+export { findAudioSrc, findTrackInfo, resolveTrackID };

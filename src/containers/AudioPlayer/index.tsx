@@ -1,4 +1,10 @@
-import { useRef, MutableRefObject, ChangeEvent, useEffect } from "react";
+import {
+  useRef,
+  useEffect,
+  ChangeEvent,
+  SyntheticEvent,
+  MutableRefObject,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import _ from "lodash";
@@ -11,13 +17,13 @@ import Progress from "components/Progress";
 import Volume from "components/Volume";
 
 import {
-  changeProgressCurrentTime,
   resetAudio,
   toPercentage,
   playlistFilter,
-  startDownload,
+  changeProgressCurrentTime,
 } from "helpers/utils";
 import { selectAppState } from "containers/App/selectors";
+import { initHandleDownload, initHandleLike } from "helpers/handlers";
 import { AppStateType } from "containers/App/types";
 
 import {
@@ -29,7 +35,7 @@ import {
   userSetVolume,
 } from "./actions";
 import { playerButtonsDefaults, playerReactionsDefaults } from "./contants";
-import { findAudioSrc, findTrackInfo } from "./utils";
+import { findAudioSrc, findTrackInfo, resolveTrackID } from "./utils";
 import { selectPlayerState } from "./selectors";
 import { AudioPlayerState } from "./types";
 import "./styles.scss";
@@ -56,7 +62,7 @@ const AudioPlayer = () => {
   const playlistRef = useRef() as MutableRefObject<string>;
   const audioRef = useRef() as MutableRefObject<HTMLAudioElement>;
 
-  const handleMetada = () => {
+  const handleMetadata = () => {
     savedVolumeRef.current = audioRef.current.volume;
     savedVolumePositionRef.current = `100%`;
     dispatch(
@@ -126,8 +132,8 @@ const AudioPlayer = () => {
     dispatch(userChangeTrack(handleLimit));
     resetAudio({
       playlistID: currentPlaylistID,
-      audioRef: audioRef,
       isPlaying: isPlaying,
+      audioRef: audioRef,
       progressRef,
       dispatch: () =>
         dispatch(setPlayerState({ currentTrackIndex: handleLimit })),
@@ -168,11 +174,25 @@ const AudioPlayer = () => {
     dispatch(userMuteVolume());
   };
 
-  const handleDownload = () => {
+  const handleDownload = (e: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
     if (currentPlaylistID === null || data === null) return;
-    const currentPlaylist = playlistFilter(data, currentPlaylistID);
-    const currentTrack = currentPlaylist.tracks[currentTrackIndex as number];
-    startDownload(currentTrack.id);
+    e.stopPropagation();
+    initHandleDownload({
+      data: data,
+      currentPlaylistID: currentPlaylistID as string,
+      currentTrackIndex: currentTrackIndex as number,
+    });
+  };
+
+  const handleLikeReaction = (
+    e: SyntheticEvent<HTMLDivElement, MouseEvent>,
+    id: string
+  ) => {
+    e.stopPropagation();
+    if (currentPlaylistID === null || data === null) return;
+    initHandleLike({
+      targetID: id,
+    });
   };
 
   useEffect(() => {
@@ -207,23 +227,23 @@ const AudioPlayer = () => {
     onClick: togglePlayPause,
   };
 
-  const trackInfoProps: PlayerInfoProps = findTrackInfo(
+  const trackInfoProps: PlayerInfoProps = findTrackInfo({
     data,
     currentPlaylistID,
-    currentTrackIndex
-  );
+    currentTrackIndex,
+  });
 
   return (
     <div className="audioPlayer">
       {!!currentPlaylistID && (
         <audio
-          onLoadedMetadata={handleMetada}
+          onLoadedMetadata={handleMetadata}
           onEnded={handleNextButton}
           onError={handleError}
           ref={audioRef}
         >
           <source
-            src={findAudioSrc(data, currentPlaylistID, currentTrackIndex)}
+            src={findAudioSrc({ data, currentPlaylistID, currentTrackIndex })}
             type="audio/mp3"
           />
         </audio>
@@ -259,10 +279,23 @@ const AudioPlayer = () => {
           />
         </div>
         <div className="audioPlayer__reactions">
-          <PlayerButton {...playerReactionsDefaults[0]} />
+          <PlayerButton
+            {...playerReactionsDefaults[0]}
+            onClick={handleLikeReaction}
+            trackID={resolveTrackID({
+              currentPlaylistID,
+              currentTrackIndex,
+              data,
+            })}
+          />
           <PlayerButton
             {...playerReactionsDefaults[1]}
             onClick={handleDownload}
+            trackID={resolveTrackID({
+              currentPlaylistID,
+              currentTrackIndex,
+              data,
+            })}
           />
         </div>
       </div>

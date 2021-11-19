@@ -1,3 +1,4 @@
+import { isValidElement } from "react";
 import ProgressiveImage from "react-progressive-graceful-image";
 
 import Image from "assets/images/error302ART.png";
@@ -15,7 +16,9 @@ const ErrorBoundary = ({ isError, children }: ErrorBoundaryProps) => {
           {(src) => <img src={src} alt={IMAGE_ALT} />}
         </ProgressiveImage>
         <div className="mt-2">
-          {children || (
+          {isValidElement(children) ? (
+            children
+          ) : (
             <>
               <h1 className="txt-h6 txt-sec mb-1">{HEADING}</h1>
               <p className="txt-btn txt-muted">{PARAGRAPH}</p>

@@ -10,16 +10,16 @@ const playerInfoDefaults = {
 } as PlayerInfoProps;
 
 const playerButtonsDefaults: PlayerButtonProps[] = [
-  { type: "sm", icon: "random" },
-  { type: "md", icon: "backward" },
-  { type: "lg", icon: "play" },
-  { type: "md", icon: "forward" },
-  { type: "sm", icon: "retweet" },
+  { trackID: null, type: "sm", icon: "random" },
+  { trackID: null, type: "md", icon: "backward" },
+  { trackID: null, type: "lg", icon: "play" },
+  { trackID: null, type: "md", icon: "forward" },
+  { trackID: null, type: "sm", icon: "retweet" },
 ];
 
 const playerReactionsDefaults: PlayerButtonProps[] = [
-  { type: "sm", icon: "heart", isHeart: true },
-  { type: "sm", icon: "download" },
+  { trackID: null, type: "sm", icon: "heart", isHeart: true },
+  { trackID: null, type: "sm", icon: "download" },
 ];
 
 const playerActions = {
@@ -44,5 +44,5 @@ export {
   playerButtonsDefaults,
   playerReactionsDefaults,
   playerActions,
-  playerButtonsDirections
+  playerButtonsDirections,
 };

@@ -72,6 +72,12 @@
     border-radius: $structure-radius-sm;
     width: 35px;
     height: 35px;
+    overflow: hidden;
+    display: inline-block;
+    background-color: $color-p-4;
+    @include respond-to("medium") {
+      display: none;
+    }
   }
 
   &__body {
@@ -110,7 +116,12 @@
 
   &__body button {
     border: 0;
-    background: transparent;
+    background-color: transparent;
+    transition: all 0.4s $easing-expo;
     cursor: pointer;
+  }
+
+  &__body button:hover {
+    opacity: 0.6
   }
 }

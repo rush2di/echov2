@@ -1,40 +1,46 @@
+import { AppStateType } from "containers/App/types";
 import { createSelector } from "reselect";
 import { AuthFormsReducerType } from "./type";
 
-const selectAuthState = (globalState): AuthFormsReducerType =>
+const selectAuthFormState = (globalState): AuthFormsReducerType =>
   globalState.authForms;
 
+const selectAuthState = (globalState): AppStateType => globalState.app;
+
 const makeSelectFormFields = () => {
-  return createSelector(selectAuthState, (authForms: AuthFormsReducerType) => {
-    return authForms.formFields;
-  });
+  return createSelector(
+    selectAuthFormState,
+    (authForms: AuthFormsReducerType) => {
+      return authForms.formFields;
+    }
+  );
 };
 
 const makeSelectFormSubmitState = () => {
   return createSelector(
     selectAuthState,
-    (authForms: AuthFormsReducerType): boolean | null => {
-      return authForms.isSubmiting;
+    (appState: AppStateType): boolean | null => {
+      return appState.isSubmiting;
     }
   );
 };
 
 const makeSelectUserState = () => {
-  return createSelector(selectAuthState, (authForms: AuthFormsReducerType) => {
-    return authForms.isOnline;
+  return createSelector(selectAuthState, (appState: AppStateType) => {
+    return appState.isOnline;
   });
 };
 
 const makeSelectAuthError = () => {
-  return createSelector(selectAuthState, (authForms: AuthFormsReducerType) => {
-    return authForms.hasError;
-  })
-}
+  return createSelector(selectAuthState, (appState: AppStateType) => {
+    return appState.isAuthError;
+  });
+};
 
 export {
   selectAuthState,
   makeSelectFormFields,
   makeSelectFormSubmitState,
   makeSelectUserState,
-  makeSelectAuthError
+  makeSelectAuthError,
 };

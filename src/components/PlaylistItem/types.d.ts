@@ -2,6 +2,7 @@ import { MouseEventHandler } from "react";
 
 export interface PlaylistItemProps {
   id: string;
+  index: number;
   isActive: boolean;
   rank: string;
   image: string;

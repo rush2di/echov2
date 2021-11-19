@@ -3,11 +3,7 @@ import { AuthPageProps } from "pages/auth/types";
 export interface AuthFormsContainerProps extends AuthPageProps {}
 
 export interface AuthFormsReducerType {
-  currentUser: userDataType<string | null, string[] | null>;
   formFields: AuthFormFieldsType<string | null>;
-  isSubmiting: boolean | null;
-  isOnline: boolean | null;
-  hasError: boolean | null;
 }
 
 export interface userDataType<T, L> {

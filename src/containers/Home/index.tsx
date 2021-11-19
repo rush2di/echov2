@@ -1,16 +1,18 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import PlaylistCover from "components/PlaylistCover";
+
 import {
-  setDefaultPlaylist,
   userChangeTrack,
   userSelectPlaylist,
+  setDefaultPlaylist,
 } from "containers/AudioPlayer/actions";
 import { CARD_UI, STACKED_UI } from "components/PlaylistCover/constants";
-import { extractFeaturedArtists, extractImageSizes } from "./utils";
+
 import { FIRST_HEADING, SECOND_HEADING } from "./constants";
-import PlaylistCover from "components/PlaylistCover";
-import { useEffect } from "react";
+import { extractFeaturedArtists, extractImageSizes } from "./utils";
 
 const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
   const dispatch = useDispatch();
@@ -63,7 +65,7 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
       </div>
       <h2 className="txt-h5 txt-prim mt-3 mb-2">{SECOND_HEADING}</h2>
       <div className="row">
-        {data?.map((data) => (
+        {data.map((data) => (
           <div
             key={data.id}
             className="col-3 col-lg-4 col-md-4 col-sm-6 col-xsm-12"

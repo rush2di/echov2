@@ -26,3 +26,9 @@ export interface UtilsResetAudioArgs {
   isPlaying?: boolean;
   dispatch?: any;
 }
+
+export interface AudioPlayerUtilsArgs {
+  data: PlaylistDataType[] | null;
+  currentPlaylistID: string | number | null;
+  currentTrackIndex: number | null;
+}

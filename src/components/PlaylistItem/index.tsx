@@ -16,6 +16,7 @@ const PlaylistItem = ({
   rank,
   image,
   title,
+  index,
   artist,
   isLiked,
   isActive,
@@ -27,7 +28,7 @@ const PlaylistItem = ({
   const stylesLogic = isActive ? ACTIVE_CLASSNAME : DEFAULT_CLASSNAME;
 
   return (
-    <div id={id} className={`playlistItem ${stylesLogic}`} onClick={onClick}>
+    <div tabIndex={index} id={id} className={`playlistItem ${stylesLogic}`} onClick={onClick}>
       <div className="playlistItem__flex">
         <div className="playlistItem__head txt-btn">
           <p className="txt-md txt-sec">{rank}</p>

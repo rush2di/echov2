@@ -9,23 +9,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { ToastContainer } from "react-toastify";
 
+import ErrorBoundary from "containers/ErrorBoundary";
 import Spinner from "components/Spinner";
 import Layout from "containers/Layout";
 
 import { LOGIN_AUTH_TYPE, REGISTER_AUTH_TYPE } from "pages/auth/constants";
-import { authLoginSuccess } from "containers/AuthForms/actions";
 import { onAuthStateChanged } from "firebase/auth";
 import { getUserData } from "service/axios";
 import { auth } from "firebase";
 
-import { makeSelectDefaultPlaylist, makeSelectStartState } from "./selectors";
-import { requestPlaylistsData, setSerializedState } from "./actions";
-import { AppRoutesProps, PlaylistDataType } from "./types";
-
 import PlaylistPage from "pages/playlist";
 import HomePage from "pages/home";
 import AuthPage from "pages/auth";
-import ErrorBoundary from "containers/ErrorBoundary";
+
+import {
+  requestPlaylistsData,
+  setSerializedState,
+  authLoginSuccess,
+} from "./actions";
+import { makeSelectDefaultPlaylist, makeSelectStartState } from "./selectors";
+import { AppRoutesProps, PlaylistDataType } from "./types";
 
 const hyderationState = createStructuredSelector({
   mainState: makeSelectStartState(),
@@ -34,11 +37,12 @@ const hyderationState = createStructuredSelector({
 
 const App = () => {
   const dispatch = useDispatch();
-
   const {
     defaultPlaylist,
     mainState: { data, isLoading, isError },
   } = useSelector(hyderationState);
+
+  console.log("rerender in App")
 
   useEffect(() => {
     const storedData = sessionStorage.getItem("echoState") as string;

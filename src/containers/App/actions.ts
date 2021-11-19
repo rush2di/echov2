@@ -1,4 +1,7 @@
-import { appActions } from "./constants";
+import { AuthFormFieldsType } from "containers/AuthForms/type";
+import { toast } from "react-toastify";
+
+import { appActions, authActionTypes, toastMessages } from "./constants";
 
 const setSerializedState = (payload) => {
   return {
@@ -27,9 +30,132 @@ const requestPlaylistsDataError = (payload) => {
   };
 };
 
+const authRegisterStart = (payload: AuthFormFieldsType<string | null>) => {
+  return {
+    type: authActionTypes.REQUEST_AUTH_REGISTER_START,
+    payload,
+  };
+};
+
+const authRegisterSuccess = (payload: any) => {
+  toast.success(toastMessages.REGISTER_SUCCESS);
+  return {
+    type: authActionTypes.REQUEST_AUTH_REGISTER_SUCCESS,
+    payload,
+  };
+};
+
+const authRegisterError = () => {
+  toast.error(toastMessages.ERRORS);
+  return {
+    type: authActionTypes.REQUEST_AUTH_REGISTER_ERROR,
+  };
+};
+
+const authLoginStart = (payload: AuthFormFieldsType<string | null>) => {
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGIN_START,
+    payload,
+  };
+};
+
+const authLoginSuccess = (payload: any, notify = true) => {
+  notify && toast.success(toastMessages.LOGIN_SUCCESS);
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGIN_SUCCESS,
+    payload,
+  };
+};
+
+const authLoginError = () => {
+  toast.error(toastMessages.ERRORS);
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGIN_ERROR,
+  };
+};
+
+const authLogoutStart = () => {
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGOUT_START,
+  };
+};
+
+const authLogoutSuccess = () => {
+  toast.info(toastMessages.LOGOUT_SUCCESS);
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGOUT_SUCCESS,
+  };
+};
+
+const authLogoutError = () => {
+  toast.error(toastMessages.ERRORS);
+  return {
+    type: authActionTypes.REQUEST_AUTH_LOGOUT_ERROR,
+  };
+};
+
+const requestDownloadStart = (trackUID: string) => {
+  return {
+    type: appActions.REQUEST_USER_DOWNLOAD_TRACK_START,
+    payload: trackUID,
+  };
+};
+
+const requestDownloadSuccess = (downloadURL: string, trackUID: string) => {
+  const newWindow = window.open(downloadURL, "_blank") as Window;
+  newWindow && newWindow.focus();
+  return {
+    type: appActions.REQUEST_USER_DOWNLOAD_TRACK_SUCCESS,
+    payload: trackUID,
+  };
+};
+
+const requestDownloadError = (trackUID: string) => {
+  toast.error(toastMessages.ERRORS);
+  return {
+    type: appActions.REQUEST_USER_DOWNLOAD_TRACK_ERROR,
+    payload: trackUID,
+  };
+};
+
+const requestUserLikeStart = (trackUID: string) => {
+  return {
+    type: appActions.REQUEST_USER_LIKE_TRACK_START,
+    payload: trackUID,
+  };
+};
+
+const requestUserLikeSuccess = () => {
+  return {
+    type: appActions.REQUEST_USER_LIKE_TRACK_SUCCESS,
+  };
+};
+
+const requestUserLikeError = () => {
+  toast.error(toastMessages.ERRORS);
+  return {
+    type: appActions.REQUEST_USER_LIKE_TRACK_ERROR,
+  };
+};
+
 export {
   requestPlaylistsData,
   requestPlaylistsDataSuccess,
   requestPlaylistsDataError,
   setSerializedState,
+  authRegisterStart,
+  authRegisterSuccess,
+  authRegisterError,
+  authLoginStart,
+  authLoginSuccess,
+  authLoginError,
+  authLogoutStart,
+  authLogoutSuccess,
+  authLogoutError,
+  requestDownloadStart,
+  requestDownloadSuccess,
+  requestDownloadError,
+  requestUserLikeStart,
+  requestUserLikeSuccess,
+  requestUserLikeError,
 };

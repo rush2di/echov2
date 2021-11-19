@@ -5,5 +5,6 @@ export interface PlayerButtonProps {
   icon: IconName;
   isHeart?: boolean;
   isLiked?: boolean;
-  onClick?(): void;
+  trackID: string | null;
+  onClick?(e: any, id: string): void;
 }

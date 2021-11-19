@@ -7,12 +7,14 @@ const PlayerButton = ({
   icon,
   isHeart,
   isLiked,
+  trackID,
   onClick,
 }: PlayerButtonProps) => {
   const iconPrefix = resolveReactionIcon(isHeart, isLiked);
   const buttonAttributesBase = { className: `playerButton--${type}` };
 
-  if (typeof onClick == "function") buttonAttributesBase["onClick"] = onClick;
+  if (typeof onClick == "function")
+    buttonAttributesBase["onClick"] = (e) => onClick(e, trackID || "");
 
   return (
     <button {...buttonAttributesBase}>

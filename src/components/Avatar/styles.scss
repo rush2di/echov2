@@ -29,6 +29,13 @@
     object-fit: cover;
   }
 
+  &.--lg &__head img,
+  &.--sm &__head img {
+    overflow: hidden;
+    display: inline-block;
+    background-color: $color-p-3;
+  }
+
   &.--lg &__head img {
     height: $avatar_img_lg;
     width: $avatar_img_lg;
