@@ -1,7 +1,7 @@
 import ProgressiveImage from "react-progressive-graceful-image";
 
-import { generateTitle } from "helpers/utils/playerStringUtils";
 import InfoBadge from "components/InfoBadge";
+import { generateTitle } from "helpers/utils";
 
 import { BADGE_TEXT, STACKED_UI, IMAGE_SIZES } from "./constants";
 import { parseFeaturedArtists } from "./utils";

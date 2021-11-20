@@ -11,7 +11,7 @@ import "./styles.scss";
 const ErrorBoundary = ({ isError, children }: ErrorBoundaryProps) => {
   if (isError) {
     return (
-      <div className="homeError__wrapper">
+      <div className="screenError__wrapper">
         <ProgressiveImage placeholder={ImageSM} src={Image}>
           {(src) => <img src={src} alt={IMAGE_ALT} />}
         </ProgressiveImage>

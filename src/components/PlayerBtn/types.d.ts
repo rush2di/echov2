@@ -7,4 +7,5 @@ export interface PlayerButtonProps {
   isLiked?: boolean;
   trackID: string | null;
   onClick?(e: any, id: string): void;
+  animated?: boolean;
 }

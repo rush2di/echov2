@@ -33,15 +33,19 @@ const saveUserToDB = async (user: any, displayName: string) => {
   return await request.post(`/users/register/${user.uid}`, payload);
 };
 
-const saveUserLikedTrack = async (userUID: string, track: TrackDataType) => {
+const saveUserLikedTrack = async (userUID: string, track: TrackDataType[]) => {
   return await request.post(`/users/${userUID}/likes`, track);
 };
 
 const saveUserDownloadedTrack = async (
   userUID: string,
-  track: TrackDataType
+  downloadedTracks: TrackDataType[]
 ) => {
-  return await request.post(`/users/${userUID}/downloads`, track);
+  const body = {
+    downloadedTracks,
+  };
+  console.log('save', userUID, downloadedTracks)
+  return await request.post(`/users/${userUID}/downloads`, body);
 };
 
 export {

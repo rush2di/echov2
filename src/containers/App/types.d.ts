@@ -1,14 +1,14 @@
 import { downloadStatus } from "./constants";
 
 export interface AppStateType {
-  currentUser: userDataType<string | null, TrackDataType[] | null>;
+  currentUser: UserDataType<string | null, TrackDataType[]>;
   data: PlaylistDataType[] | null;
   isError: boolean | null;
   isOnline: boolean | null;
   isLoading: boolean | null;
   isAuthError: boolean | null;
   isSubmiting: boolean | null;
-  pendingDownloadUIDs: PendingDownloadsUIDsType[];
+  pendingDownloadsUIDs: PendingDownloadsUIDsType[];
 }
 
 export interface PendingDownloadsUIDsType {
@@ -49,7 +49,8 @@ export interface AppRoutesProps {
   defaultPlaylist: string | number;
 }
 
-export interface userDataType<T, L> {
+export interface UserDataType<T, L> {
+  uid: T;
   fullname: T;
   avatar: T;
   likedTracks: L;

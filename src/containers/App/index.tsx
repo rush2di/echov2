@@ -42,11 +42,10 @@ const App = () => {
     mainState: { data, isLoading, isError },
   } = useSelector(hyderationState);
 
-  console.log("rerender in App")
-
   useEffect(() => {
     const storedData = sessionStorage.getItem("echoState") as string;
     const parsedData: { data: PlaylistDataType } = JSON.parse(storedData);
+    
     if (parsedData && parsedData.data !== null) {
       dispatch(setSerializedState(parsedData));
     } else {

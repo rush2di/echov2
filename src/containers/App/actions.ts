@@ -2,6 +2,7 @@ import { AuthFormFieldsType } from "containers/AuthForms/type";
 import { toast } from "react-toastify";
 
 import { appActions, authActionTypes, toastMessages } from "./constants";
+import { TrackDataType } from "./types";
 
 const setSerializedState = (payload) => {
   return {
@@ -94,14 +95,14 @@ const authLogoutError = () => {
   };
 };
 
-const requestDownloadStart = (trackUID: string) => {
+const requestDownloadStart = (track: TrackDataType) => {
   return {
     type: appActions.REQUEST_USER_DOWNLOAD_TRACK_START,
-    payload: trackUID,
+    payload: track,
   };
 };
 
-const requestDownloadSuccess = (downloadURL: string, trackUID: string) => {
+const requestDownloadSuccess = (downloadURL: string, trackUID: TrackDataType[]) => {
   const newWindow = window.open(downloadURL, "_blank") as Window;
   newWindow && newWindow.focus();
   return {

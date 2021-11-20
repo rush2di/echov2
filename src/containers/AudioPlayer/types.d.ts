@@ -19,14 +19,6 @@ export interface SetPlayerStatePayload {
   hasError?: boolean;
 }
 
-export interface UtilsResetAudioArgs {
-  progressRef: MutableRefObject<HTMLDivElement> | any;
-  audioRef: MutableRefObject<HTMLAudioElement> | any;
-  playlistID: number | string | null;
-  isPlaying?: boolean;
-  dispatch?: any;
-}
-
 export interface AudioPlayerUtilsArgs {
   data: PlaylistDataType[] | null;
   currentPlaylistID: string | number | null;

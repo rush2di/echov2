@@ -9,16 +9,18 @@ const PlayerButton = ({
   isLiked,
   trackID,
   onClick,
+  animated = false,
 }: PlayerButtonProps) => {
   const iconPrefix = resolveReactionIcon(isHeart, isLiked);
   const buttonAttributesBase = { className: `playerButton--${type}` };
 
-  if (typeof onClick == "function")
-    buttonAttributesBase["onClick"] = (e) => onClick(e, trackID || "");
+  if (typeof onClick == "function") {
+    buttonAttributesBase["onClick"] = (event) => onClick(event, trackID || "");
+  }
 
   return (
     <button {...buttonAttributesBase}>
-      <FontAwesomeIcon icon={[iconPrefix, icon]} />
+      <FontAwesomeIcon icon={[iconPrefix, icon]} spin={animated} />
     </button>
   );
 };

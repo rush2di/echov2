@@ -1,15 +1,25 @@
-import { changeProgressCurrentTime, resetAudio, playlistFilter, startDownload } from "./sharedPlaylistUtils";
-import { rankLeftFill, artistsNumberToText } from "./playerStringUtils";
-import { toPercentage, toRangePercentage } from "./playerCalcUtils";
-import { resolveReactionIcon } from "./playerReactionUtils";
+import {
+  animateDownloadIcon,
+  resolveReactionIcon,
+} from "./syncedPlayerUtils/styles";
+import {
+  rankLeftFill,
+  generateTitle,
+  artistsNumberToText,
+} from "./syncedPlayerUtils/string";
+import { resetAudio } from "./syncedPlayerUtils/audio";
+import { toPercentage } from "./syncedPlayerUtils/calculations";
+import { changeProgressCurrentTime } from "./syncedPlayerUtils/progress";
+import { extractTrackID, playlistFilter } from "./syncedPlayerUtils/filters";
 
 export {
   changeProgressCurrentTime,
   resolveReactionIcon,
+  animateDownloadIcon,
   artistsNumberToText,
-  toRangePercentage,
   playlistFilter,
-  startDownload,
+  extractTrackID,
+  generateTitle,
   toPercentage,
   rankLeftFill,
   resetAudio,

@@ -1,12 +1,14 @@
+import { findIndex, remove } from "lodash";
 import { appActions, authActionTypes, downloadStatus } from "./constants";
 import { AppStateType, PendingDownloadsUIDsType } from "./types";
 
 const initState: AppStateType = {
   currentUser: {
+    uid: null,
     avatar: null,
     fullname: null,
-    likedTracks: null,
-    downloadedTracks: null,
+    likedTracks: [],
+    downloadedTracks: [],
   },
   data: null,
   isError: null,
@@ -14,7 +16,7 @@ const initState: AppStateType = {
   isLoading: null,
   isSubmiting: null,
   isAuthError: null,
-  pendingDownloadUIDs: [], // trackUID
+  pendingDownloadsUIDs: [], // trackUID
 };
 
 const appGlobalReducer = (state = initState, action: any) => {
@@ -49,6 +51,7 @@ const appGlobalReducer = (state = initState, action: any) => {
         isOnline: true,
         isSubmiting: false,
         currentUser: {
+          uid: action.payload.id,
           fullname: action.payload.user_fullname,
           avatar: action.payload.user_avatar,
           likedTracks: action.payload.liked_tracks,
@@ -70,6 +73,7 @@ const appGlobalReducer = (state = initState, action: any) => {
         isSubmiting: false,
         isOnline: true,
         currentUser: {
+          uid: action.payload.id,
           fullname: action.payload.user_fullname,
           avatar: action.payload.user_avatar,
           likedTracks: action.payload.liked_tracks,
@@ -94,8 +98,9 @@ const appGlobalReducer = (state = initState, action: any) => {
         isSubmiting: false,
         isOnline: false,
         currentUser: {
-          fullname: null,
+          uid: null,
           avatar: null,
+          fullname: null,
           likedTracks: null,
           downloadedTracks: null,
         },
@@ -108,30 +113,46 @@ const appGlobalReducer = (state = initState, action: any) => {
       };
     case appActions.REQUEST_USER_DOWNLOAD_TRACK_START:
       const newPending: PendingDownloadsUIDsType = {
-        uid: action.payload,
+        uid: action.payload.id,
         status: downloadStatus.PENDING,
       };
       return {
         ...state,
-        pendingDownloadsUIDs: [...state.pendingDownloadUIDs, newPending],
+        pendingDownloadsUIDs: [...state.pendingDownloadsUIDs, newPending],
       };
     case appActions.REQUEST_USER_DOWNLOAD_TRACK_SUCCESS:
-      const cleanPendings: PendingDownloadsUIDsType[] =
-        state.pendingDownloadUIDs.filter((val) => {
-          return val.uid !== action.payload;
-        });
+      const pendingSuccessIndex = findIndex(state.pendingDownloadsUIDs, (val) => {
+        return val.uid === action.payload.id;
+      });
+
+      const cleanPendings =
+        state.pendingDownloadsUIDs.length > 1
+          ? [...state.pendingDownloadsUIDs].splice(pendingSuccessIndex, 1)
+          : [];
       return {
         ...state,
+        currentUser: {
+          ...state.currentUser,
+          downloadedTracks: [
+            ...state.currentUser.downloadedTracks,
+            action.payload,
+          ],
+        },
         pendingDownloadsUIDs: cleanPendings,
       };
-    case appActions.REQUEST_USER_DOWNLOAD_TRACK_SUCCESS:
-      const notePendingError = state.pendingDownloadUIDs.filter((val) => {
-        return val.uid === action.payload;
-      })[0];
-      notePendingError.status = downloadStatus.ERROR;
+    case appActions.REQUEST_USER_DOWNLOAD_TRACK_ERROR:
+      const pendingErrorIndex = findIndex(state.pendingDownloadsUIDs, (val) => {
+        return val.uid === action.payload.id;
+      });
+
+      const newPendings =
+        state.pendingDownloadsUIDs.length > 1
+          ? [...state.pendingDownloadsUIDs].splice(pendingErrorIndex, 1)
+          : [];
+
       return {
         ...state,
-        pendingDownloadsUIDs: [...state.pendingDownloadUIDs, notePendingError],
+        pendingDownloadsUIDs: newPendings,
       };
     default:
       return state;

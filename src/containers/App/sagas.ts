@@ -1,9 +1,11 @@
-import { takeLatest, call, put, takeEvery } from "redux-saga/effects";
+import { uniqBy } from "lodash";
+import { takeLatest, call, put, takeEvery, select } from "redux-saga/effects";
 
 import {
   getDownloadTrack,
   getPlaylists,
   getUserData,
+  saveUserDownloadedTrack,
   saveUserToDB,
 } from "service/axios";
 import { login, logout, register } from "service/firebaseAuth";
@@ -25,6 +27,8 @@ import {
   requestUserLikeError,
 } from "./actions";
 import { appActions, authActionTypes } from "./constants";
+import { makeSelectUser, makeSelectUserDownloads } from "./selectors";
+import { TrackDataType } from "./types";
 import { serilizeData } from "./utils";
 
 function* playlistsSaga() {
@@ -58,6 +62,7 @@ function* postAuthRegister(action) {
       response.user,
       action.payload.fullname
     );
+    console.log("test", { userData });
     yield put(authRegisterSuccess(userData.data));
   } catch (err) {
     yield put(authRegisterError());
@@ -92,8 +97,21 @@ function* downloadSaga() {
 
 function* requestDownload(action) {
   try {
-    const response = yield call(getDownloadTrack, action.payload);
-    yield put(requestDownloadSuccess(response.data.url, action.payload));
+    const user = yield select(makeSelectUser());
+    const userDownloads = yield select(makeSelectUserDownloads());
+    const downloadLink = yield call(getDownloadTrack, action.payload.id);
+    console.log("test", { user });
+    yield call(
+      saveUserDownloadedTrack,
+      user.uid,
+      uniqBy([...userDownloads, action.payload], "id")
+    );
+    yield put(
+      requestDownloadSuccess(
+        downloadLink.data.url,
+        uniqBy([...userDownloads, action.payload], "id")
+      )
+    );
   } catch (err) {
     yield put(requestDownloadError(action.payload));
   }

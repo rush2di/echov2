@@ -1,19 +1,25 @@
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { createStructuredSelector } from "reselect";
-import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { isNull } from "lodash";
 
 import PlaylistItem from "components/PlaylistItem";
 import ArtistsTable from "components/ArtistsTable";
 import AdsBanner from "components/AdsBanner";
 import Avatar from "components/Avatar";
 
+import {
+  animateDownloadIcon,
+  extractTrackID,
+  generateTitle,
+} from "helpers/utils";
 import { SM_SIZE } from "components/Avatar/constants";
-import { generateTitle } from "helpers/utils/playerStringUtils";
 import { setPlayerState } from "containers/AudioPlayer/actions";
 import { initHandleDownload, initHandleLike } from "helpers/handlers";
+import { makeSelectPendingDownloads } from "containers/App/selectors";
 import {
   resetAudio,
   rankLeftFill,
@@ -29,15 +35,16 @@ import {
   ADVERTISMENT_IMAGE,
   ADVERTISMENT_ALT,
 } from "./constants";
-import "./styles.scss";
 import {
   makeSelectPlayerState,
   makeSelectPlaylistID,
   makeSelectTrackIndex,
 } from "./selectors";
 import { artistsSum, topArtistsTracks } from "./utils";
+import "./styles.scss";
 
 const playlistAudioState = createStructuredSelector({
+  pendingDownloadsUIDs: makeSelectPendingDownloads(),
   currentPlaylistID: makeSelectPlaylistID(),
   currentTrackIndex: makeSelectTrackIndex(),
   isPlaying: makeSelectPlayerState(),
@@ -47,34 +54,41 @@ const PlaylistContainer = ({ data }) => {
   const dispatch = useDispatch();
   const { id: pageID } = useParams<{ id: string }>();
 
-  const { currentPlaylistID, currentTrackIndex, isPlaying } =
-    useSelector(playlistAudioState);
+  const {
+    isPlaying,
+    currentTrackIndex,
+    currentPlaylistID,
+    pendingDownloadsUIDs,
+  } = useSelector(playlistAudioState);
 
   const currentPlaylist = playlistFilter(data, currentPlaylistID || pageID);
   const playlistTracks = currentPlaylist.tracks;
   const playlistTitle = currentPlaylist.title;
 
   const handleLikeReaction = (
-    e: SyntheticEvent<HTMLDivElement, MouseEvent>,
+    event: SyntheticEvent<HTMLDivElement, MouseEvent>,
     id: string
   ) => {
-    e.stopPropagation();
+    event.stopPropagation();
     initHandleLike({
       targetID: id,
     });
   };
 
-  const handleDownload = (e: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
+  const handleDownload = (
+    event: SyntheticEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    const newtrackIndex = event.currentTarget.tabIndex;
     initHandleDownload({
       data: data,
       currentPlaylistID: currentPlaylistID as string,
-      currentTrackIndex: currentTrackIndex as number,
+      currentTrackIndex: newtrackIndex as number,
     });
   };
 
-  const handleClick = (e: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
-    const newtrackIndex = e.currentTarget.tabIndex;
+  const handleClick = (event: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
+    const newtrackIndex = event.currentTarget.tabIndex;
     resetAudio({
       isPlaying,
       playlistID: currentPlaylistID,
@@ -102,15 +116,21 @@ const PlaylistContainer = ({ data }) => {
                   <PlaylistItem
                     id={track.id}
                     index={index}
+                    isLiked={false}
+                    title={track.title}
+                    image={track.cover_medium}
+                    artist={track.artist_name}
+                    isPending={
+                      animateDownloadIcon({
+                        pendingList: pendingDownloadsUIDs,
+                        trackUID: track.id,
+                      }).animated
+                    }
                     isActive={currentTrackIndex === index}
                     rank={rankLeftFill(track.rank)}
                     handleDownload={handleDownload}
                     handleLikeReaction={handleLikeReaction}
-                    artist={track.artist_name}
-                    image={track.cover_medium}
                     onClick={handleClick}
-                    title={track.title}
-                    isLiked={false}
                   />
                   <hr className="my-0 bg-muted" />
                 </div>

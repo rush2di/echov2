@@ -7,7 +7,7 @@ import {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
-import _ from "lodash";
+import { isNull } from "lodash";
 
 import { PlayerButtonProps } from "components/PlayerBtn/types";
 import { PlayerInfoProps } from "components/PlayerInfo/types";
@@ -21,8 +21,13 @@ import {
   toPercentage,
   playlistFilter,
   changeProgressCurrentTime,
+  animateDownloadIcon,
+  extractTrackID,
 } from "helpers/utils";
-import { selectAppState } from "containers/App/selectors";
+import {
+  makeSelectPendingDownloads,
+  selectAppState,
+} from "containers/App/selectors";
 import { initHandleDownload, initHandleLike } from "helpers/handlers";
 import { AppStateType } from "containers/App/types";
 
@@ -35,7 +40,7 @@ import {
   userSetVolume,
 } from "./actions";
 import { playerButtonsDefaults, playerReactionsDefaults } from "./contants";
-import { findAudioSrc, findTrackInfo, resolveTrackID } from "./utils";
+import { findAudioSrc, findTrackInfo } from "./utils";
 import { selectPlayerState } from "./selectors";
 import { AudioPlayerState } from "./types";
 import "./styles.scss";
@@ -53,6 +58,7 @@ const AudioPlayer = () => {
     currentTrackIndex,
     currentTrackDuration,
   } = useSelector<AudioPlayerState, AudioPlayerState>(selectPlayerState);
+  const pendingDownloadUIDs = useSelector(makeSelectPendingDownloads());
 
   const savedVolumePositionRef = useRef() as MutableRefObject<any>;
   const savedVolumeRef = useRef() as MutableRefObject<any>;
@@ -174,9 +180,11 @@ const AudioPlayer = () => {
     dispatch(userMuteVolume());
   };
 
-  const handleDownload = (e: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
+  const handleDownload = (
+    event: SyntheticEvent<HTMLDivElement, MouseEvent>
+  ) => {
     if (currentPlaylistID === null || data === null) return;
-    e.stopPropagation();
+    event.stopPropagation();
     initHandleDownload({
       data: data,
       currentPlaylistID: currentPlaylistID as string,
@@ -185,10 +193,10 @@ const AudioPlayer = () => {
   };
 
   const handleLikeReaction = (
-    e: SyntheticEvent<HTMLDivElement, MouseEvent>,
+    event: SyntheticEvent<HTMLDivElement, MouseEvent>,
     id: string
   ) => {
-    e.stopPropagation();
+    event.stopPropagation();
     if (currentPlaylistID === null || data === null) return;
     initHandleLike({
       targetID: id,
@@ -228,9 +236,20 @@ const AudioPlayer = () => {
   };
 
   const trackInfoProps: PlayerInfoProps = findTrackInfo({
-    data,
     currentPlaylistID,
     currentTrackIndex,
+    data,
+  });
+
+  const trackID = extractTrackID({
+    currentPlaylistID,
+    currentTrackIndex,
+    data,
+  });
+
+  const isPendingDownload = animateDownloadIcon({
+    pendingList: pendingDownloadUIDs,
+    trackUID: !isNull(trackID) ? trackID : "",
   });
 
   return (
@@ -282,20 +301,14 @@ const AudioPlayer = () => {
           <PlayerButton
             {...playerReactionsDefaults[0]}
             onClick={handleLikeReaction}
-            trackID={resolveTrackID({
-              currentPlaylistID,
-              currentTrackIndex,
-              data,
-            })}
+            trackID={trackID}
           />
           <PlayerButton
             {...playerReactionsDefaults[1]}
             onClick={handleDownload}
-            trackID={resolveTrackID({
-              currentPlaylistID,
-              currentTrackIndex,
-              data,
-            })}
+            trackID={trackID}
+            icon={isPendingDownload.icon}
+            animated={isPendingDownload.animated}
           />
         </div>
       </div>

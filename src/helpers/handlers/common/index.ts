@@ -15,7 +15,7 @@ const initHandleDownload = ({
   const currentPlaylist = playlistFilter(data, currentPlaylistID);
   const currentTrack = currentPlaylist.tracks[currentTrackIndex as number];
 
-  store.dispatch(requestDownloadStart(currentTrack.id));
+  store.dispatch(requestDownloadStart(currentTrack));
 };
 
 const initHandleLike = ({ targetID }: initHandleLikeArgs) => {

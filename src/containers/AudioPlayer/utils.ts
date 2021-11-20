@@ -33,15 +33,4 @@ const findTrackInfo = ({
   } as PlayerInfoProps;
 };
 
-const resolveTrackID = ({
-  data,
-  currentPlaylistID,
-  currentTrackIndex,
-}: AudioPlayerUtilsArgs) => {
-  if (data === null || currentPlaylistID === null) return null;
-  return playlistFilter(data, currentPlaylistID).tracks[
-    currentTrackIndex as number
-  ].id;
-};
-
-export { findAudioSrc, findTrackInfo, resolveTrackID };
+export { findAudioSrc, findTrackInfo };

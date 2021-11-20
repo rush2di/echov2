@@ -12,4 +12,5 @@ export interface PlaylistItemProps {
   onClick?(e: MouseEvent<HTMLDivElement>): void;
   handleDownload(e: MouseEvent<HTMLDivElement>): void;
   handleLikeReaction(e: MouseEvent<HTMLDivElement>, id: string): void;
+  isPending?: boolean
 }

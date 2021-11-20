@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
+  ICON_HEART,
   ACTIVE_CLASSNAME,
   DEFAULT_CLASSNAME,
-  ICON_HEART,
   itemDecorator,
+  itemIconPending,
   itemIconDownload,
 } from "./constants";
 import { resolveReactionIcon } from "helpers/utils";
@@ -23,12 +24,18 @@ const PlaylistItem = ({
   onClick,
   handleDownload,
   handleLikeReaction,
+  isPending = false,
 }: PlaylistItemProps) => {
   const iconPrefix = resolveReactionIcon(true, isLiked);
   const stylesLogic = isActive ? ACTIVE_CLASSNAME : DEFAULT_CLASSNAME;
 
   return (
-    <div tabIndex={index} id={id} className={`playlistItem ${stylesLogic}`} onClick={onClick}>
+    <div
+      id={id}
+      tabIndex={index}
+      className={`playlistItem ${stylesLogic}`}
+      onClick={onClick}
+    >
       <div className="playlistItem__flex">
         <div className="playlistItem__head txt-btn">
           <p className="txt-md txt-sec">{rank}</p>
@@ -39,11 +46,22 @@ const PlaylistItem = ({
           <p className="txt-md">{title}</p>
           <p className="txt-md">{artist}</p>
           <div className="reactions">
-            <button className="like" onClick={(e) => handleLikeReaction(e, id)}>
+            <button
+              tabIndex={index}
+              className="like"
+              onClick={(e) => handleLikeReaction(e, id)}
+            >
               <FontAwesomeIcon icon={[iconPrefix, ICON_HEART]} />
             </button>
-            <button className="download" onClick={handleDownload}>
-              <FontAwesomeIcon icon={itemIconDownload} />
+            <button
+              tabIndex={index}
+              className="download"
+              onClick={handleDownload}
+            >
+              <FontAwesomeIcon
+                icon={isPending ? itemIconPending : itemIconDownload}
+                spin={isPending}
+              />
             </button>
           </div>
         </div>
