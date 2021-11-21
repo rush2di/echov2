@@ -2,14 +2,20 @@
 @import "../../styles/abstracts/helpers/helpers";
 @import "../../styles/abstracts/mixins/mixins";
 
-.artistsTable {
+.Table {
   @include add-dark-wrapper;
+  width: 100%;
+  width: -webkit-fill-available;
 
   &__head,
   &__head > div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &__head h3 {
+    text-transform: capitalize
   }
 
   &__head p {

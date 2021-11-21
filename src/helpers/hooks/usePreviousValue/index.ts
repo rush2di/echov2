@@ -7,7 +7,6 @@ const usePreviousValue = <T>(value?: T): T => {
     if (!!value && value === null) prevValue.current = value;
   }, [value]);
 
-  console.log({ prevValue, value });
   return prevValue.current as T;
 };
 

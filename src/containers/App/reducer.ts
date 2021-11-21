@@ -121,22 +121,21 @@ const appGlobalReducer = (state = initState, action: any) => {
         pendingDownloadsUIDs: [...state.pendingDownloadsUIDs, newPending],
       };
     case appActions.REQUEST_USER_DOWNLOAD_TRACK_SUCCESS:
-      const pendingSuccessIndex = findIndex(state.pendingDownloadsUIDs, (val) => {
-        return val.uid === action.payload.id;
-      });
+      const pendingSuccessIndex = findIndex(
+        state.pendingDownloadsUIDs,
+        (val) => val.uid === action.payload.id
+      );
 
       const cleanPendings =
         state.pendingDownloadsUIDs.length > 1
           ? [...state.pendingDownloadsUIDs].splice(pendingSuccessIndex, 1)
           : [];
+
       return {
         ...state,
         currentUser: {
           ...state.currentUser,
-          downloadedTracks: [
-            ...state.currentUser.downloadedTracks,
-            action.payload,
-          ],
+          downloadedTracks: [...action.payload],
         },
         pendingDownloadsUIDs: cleanPendings,
       };

@@ -68,8 +68,8 @@ const authLoginSuccess = (payload: any, notify = true) => {
   };
 };
 
-const authLoginError = () => {
-  toast.error(toastMessages.ERRORS);
+const authLoginError = (message: string = toastMessages.ERRORS) => {
+  toast.error(message);
   return {
     type: authActionTypes.REQUEST_AUTH_LOGIN_ERROR,
   };
@@ -102,7 +102,10 @@ const requestDownloadStart = (track: TrackDataType) => {
   };
 };
 
-const requestDownloadSuccess = (downloadURL: string, trackUID: TrackDataType[]) => {
+const requestDownloadSuccess = (
+  downloadURL: string,
+  trackUID: TrackDataType[]
+) => {
   const newWindow = window.open(downloadURL, "_blank") as Window;
   newWindow && newWindow.focus();
   return {

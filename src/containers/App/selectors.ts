@@ -14,8 +14,8 @@ const selectPlayerState = (globalState): AudioPlayerState => globalState.player;
 const makeSelectStartState = () => {
   return createSelector(
     selectAppState,
-    ({ data, isLoading, isError }: AppStateType) => {
-      return { data, isLoading, isError };
+    ({ data, isLoading, isError, currentUser }: AppStateType) => {
+      return { data, isLoading, isError, currentUser };
     }
   );
 };
@@ -63,5 +63,5 @@ export {
   makeSelectStartState,
   makeSelectDefaultPlaylist,
   makeSelectPendingDownloads,
-  makeSelectUserDownloads
+  makeSelectUserDownloads,
 };

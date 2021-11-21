@@ -62,7 +62,6 @@ function* postAuthRegister(action) {
       response.user,
       action.payload.fullname
     );
-    console.log("test", { userData });
     yield put(authRegisterSuccess(userData.data));
   } catch (err) {
     yield put(authRegisterError());
@@ -75,7 +74,10 @@ function* postAuthLogin(action) {
     const userData = yield call(getUserData, response.user);
     yield put(authLoginSuccess(userData.data));
   } catch (err) {
-    yield put(authLoginError());
+    const newError = err as any;
+    const errorMessage =
+      newError.code === "auth/wrong-password" ? "Wrong password" : undefined;
+    yield put(authLoginError(errorMessage));
   }
 }
 
@@ -100,7 +102,6 @@ function* requestDownload(action) {
     const user = yield select(makeSelectUser());
     const userDownloads = yield select(makeSelectUserDownloads());
     const downloadLink = yield call(getDownloadTrack, action.payload.id);
-    console.log("test", { user });
     yield call(
       saveUserDownloadedTrack,
       user.uid,

@@ -33,6 +33,7 @@
   .dropdownMenu:hover {
     opacity: 1;
     z-index: 100;
+    visibility: visible;
   }
   .hover-area:hover .dropdownMenu {
     transform: translateY(0rem);
@@ -42,10 +43,12 @@
 .dropdownMenu {
   opacity: 0;
   position: absolute;
+  visibility: hidden;
   z-index: 100;
   top: 3.35rem;
-  left: 3rem;
+  right: 0;
   z-index: -10;
   transform: translateY(1rem);
-  transition: all .4s $easing-expo
+  transition: transform 0.4s $easing-expo, opacity 0.4s $easing-expo,
+    visibility 0s;
 }

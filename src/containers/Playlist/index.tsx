@@ -1,21 +1,16 @@
-import { SyntheticEvent, useEffect } from "react";
+import { SyntheticEvent } from "react";
 import { useParams } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { v4 as uuidv4 } from "uuid";
-import { isNull } from "lodash";
 
 import PlaylistItem from "components/PlaylistItem";
-import ArtistsTable from "components/ArtistsTable";
+import Table from "components/Table";
 import AdsBanner from "components/AdsBanner";
 import Avatar from "components/Avatar";
 
-import {
-  animateDownloadIcon,
-  extractTrackID,
-  generateTitle,
-} from "helpers/utils";
+import { animateDownloadIcon, generateTitle } from "helpers/utils";
 import { SM_SIZE } from "components/Avatar/constants";
 import { setPlayerState } from "containers/AudioPlayer/actions";
 import { initHandleDownload, initHandleLike } from "helpers/handlers";
@@ -140,7 +135,7 @@ const PlaylistContainer = ({ data }) => {
           <div className="col-4 col-sm-12 col-xsm-12">
             <div className="item-wrapper-2">
               <div>
-                <ArtistsTable
+                <Table
                   label={artistsNumberToText(
                     ARGS_TEMPLATE,
                     ARGS_REPLACER,
@@ -159,7 +154,7 @@ const PlaylistContainer = ({ data }) => {
                       />
                     );
                   })}
-                </ArtistsTable>
+                </Table>
               </div>
               <div className="mt-1">
                 <AdsBanner

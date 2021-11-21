@@ -1,0 +1,58 @@
+@import "../../styles/abstracts/mixins/mixins";
+@import "../../styles/abstracts/helpers/helpers";
+@import "../../styles/abstracts/variables/variables";
+
+.ProfileCover {
+  @include add-borders($color-borders, $color-p-5, $structure-radius-md);
+  @include add-shadow($effect-smooth-shadow-l1);
+  height: 200px;
+  width: 100%;
+  width: -webkit-fill-available;
+  position: relative;
+
+  &__background {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__background::before {
+    content: "";
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $color-p-4;
+    border-radius: $structure-radius-md;
+    opacity: 0.5;
+  }
+
+  &__background img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    object-position: center;
+    border-radius: $structure-radius-md;
+  }
+
+  &__dp {
+    text-transform: capitalize;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__dp img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 1px solid $color-borders;
+    @include add-shadow($effect-smooth-shadow-l1);
+    margin-bottom: 0.5rem;
+  }
+}

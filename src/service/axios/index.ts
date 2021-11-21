@@ -44,7 +44,6 @@ const saveUserDownloadedTrack = async (
   const body = {
     downloadedTracks,
   };
-  console.log('save', userUID, downloadedTracks)
   return await request.post(`/users/${userUID}/downloads`, body);
 };
 

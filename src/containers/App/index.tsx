@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { ToastContainer } from "react-toastify";
 
-import ErrorBoundary from "containers/ErrorBoundary";
+import ErrorBoundary from "components/ErrorBoundary";
 import Spinner from "components/Spinner";
 import Layout from "containers/Layout";
 
@@ -29,6 +29,8 @@ import {
 } from "./actions";
 import { makeSelectDefaultPlaylist, makeSelectStartState } from "./selectors";
 import { AppRoutesProps, PlaylistDataType } from "./types";
+import { isNull } from "lodash";
+import Downloads from "pages/downloads";
 
 const hyderationState = createStructuredSelector({
   mainState: makeSelectStartState(),
@@ -39,13 +41,13 @@ const App = () => {
   const dispatch = useDispatch();
   const {
     defaultPlaylist,
-    mainState: { data, isLoading, isError },
+    mainState: { data, isLoading, isError, currentUser },
   } = useSelector(hyderationState);
 
   useEffect(() => {
     const storedData = sessionStorage.getItem("echoState") as string;
     const parsedData: { data: PlaylistDataType } = JSON.parse(storedData);
-    
+
     if (parsedData && parsedData.data !== null) {
       dispatch(setSerializedState(parsedData));
     } else {
@@ -77,13 +79,40 @@ const App = () => {
               pauseOnHover
             />
             <ErrorBoundary isError={isError}>
-              {isLoading && <Spinner />}
-              {!isLoading && !!data && (
-                <AppRoutes
-                  defaultPlaylist={defaultPlaylist as string | number}
-                  data={data}
-                />
-              )}
+              <SyncedRoute exact path="/" dependency={data}>
+                <HomePage data={data as PlaylistDataType[]} />
+              </SyncedRoute>
+              <SyncedRoute exact path="/playlist" dependency={data}>
+                {isNull(defaultPlaylist) ? (
+                  <PlaylistPage data={data as PlaylistDataType[]} />
+                ) : (
+                  <Redirect to={`/playlist/${defaultPlaylist}`} />
+                )}
+              </SyncedRoute>
+              <SyncedRoute path="/playlist/:id" dependency={data}>
+                <PlaylistPage data={data as PlaylistDataType[]} />
+              </SyncedRoute>
+              <SyncedRoute exact path="/login" dependency={data}>
+                {isNull(currentUser.uid) ? (
+                  <AuthPage type={LOGIN_AUTH_TYPE} />
+                ) : (
+                  <Redirect exact to="/" />
+                )}
+              </SyncedRoute>
+              <SyncedRoute exact path="/register" dependency={data}>
+                {isNull(currentUser.uid) ? (
+                  <AuthPage type={REGISTER_AUTH_TYPE} />
+                ) : (
+                  <Redirect exact to="/" />
+                )}
+              </SyncedRoute>
+              <SyncedRoute exact path="/downloads" dependency={currentUser.uid}>
+                {isNull(currentUser.uid) ? (
+                  <Redirect exact to="/" />
+                ) : (
+                  <Downloads currentUser={currentUser} />
+                )}
+              </SyncedRoute>
             </ErrorBoundary>
           </Layout>
         </Switch>
@@ -92,30 +121,38 @@ const App = () => {
   );
 };
 
-const AppRoutes = ({ data, defaultPlaylist }: AppRoutesProps) => {
+const SyncedRoute = ({ dependency, path, exact = false, children }) => {
   return (
-    <>
-      <Route exact path="/">
-        <HomePage data={data as PlaylistDataType[]} />
-      </Route>
-      <Route exact path="/playlist">
-        {defaultPlaylist !== null ? (
-          <Redirect to={`/playlist/${defaultPlaylist}`} />
-        ) : (
-          <PlaylistPage data={data as PlaylistDataType[]} />
-        )}
-      </Route>
-      <Route path="/playlist/:id">
-        <PlaylistPage data={data as PlaylistDataType[]} />
-      </Route>
-      <Route exact path="/login">
-        <AuthPage type={LOGIN_AUTH_TYPE} />
-      </Route>
-      <Route exact path="/register">
-        <AuthPage type={REGISTER_AUTH_TYPE} />
-      </Route>
-    </>
+    <Route {...{ path, exact }}>
+      {isNull(dependency) ? <Spinner /> : children}
+    </Route>
   );
 };
+
+// const AppRoutes = ({ data, defaultPlaylist }: AppRoutesProps) => {
+//   return (
+//     <>
+//       <Route exact path="/">
+//         <HomePage data={data as PlaylistDataType[]} />
+//       </Route>
+//       <Route exact path="/playlist">
+//         {defaultPlaylist !== null ? (
+//           <Redirect to={`/playlist/${defaultPlaylist}`} />
+//         ) : (
+//           <PlaylistPage data={data as PlaylistDataType[]} />
+//         )}
+//       </Route>
+//       <Route path="/playlist/:id">
+//         <PlaylistPage data={data as PlaylistDataType[]} />
+//       </Route>
+//       <Route exact path="/login">
+//         <AuthPage type={LOGIN_AUTH_TYPE} />
+//       </Route>
+//       <Route exact path="/register">
+//         <AuthPage type={REGISTER_AUTH_TYPE} />
+//       </Route>
+//     </>
+//   );
+// };
 
 export default App;
