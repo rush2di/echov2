@@ -47,6 +47,15 @@ const makeSelectUserDownloads = () => {
   );
 };
 
+const makeSelectUserLikes = () => {
+  return createSelector(
+    selectAppState,
+    ({ currentUser }): TrackDataType[] | null => {
+      return currentUser.likedTracks;
+    }
+  );
+};
+
 const makeSelectPendingDownloads = () => {
   return createSelector(
     selectAppState,
@@ -64,4 +73,5 @@ export {
   makeSelectDefaultPlaylist,
   makeSelectPendingDownloads,
   makeSelectUserDownloads,
+  makeSelectUserLikes,
 };

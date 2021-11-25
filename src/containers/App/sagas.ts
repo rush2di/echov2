@@ -6,6 +6,7 @@ import {
   getPlaylists,
   getUserData,
   saveUserDownloadedTrack,
+  saveUserLikedTrack,
   saveUserToDB,
 } from "service/axios";
 import { login, logout, register } from "service/firebaseAuth";
@@ -27,7 +28,11 @@ import {
   requestUserLikeError,
 } from "./actions";
 import { appActions, authActionTypes } from "./constants";
-import { makeSelectUser, makeSelectUserDownloads } from "./selectors";
+import {
+  makeSelectUser,
+  makeSelectUserDownloads,
+  makeSelectUserLikes,
+} from "./selectors";
 import { TrackDataType } from "./types";
 import { serilizeData } from "./utils";
 
@@ -41,6 +46,7 @@ function* requestPlaylists() {
     yield call(serilizeData, response.data);
     yield put(requestPlaylistsDataSuccess(response.data));
   } catch (err) {
+    console.log(err);
     yield put(requestPlaylistsDataError(err));
   }
 }
@@ -118,4 +124,19 @@ function* requestDownload(action) {
   }
 }
 
-export { playlistsSaga, authSaga, downloadSaga };
+function* likeSaga() {
+  yield takeEvery(appActions.REQUEST_USER_LIKE_TRACK_START, requestLike);
+}
+
+function* requestLike(action) {
+  try {
+    const user = yield select(makeSelectUser());
+    yield call(saveUserLikedTrack, user.uid, action.payload);
+    yield put(requestUserLikeSuccess(action.payload));
+  } catch (err) {
+    console.log(err)
+    yield put(requestUserLikeError());
+  }
+}
+
+export { playlistsSaga, authSaga, downloadSaga, likeSaga };

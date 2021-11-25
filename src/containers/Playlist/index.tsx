@@ -37,6 +37,7 @@ import {
 } from "./selectors";
 import { artistsSum, topArtistsTracks } from "./utils";
 import "./styles.scss";
+import { isTrackLiked } from "helpers/utils/syncedPlayerUtils/styles";
 
 const playlistAudioState = createStructuredSelector({
   pendingDownloadsUIDs: makeSelectPendingDownloads(),
@@ -66,7 +67,9 @@ const PlaylistContainer = ({ data }) => {
   ) => {
     event.stopPropagation();
     initHandleLike({
+      data,
       targetID: id,
+      currentPlaylistID: currentPlaylistID as string,
     });
   };
 
@@ -111,10 +114,13 @@ const PlaylistContainer = ({ data }) => {
                   <PlaylistItem
                     id={track.id}
                     index={index}
-                    isLiked={false}
                     title={track.title}
                     image={track.cover_medium}
                     artist={track.artist_name}
+                    rank={rankLeftFill(track.rank)}
+                    handleLikeReaction={handleLikeReaction}
+                    handleDownload={handleDownload}
+                    onClick={handleClick}
                     isPending={
                       animateDownloadIcon({
                         pendingList: pendingDownloadsUIDs,
@@ -122,10 +128,7 @@ const PlaylistContainer = ({ data }) => {
                       }).animated
                     }
                     isActive={currentTrackIndex === index}
-                    rank={rankLeftFill(track.rank)}
-                    handleDownload={handleDownload}
-                    handleLikeReaction={handleLikeReaction}
-                    onClick={handleClick}
+                    isLiked={isTrackLiked({ trackUID: track.id })}
                   />
                   <hr className="my-0 bg-muted" />
                 </div>

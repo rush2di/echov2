@@ -199,7 +199,9 @@ const AudioPlayer = () => {
     event.stopPropagation();
     if (currentPlaylistID === null || data === null) return;
     initHandleLike({
+      data,
       targetID: id,
+      currentPlaylistID
     });
   };
 

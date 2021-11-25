@@ -1,10 +1,17 @@
 import { fork } from "redux-saga/effects";
-import { playlistsSaga, authSaga, downloadSaga } from "containers/App/sagas";
+
+import {
+  playlistsSaga,
+  downloadSaga,
+  authSaga,
+  likeSaga,
+} from "containers/App/sagas";
 
 function* rootSaga() {
   yield fork(playlistsSaga);
-  yield fork(authSaga);
   yield fork(downloadSaga);
+  yield fork(authSaga);
+  yield fork(likeSaga);
 }
 
 export default rootSaga;

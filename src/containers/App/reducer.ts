@@ -1,4 +1,4 @@
-import { findIndex, remove } from "lodash";
+import { filter, findIndex, remove, some, uniqBy } from "lodash";
 import { appActions, authActionTypes, downloadStatus } from "./constants";
 import { AppStateType, PendingDownloadsUIDsType } from "./types";
 
@@ -152,6 +152,22 @@ const appGlobalReducer = (state = initState, action: any) => {
       return {
         ...state,
         pendingDownloadsUIDs: newPendings,
+      };
+    case appActions.REQUEST_USER_LIKE_TRACK_START:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          likedTracks: action.payload,
+        },
+      };
+    case appActions.REQUEST_USER_LIKE_TRACK_SUCCESS:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          likedTracks: action.payload,
+        },
       };
     default:
       return state;

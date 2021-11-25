@@ -8,7 +8,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { ToastContainer } from "react-toastify";
+import { isNull } from "lodash";
 
+import DisclaimerContainer from "containers/DisclaimerContainer";
 import ErrorBoundary from "components/ErrorBoundary";
 import Spinner from "components/Spinner";
 import Layout from "containers/Layout";
@@ -19,18 +21,19 @@ import { getUserData } from "service/axios";
 import { auth } from "firebase";
 
 import PlaylistPage from "pages/playlist";
+import Downloads from "pages/downloads";
 import HomePage from "pages/home";
 import AuthPage from "pages/auth";
 
+import { makeSelectDefaultPlaylist, makeSelectStartState } from "./selectors";
+import { PlaylistDataType } from "./types";
 import {
   requestPlaylistsData,
   setSerializedState,
   authLoginSuccess,
 } from "./actions";
-import { makeSelectDefaultPlaylist, makeSelectStartState } from "./selectors";
-import { AppRoutesProps, PlaylistDataType } from "./types";
-import { isNull } from "lodash";
-import Downloads from "pages/downloads";
+import { toastProps } from "./constants";
+import Likes from "pages/likes";
 
 const hyderationState = createStructuredSelector({
   mainState: makeSelectStartState(),
@@ -41,7 +44,7 @@ const App = () => {
   const dispatch = useDispatch();
   const {
     defaultPlaylist,
-    mainState: { data, isLoading, isError, currentUser },
+    mainState: { data, isError, currentUser },
   } = useSelector(hyderationState);
 
   useEffect(() => {
@@ -67,17 +70,8 @@ const App = () => {
       <div className="app">
         <Switch>
           <Layout>
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
+            <ToastContainer {...toastProps} />
+            {!isNull(defaultPlaylist) && <DisclaimerContainer />}
             <ErrorBoundary isError={isError}>
               <SyncedRoute exact path="/" dependency={data}>
                 <HomePage data={data as PlaylistDataType[]} />
@@ -113,6 +107,13 @@ const App = () => {
                   <Downloads currentUser={currentUser} />
                 )}
               </SyncedRoute>
+              <SyncedRoute exact path="/likes" dependency={currentUser.uid}>
+                {isNull(currentUser.uid) ? (
+                  <Redirect exact to="/" />
+                ) : (
+                  <Likes currentUser={currentUser} />
+                )}
+              </SyncedRoute>
             </ErrorBoundary>
           </Layout>
         </Switch>
@@ -128,31 +129,5 @@ const SyncedRoute = ({ dependency, path, exact = false, children }) => {
     </Route>
   );
 };
-
-// const AppRoutes = ({ data, defaultPlaylist }: AppRoutesProps) => {
-//   return (
-//     <>
-//       <Route exact path="/">
-//         <HomePage data={data as PlaylistDataType[]} />
-//       </Route>
-//       <Route exact path="/playlist">
-//         {defaultPlaylist !== null ? (
-//           <Redirect to={`/playlist/${defaultPlaylist}`} />
-//         ) : (
-//           <PlaylistPage data={data as PlaylistDataType[]} />
-//         )}
-//       </Route>
-//       <Route path="/playlist/:id">
-//         <PlaylistPage data={data as PlaylistDataType[]} />
-//       </Route>
-//       <Route exact path="/login">
-//         <AuthPage type={LOGIN_AUTH_TYPE} />
-//       </Route>
-//       <Route exact path="/register">
-//         <AuthPage type={REGISTER_AUTH_TYPE} />
-//       </Route>
-//     </>
-//   );
-// };
 
 export default App;

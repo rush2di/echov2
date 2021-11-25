@@ -28,11 +28,29 @@ const downloadStatus = {
   ERROR: `ERROR`,
 };
 
+const toastProps = {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  newestOnTop: false,
+  rtl: false,
+  pauseOnFocusLoss: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+};
+
 const toastMessages = {
   LOGIN_SUCCESS: `Successfuly logged in ✅`,
   LOGOUT_SUCCESS: `Logged out, see you soon 👋`,
   REGISTER_SUCCESS: `Welcome aboard 🥳`,
-  ERRORS: `Something went wrong ☹️`
-}
+  ERRORS: `Something went wrong ☹️`,
+};
 
-export { appActions, authActionTypes, downloadStatus, toastMessages };
+export {
+  appActions,
+  authActionTypes,
+  downloadStatus,
+  toastMessages,
+  toastProps,
+};

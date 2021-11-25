@@ -9,4 +9,6 @@ export interface initHandleDownloadArgs {
 
 export interface initHandleLikeArgs {
   targetID: string;
+  data: PlaylistDataType[];
+  currentPlaylistID: string | number;
 }

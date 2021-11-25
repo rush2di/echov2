@@ -21,6 +21,7 @@
   @include respond-to("small") {
     height: initial;
     padding: 0 2rem;
+    z-index: 99999999;
   }
 
   @include respond-to("x-small") {

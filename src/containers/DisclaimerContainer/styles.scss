@@ -1,0 +1,66 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/helpers/helpers";
+@import "../../styles/abstracts/mixins/mixins";
+
+.disclaimerContainer {
+  top: 0;
+  position: sticky;
+  z-index: 999999;
+  margin-left: -2.5rem;
+  width: calc(100% + 5rem);
+  transition: opacity 0.4s $easing-expo, visibility 0s;
+
+  &.--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.--hidden .disclaimer {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(1rem);
+    transition: transform 0.4s $easing-expo, opacity 0.4s $easing-expo,
+      visibility 0s;
+  }
+
+  &.--visible {
+    opacity: 1;
+    visibility: visible;
+    margin-top: -5rem;
+  }
+
+  &.--visible .disclaimer {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0rem);
+  }
+}
+
+.disclaimerContainer__body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  z-index: 999999;
+  align-items: center;
+  background: #06080d82;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  height: calc(100vh - 120px);
+  @include respond-to("medium") {
+    height: calc(100vh - 80px);
+  }
+  @include respond-to("x-small") {
+    width: 100%;
+    margin-left: 0;
+    padding: 3rem 0;
+    margin-top: -4rem;
+  }
+}
+
+// .disclaimer {
+//   position: absolute;
+//   z-index: 999999;
+// }

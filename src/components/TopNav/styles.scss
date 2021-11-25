@@ -13,6 +13,9 @@
   &__auth {
     position: relative;
     z-index: 1000;
+    @include respond-to("x-small") {
+      display: none !important;
+    }
   }
 
   &__auth,

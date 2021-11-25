@@ -122,16 +122,17 @@ const requestDownloadError = (trackUID: string) => {
   };
 };
 
-const requestUserLikeStart = (trackUID: string) => {
+const requestUserLikeStart = (newLikes: TrackDataType[]) => {
   return {
     type: appActions.REQUEST_USER_LIKE_TRACK_START,
-    payload: trackUID,
+    payload: newLikes,
   };
 };
 
-const requestUserLikeSuccess = () => {
+const requestUserLikeSuccess = (likedTracks: TrackDataType[]) => {
   return {
     type: appActions.REQUEST_USER_LIKE_TRACK_SUCCESS,
+    payload: likedTracks,
   };
 };
 

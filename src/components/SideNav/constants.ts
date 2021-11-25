@@ -23,7 +23,7 @@ const menuItemsMenu: Array<MenuItemProps> = [
 
 const menuItemsAccount: Array<MenuItemProps> = [
   { icon: "save", text: "Downloads", color: "color-5", link: "/downloads" },
-  { icon: "heart", text: "Favorites", color: "color-6" },
+  { icon: "heart", text: "Favorites", color: "color-6", link: "/likes"  },
   { icon: "ticket-alt", text: "Copouns", color: "color-7" },
 ];
 

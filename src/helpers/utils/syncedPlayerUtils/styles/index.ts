@@ -1,7 +1,12 @@
-import _ from "lodash";
+import _, { some } from "lodash";
 import { IconPrefix } from "@fortawesome/fontawesome-common-types";
 
-import { AnimateDownloadIconArgs, AnimateDownloadIconReturn } from "./types";
+import {
+  AnimateDownloadIconArgs,
+  AnimateDownloadIconReturn,
+  isTrackLikedArgs,
+} from "./types";
+import store from "store/store";
 
 const resolveReactionIcon = (
   isHeart: boolean | undefined,
@@ -26,4 +31,9 @@ const animateDownloadIcon = ({
     : { icon: "download", animated: false };
 };
 
-export { resolveReactionIcon, animateDownloadIcon };
+const isTrackLiked = ({ trackUID }: isTrackLikedArgs) => {
+  const { currentUser } = store.getState().app;
+  return some(currentUser.likedTracks, ["id", trackUID]);
+};
+
+export { resolveReactionIcon, animateDownloadIcon, isTrackLiked };

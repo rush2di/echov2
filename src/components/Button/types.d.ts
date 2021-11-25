@@ -6,6 +6,5 @@ export interface ButtonProps {
   icon?: IconProp;
   classNames?: string;
   onClick?(e: SyntheticEvent): void;
-  // All other props
-  [x: string]: any;
+  [x: string]: any;  // All other props
 }

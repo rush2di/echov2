@@ -6,7 +6,7 @@ const Button = (props: ButtonProps) => {
 
   if (icon) {
     return (
-      <button {...rest} className={`btn ${classNames}`}>
+      <button {...rest} className={`btn ${classNames}`} onClick={onClick}>
         <FontAwesomeIcon icon={icon} />
         <p>{label}</p>
       </button>
@@ -15,7 +15,7 @@ const Button = (props: ButtonProps) => {
 
   if (children) {
     return (
-      <button {...rest} className={`btn ${classNames}`}>
+      <button {...rest} className={`btn ${classNames}`} onClick={onClick}>
         {children}
       </button>
     );
