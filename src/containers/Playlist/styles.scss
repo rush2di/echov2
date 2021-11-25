@@ -1,0 +1,61 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/mixins/mixins";
+
+hr {
+  @include respond-to("small") {
+    margin-left: 0.5rem !important;
+  }
+}
+
+.main-wrapper {
+  width: initial;
+  margin-left: -1rem;
+  @include respond-to("small") {
+    margin-left: 0;
+  }
+  @include respond-to("x-small") {
+    width: calc(100% + 1rem);
+  }
+}
+
+.info-wrapper p {
+  margin-left: 0.5rem;
+  margin-top: -1px;
+}
+
+.item-wrapper-1 {
+  display: flex;
+  flex-direction: column;
+  width: -webkit-fill-available;
+}
+
+.item-wrapper-1 .playlistItem {
+  width: auto;
+}
+
+.item-wrapper-2 {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 1rem;
+  @include respond-to("small") {
+    position: static;
+    margin-left: -0.5rem;
+  }
+}
+
+.item-wrapper-2 > div {
+  display: flex;  
+  &:nth-child(2) {
+    @include respond-to("small") {
+      display: none;
+    }
+  }
+}
+
+.no-wrap {
+  flex-wrap: nowrap !important;
+  @include respond-to("small") {
+    flex-wrap: wrap-reverse !important;
+  }
+}

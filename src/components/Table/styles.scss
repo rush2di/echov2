@@ -1,0 +1,35 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/helpers/helpers";
+@import "../../styles/abstracts/mixins/mixins";
+
+.Table {
+  @include add-dark-wrapper;
+  width: 100%;
+  width: -webkit-fill-available;
+
+  &__head,
+  &__head > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__head h3 {
+    text-transform: capitalize
+  }
+
+  &__head p {
+    @include truncate($text-paragraphs-small, $text-line-height-md, 1);
+  }
+
+  &__body {
+    display: grid;
+    grid-template-rows: auto;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  hr {
+    border-color: $color-p-0;
+  }
+}

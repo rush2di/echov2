@@ -1,0 +1,44 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/helpers/helpers";
+@import "../../styles/abstracts/mixins/mixins";
+
+.dropdownMenu {
+  min-width: 130px;
+  @include add-borders($color-p-1, $color-p-0-lighter, $structure-radius-sm);
+  @include add-shadow($effect-smooth-shadow-l1);
+  padding: 0.75rem 1rem 0.95rem;
+  display: inline-block;
+
+  &__list {
+    color: $color-p-4;
+  }
+
+  &__list-item {
+    cursor: pointer;
+  }
+
+  &__list-item > *:first-child {
+    text-transform: capitalize;
+    transition: background-color 0.25s $easing-expo;
+    color: $color-p-3;
+  }
+
+  &__list-item:hover > *:first-child {
+    opacity: 0.7;
+  }
+
+  &__list-item hr {
+    height: 1px;
+    background-color: $color-hover-1;
+    margin: 0.75rem 0;
+    border: 0;
+  }
+
+  &__list-item:last-child > *:first-child {
+    color: $color-google-red;
+  }
+
+  &__list-item:last-child hr {
+    display: none;
+  }
+}

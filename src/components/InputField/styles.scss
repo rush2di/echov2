@@ -1,0 +1,101 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/helpers/helpers";
+@import "../../styles/abstracts/mixins/mixins";
+
+.inputField {
+  $decorators_paddings: 0.25rem 0.5rem;
+
+  display: block;
+  position: relative;
+  min-width: 250px;
+
+  label {
+    display: inline-block;
+    padding: $decorators_paddings;
+  }
+
+  &__wrapper {
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    width: -webkit-fill-available;
+    color: $color-p-0-light;
+  }
+
+  &__wrapper.--default {
+    @include add-borders($color-p-1, $color-highlight-1, $structure-radius-sm);
+  }
+
+  &__wrapper.--success {
+    @include add-borders(
+      $color-borders-success,
+      $color-highlight-1,
+      $structure-radius-sm
+    );
+  }
+
+  &__wrapper.--error {
+    @include add-borders(
+      $color-borders-error,
+      $color-highlight-1,
+      $structure-radius-sm
+    );
+  }
+
+  &__wrapper input {
+    border: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    color: $color-p-0-light;
+    padding: 0.65rem 0.5rem;
+    background-color: transparent;
+  }
+
+  &__wrapper .icon {
+    position: absolute;
+    display: flex;
+    right: 0;
+    top: 0;
+    align-items: center;
+    bottom: 0;
+    padding: 0 0.5rem;
+  }
+
+  &__feedback {
+    padding: $decorators_paddings;
+  }
+
+  &__feedback.--default {
+    color: $color-p-0;
+  }
+
+  &__feedback.--success {
+    color: $color-p-0-light;
+  }
+
+  &__feedback.--error {
+    color: $color-error-text;
+  }
+
+  &__wrapper .icon,
+  &__wrapper input::placeholder {
+    color: $color-p-0;
+  }
+
+  &__wrapper:focus,
+  &__wrapper:focus-within,
+  &__wrapper:active {
+    border-color: $color-borders;
+  }
+
+  &__wrapper:focus .icon,
+  &__wrapper:focus-within .icon,
+  &__wrapper:active .icon {
+    color: $color-p-0-light;
+  }
+
+  .show-icon {
+    cursor: pointer;
+  }
+}

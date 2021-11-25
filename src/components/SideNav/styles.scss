@@ -1,0 +1,168 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/mixins/mixins";
+
+$_icon_colors: #e24c1d, #1976d2, #77ad1c, #f9a825, #d52b28, #673ab7, #00897b;
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: $structure-radius-sm;
+  background-color: transparent;
+  transition: background-color 0.6s $easing-expo;
+  padding: 0.5rem;
+  cursor: pointer;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-p-1;
+    border-radius: $structure-radius-sm;
+    transition: background-color 0.6s $easing-expo;
+    color: $color-p-0;
+    width: 33px;
+    height: 33px;
+  }
+
+  p {
+    @include respond-to("medium") {
+      display: none;
+    }
+  }
+
+  &--active p,
+  &--active &__icon,
+  &:active p,
+  &:active &__icon {
+    color: $color-p-0-light;
+  }
+}
+
+@for $i from 1 through length($_icon_colors) {
+  .menuItem--active .--color-#{$i} {
+    background-color: nth($_icon_colors, $i);
+  }
+  .menuItem:active .--color-#{$i} {
+    background-color: nth($_icon_colors, $i);
+  }
+}
+
+.menuItem:hover {
+  background-color: $color-hover-1;
+}
+
+.menuItem:active,
+.menuItem:focus,
+.menuItem:focus-within {
+  background-color: $color-highlight-1 !important;
+}
+
+.sideNav {
+  height: 100%;
+  grid-row: 1/3;
+  grid-column: 1/2;
+  max-width: 240px;
+  overflow: hidden;
+  width: fit-content;
+  border-right: 1px solid $color-borders;
+  box-shadow: 50vw 0px 0px 100vw #06080d00;
+  background-color: $color-p-3;
+
+  & > *:nth-child(3) {
+    pointer-events: none;
+  }
+
+  @include respond-to("medium") {
+    position: absolute;
+    transition: all 0.4s $easing-expo;
+    max-width: 70px;
+    min-width: 70px;
+    z-index: 9999999;
+    width: 0%;
+    left: 0;
+    top: 0;
+  }
+
+  @include respond-to("x-small") {
+    max-width: 55px;
+    min-width: 55px;
+  }
+
+  &__body {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    display: grid;
+    grid-template-rows: auto;
+    row-gap: 0.5rem;
+  }
+
+  &__body h2 {
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+    @include respond-to("medium") {
+      display: none;
+    }
+  }
+
+  &__head {
+    position: relative;
+  }
+
+  &__head h1 {
+    @include respond-to("medium") {
+      visibility: hidden;
+    }
+  }
+
+  .scrollable {
+    @include respond-to("x-small") {
+      overflow-y: hidden;
+    }
+  }
+
+  .scrollable > div {
+    @include respond-to("x-small") {
+      padding-left: 0.65rem !important;
+      padding-right: 0.65rem !important;
+    }
+  }
+}
+
+.--open.sideNav {
+  @include respond-to("medium") {
+    width: 200px;
+    max-width: 200px;
+    box-shadow: 50vw 0px 0px 100vw #06080d8a;
+
+    p {
+      display: block;
+      margin-left: 1rem;
+    }
+
+    .toggleButton {
+      background: $color-p-0-light;
+      color: nth($_icon_colors, 5);
+    }
+
+    .toggleButton svg {
+      transform: rotate(540deg);
+    }
+  }
+}
+
+.toggleButton {
+  @extend .menuItem__icon;
+  display: none;
+  border: 0;
+  @include respond-to("medium") {
+    display: flex;
+    position: absolute;
+    font-size: 16px;
+    right: -0.25rem;
+  }
+  @include respond-to("x-small") {
+    right: 0;
+  }
+}

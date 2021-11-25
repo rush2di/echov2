@@ -1,5 +1,5 @@
 $class_breakpoints: (
-  "xsm": "500",
+  "xsm": "660",
   "sm": "767",
   "md": "992",
   "lg": "1200",
@@ -26,7 +26,7 @@ $width_types: (
 
 @each $widthKey, $widthVal in $width_types {
   .w-#{$widthKey} {
-    width: #{$widthVal} !important;
+    width: #{$widthVal};
   }
 
   .w- {
@@ -54,27 +54,27 @@ $spacingUnits: ("0", "1", "2", "3", "4", "5", "auto");
     .#{$spacerKey} {
       @if ($num == "auto") {
         &-#{$num} {
-          #{$spacer}: auto !important;
+          #{$spacer}: auto;
         }
         &l-#{$num} {
-          #{$spacer}-left: auto !important;
+          #{$spacer}-left: auto;
         }
         &r-#{$num} {
-          #{$spacer}-right: auto !important;
+          #{$spacer}-right: auto;
         }
         &t-#{$num} {
-          #{$spacer}-top: auto !important;
+          #{$spacer}-top: auto;
         }
         &b-#{$num} {
-          #{$spacer}-bottom: auto !important;
+          #{$spacer}-bottom: auto;
         }
         &x-#{$num} {
-          #{$spacer}-left: auto !important;
-          #{$spacer}-right: auto !important;
+          #{$spacer}-left: auto;
+          #{$spacer}-right: auto;
         }
         &y-#{$num} {
-          #{$spacer}-top: auto !important;
-          #{$spacer}-bottom: auto !important;
+          #{$spacer}-top: auto;
+          #{$spacer}-bottom: auto;
         }
       } @else {
         &-#{$num} {
@@ -126,7 +126,7 @@ $spacingUnits: ("0", "1", "2", "3", "4", "5", "auto");
             }
             &y-#{$bpKey}-#{$num} {
               #{$spacer}-top: auto !important;
-              #{$spacer}-top: auto !important;
+              #{$spacer}-bottom: auto !important;
             }
           } @else {
             &-#{$bpKey}-#{$num} {
@@ -150,7 +150,7 @@ $spacingUnits: ("0", "1", "2", "3", "4", "5", "auto");
             }
             &y-#{$bpKey}-#{$num} {
               #{$spacer}-top: #{$num}rem !important;
-              #{$spacer}-top: #{$num}rem !important;
+              #{$spacer}-bottom: #{$num}rem !important;
             }
           }
         }

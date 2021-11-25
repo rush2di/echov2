@@ -1,67 +1,81 @@
 .txt-h1 {
   font-size: $text-h1;
   line-height: $text-line-height-md;
-  font-weight: 800;
+  font-weight: 500;
 }
 .txt-h2 {
   font-size: $text-h2;
   line-height: $text-line-height-md;
-  font-weight: 800;
+  font-weight: 500;
 }
 .txt-h3 {
   font-size: $text-h3;
   line-height: $text-line-height-md;
-  font-weight: 800;
+  font-weight: 500;
 }
 .txt-h4 {
   font-size: $text-h4;
   line-height: $text-line-height-md;
-  font-weight: 800;
+  font-weight: 500;
 }
 .txt-h5 {
   font-size: $text-h5;
   line-height: $text-line-height-sm;
-  font-weight: 700;
+  font-weight: 500;
 }
 .txt-h6 {
   font-size: $text-h6;
   line-height: $text-line-height-sm;
-  font-weight: 700;
+  font-weight: 500;
 }
 .txt-btn {
   font-size: $text-buttons;
   line-height: $text-line-height-sm;
-  font-weight: 600;
+  font-weight: 400;
 }
 .txt {
   font-size: $text-paragraphs;
-  line-height: $text-line-height-lg;
+  line-height: $text-line-height-md;
+  font-weight: 400;
+}
+.txt-md {
+  font-size: $text-paragraphs-md;
+  line-height: $text-line-height-md;
   font-weight: 400;
 }
 .txt-sm {
   font-size: $text-paragraphs-small;
-  line-height: $text-line-height-lg;
+  line-height: $text-line-height-md;
   font-weight: 400;
 }
 .txt-sm-bold {
   font-size: $text-paragraphs-small;
-  line-height: $text-line-height-lg;
-  font-weight: 700;
+  line-height: $text-line-height-md;
+  font-weight: 600;
 }
 .txt-sm-caps {
   font-size: $text-paragraphs-small;
-  line-height: $text-line-height-lg;
+  line-height: $text-line-height-md;
   text-transform: uppercase;
   font-weight: 400;
+}
+.txt-label {
+  color: $color-borders;
 }
 .txt-muted {
   color: $color-p-0;
 }
 .txt-prim {
-  color: $color-p-0-light;
+  color: $color-p-0-lighter;
 }
 .txt-sec {
-  color: $color-p-0-lighter;
+  color: $color-p-0-light;
+}
+.txt-no-wrap {
+  white-space: nowrap;
+}
+.txt-center {
+  text-align: center;
 }
 .bg-prim {
   background-color: $color-p-3;
@@ -84,13 +98,15 @@
 .elevation-3 {
   box-shadow: $effect-smooth-shadow-l3;
 }
-.box-prim {
-  border: 1px solid $color-borders;
-  background-color: $color-p-3;
-  border-radius: 1rem;
+.pointer {
+  cursor: pointer;
 }
-.box-sec {
-  border: 1px solid $color-p-1;
-  background-color: $color-p-4;
-  border-radius: 1rem;
+.btn-naked {
+  border: 0;
+  background-color: transparent;
+  display: inline-block;
+}
+.d-flex {
+  display: flex;
+  align-items: center;
 }

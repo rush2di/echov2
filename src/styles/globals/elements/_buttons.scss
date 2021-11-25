@@ -1,17 +1,23 @@
 .btn {
-  background-color: $color--primary;
-  color: $color--p-0-lighter;
-  border-radius: toRem(12);
-  transition: background-color 0.4s ease-out;
-  @include add-borders($color--p-4);
-  // txt-btn max-w-sm py-1.5 px-6 rounded-md border;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  color: $color-p-0-light;
+  text-align: center;
+  transition: background-color 0.4s $easing-expo;
+  @include add-borders($color-p-4, $color-primary, $structure-radius-sm);
 
-  &:hover &:focus &:active {
-    background-color: darken($color--primary, 15%);
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: darken($color-primary, 10%);
+  }
+
+  &--fluid {
+    width: 100%;
   }
 
   &--rounded {
-    border-radius: toRem(18);
+    border-radius: $structure-radius-sm;
   }
 
   &--flex {
@@ -29,25 +35,43 @@
   }
 
   &--google {
-    background-color: $color-google-red;
-    @include add-borders(darken($color-google-red, 20%));
+    @include add-borders(
+      darken($color-google-red, 20%),
+      $color-google-red,
+      $structure-radius-xsm
+    );
   }
 
-  &--google:hover &--google:focus &--google:active {
+  &--google:hover,
+  &--google:focus,
+  &--google:active {
     background-color: darken($color-google-red, 15%);
   }
 
   &--facebook {
     background-color: $color-facebook-blue;
-    @include add-borders(darken($color-facebook-blue, 20%));
+    @include add-borders(
+      darken($color-facebook-blue, 20%),
+      $color-facebook-blue,
+      $structure-radius-xsm
+    );
   }
 
-  &--facebook:hover &--facebook:focus &--facebook:active {
+  &--facebook:hover,
+  &--facebook:focus,
+  &--facebook:active {
     background-color: darken($color-facebook-blue, 15%);
+  }
+
+  &:disabled,
+  &:hover:disabled,
+  &:focus:disabled,
+  &:active:disabled {
+    color: #8b8b8b;
+    background-color: $color-p-1
   }
 }
 
-button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {

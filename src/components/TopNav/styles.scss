@@ -1,0 +1,40 @@
+@import "../../styles/abstracts/mixins/mixins";
+@import "../../styles/abstracts/variables/variables";
+
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $color-p-3;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  &__auth {
+    position: relative;
+    z-index: 1000;
+    @include respond-to("x-small") {
+      display: none !important;
+    }
+  }
+
+  &__auth,
+  &__auth-item a {
+    display: flex;
+    align-items: center;
+  }
+
+  &__auth-item a * {
+    transition: all 0.4s $easing-expo;
+  }
+
+  &__auth-item p {
+    margin-left: 0.5rem;
+  }
+
+  &__auth-item:hover a *,
+  &__auth-item:focus a *,
+  &__auth-item:active a * {
+    color: $color-p-0-lighter;
+  }
+}

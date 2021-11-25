@@ -1,14 +1,48 @@
+@import "./elements/buttons";
+@import "./elements/separators";
+
 #root {
   display: flex;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 .app {
-  width: 100%;
-  height: calc(100vh - 4rem);
+  width: 97%;
+  display: grid;
   max-width: 1270px;
   min-height: 550px;
-  @extend .box-prim;
+  height: calc(100vh - 2rem);
+  position: relative;
+  overflow: hidden;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: toRem(70) 1fr toRem(90);
+  @include add-shadow($effect-smooth-shadow-l2);
+  @include add-wrapper();
   @extend .m-auto;
+
+  @include respond-to("small") {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  @include respond-to("small") {
+    grid-template-rows: toRem(70) 1fr toRem(88);
+    border: 0;
+  }
+}
+
+.container {
+  &__fluid {
+    display: block;
+    padding: 0 2.5rem;
+    @include respond-to("medium") {
+      padding: 0 2rem;
+    }
+    @include respond-to("small") {
+      padding: 0 1.5rem;
+    }
+  }
 }

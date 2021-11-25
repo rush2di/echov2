@@ -1,0 +1,281 @@
+@import "../../styles/abstracts/variables/variables";
+@import "../../styles/abstracts/helpers/helpers";
+@import "../../styles/abstracts/mixins/mixins";
+
+.audioPlayer {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  grid-column: 1/3;
+  grid-row: 3/4;
+  align-items: center;
+  background: $color-p-3;
+  justify-content: space-between;
+  border-top: 1px solid $color-borders;
+
+  @include respond-to("medium") {
+    position: relative;
+    z-index: 11;
+  }
+
+  @include respond-to("small") {
+    height: initial;
+    padding: 0 2rem;
+    z-index: 99999999;
+  }
+
+  @include respond-to("x-small") {
+    padding: 0;
+  }
+
+  &__head {
+    @include respond-to("small") {
+      display: none;
+    }
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 280px);
+    @include respond-to("medium") {
+      width: calc(100% - 220px);
+    }
+    @include respond-to("small") {
+      width: calc(100% - 2rem);
+    }
+    @include respond-to("x-small") {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  &__buttons {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    align-items: center;
+    gap: 1rem;
+    @include respond-to("x-small") {
+      position: relative;
+      z-index: 100;
+    }
+  }
+
+  &__progress {
+    width: 100%;
+    @include respond-to("x-small") {
+      margin: 0 !important;
+      position: absolute;
+      z-index: 10;
+      top: -0.5rem;
+    }
+  }
+
+  &__volume {
+    @include respond-to("x-small") {
+      display: none;
+    }
+  }
+
+  &__reactions {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: center;
+    padding: 0 2rem;
+    gap: 1.5rem;
+    @include respond-to("medium") {
+      padding: 0;
+      padding-right: 2rem;
+    }
+    @include respond-to("x-small") {
+      position: absolute;
+      width: calc(100vw - 4rem);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 !important;
+    }
+  }
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: toRem(45);
+    height: toRem(45);
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.5rem;
+  }
+
+  &__text {
+    height: fit-content;
+  }
+
+  &__text p:first-child {
+    color: $color-p-0-light;
+    max-width: 150px !important;
+    @include truncate($text-buttons, $text-line-height-sm, 2);
+  }
+
+  &__text p:last-child {
+    color: $color-p-0;
+    max-width: 150px !important;
+    @include truncate($text-paragraphs-small, $text-line-height-md, 1);
+  }
+}
+
+.playerButton {
+  &--lg,
+  &--md,
+  &--sm {
+    border: 0;
+  }
+
+  &--lg {
+    width: toRem(57);
+    height: toRem(57);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-hover-1;
+    border-radius: 50%;
+    color: darken($color-p-0-light, 20%);
+    transition: background-color 0.4s $easing-expo;
+    font-size: toRem(18);
+  }
+
+  &--lg:hover {
+    background-color: lighten($color-hover-1, 30%);
+    color: $color-p-0-light;
+  }
+
+  &--lg:active {
+    background-color: lighten($color-hover-1, 70%);
+    color: $color-p-0-lighter;
+  }
+
+  &--md,
+  &--sm {
+    height: fit-content;
+    font-size: toRem(18);
+    color: darken($color-p-0-light, 20%);
+    transition: background-color 0.4s $easing-expo;
+    background-color: transparent;
+  }
+
+  &--md:hover,
+  &--sm:hover {
+    color: $color-p-0-light;
+  }
+
+  &--md:active,
+  &--sm:active {
+    color: $color-p-0-lighter;
+  }
+
+  &--sm {
+    font-size: toRem(16);
+    color: $color-borders;
+  }
+}
+
+.progress {
+  width: 100%;
+  height: toRem(8);
+  position: relative;
+  background-color: $color-p-1;
+  cursor: pointer;
+  @include respond-to("medium") {
+    min-width: 100px;
+  }
+
+  &__playedTime {
+    height: inherit;
+    position: absolute;
+    background-color: $color-primary;
+    transition: all 0.25s ease-out;
+    @include add-shadow($effect-progress-glow);
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+  }
+}
+
+.volume {
+  display: flex;
+  align-items: center;
+  width: 130px;
+
+  &__track {
+    position: relative;
+    width: 100%;
+    height: toRem(8);
+    background-color: $color-p-1;
+    cursor: pointer;
+    @include respond-to("medium") {
+      max-width: 60px !important;
+    }
+  }
+
+  &__value {
+    @extend .progress__playedTime;
+    width: 100%;
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+  }
+
+  .pointer {
+    display: inline-block;
+    width: toRem(20);
+    height: toRem(17);
+  }
+
+  svg {
+    transition: background-color 0.4s $easing-expo;
+  }
+
+  &:hover svg {
+    color: $color-p-0-lighter;
+  }
+}
+
+.progress,
+.volume {
+  input {
+    -webkit-appearance: none;
+    cursor: pointer;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: absolute;
+    background: #00000000;
+    top: 0;
+  }
+
+  input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  input::-moz-range-thumb {
+    width: 10px;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+audio {
+  display: none;
+}
