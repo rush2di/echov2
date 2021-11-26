@@ -107,15 +107,17 @@ function* requestDownload(action) {
   try {
     const user = yield select(makeSelectUser());
     const userDownloads = yield select(makeSelectUserDownloads());
-    const downloadLink = yield call(getDownloadTrack, action.payload.id);
-    yield call(
-      saveUserDownloadedTrack,
-      user.uid,
-      uniqBy([...userDownloads, action.payload], "id")
-    );
+    // const downloadLink = yield call(getDownloadTrack, action.payload.id); // Deprecated --token-access-bug 
+    if (user.uid) {
+      yield call(
+        saveUserDownloadedTrack,
+        user.uid,
+        uniqBy([...userDownloads, action.payload], "id")
+      );
+    }
     yield put(
       requestDownloadSuccess(
-        downloadLink.data.url,
+        `https://www.yt-download.org/api/button/mp3/${action.payload.id}`,
         uniqBy([...userDownloads, action.payload], "id")
       )
     );
@@ -134,7 +136,6 @@ function* requestLike(action) {
     yield call(saveUserLikedTrack, user.uid, action.payload);
     yield put(requestUserLikeSuccess(action.payload));
   } catch (err) {
-    console.log(err)
     yield put(requestUserLikeError());
   }
 }
