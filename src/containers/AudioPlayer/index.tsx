@@ -44,6 +44,7 @@ import { findAudioSrc, findTrackInfo } from "./utils";
 import { selectPlayerState } from "./selectors";
 import { AudioPlayerState } from "./types";
 import "./styles.scss";
+import { isTrackLiked } from "helpers/utils/syncedPlayerUtils/styles";
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -201,7 +202,7 @@ const AudioPlayer = () => {
     initHandleLike({
       data,
       targetID: id,
-      currentPlaylistID
+      currentPlaylistID,
     });
   };
 
@@ -302,6 +303,9 @@ const AudioPlayer = () => {
         <div className="audioPlayer__reactions">
           <PlayerButton
             {...playerReactionsDefaults[0]}
+            isLiked={isTrackLiked({
+              trackUID: !isNull(trackID) ? trackID : "",
+            })}
             onClick={handleLikeReaction}
             trackID={trackID}
           />
