@@ -37,10 +37,10 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
             id={worldwideCover.id}
             type={STACKED_UI}
             title={worldwideCover.title}
-            src={worldwideCover.picture}
+            src={worldwideCover.picture.replace("q_95", "q_95,f_jpg")}
             placeholder={worldwideCover.picture_small.replace(
               "q_95",
-              "q_50,w_50"
+              "q_50,w_50,f_jpg"
             )}
             srcSet={extractImageSizes(worldwideCover)}
             artists={extractFeaturedArtists(worldwideCover.tracks)}
@@ -52,10 +52,10 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
             id={moroccoCover.id}
             type={STACKED_UI}
             title={moroccoCover.title}
-            src={moroccoCover.picture}
+            src={moroccoCover.picture.replace("q_95", "q_95,f_jpg")}
             placeholder={moroccoCover.picture_small.replace(
               "q_95",
-              "q_50,w_50"
+              "q_50,w_50,f_jpg"
             )}
             srcSet={extractImageSizes(moroccoCover)}
             artists={extractFeaturedArtists(moroccoCover.tracks)}
@@ -74,8 +74,8 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
               id={data.id}
               type={CARD_UI}
               title={data.title}
-              src={data.picture}
-              placeholder={data.picture_small.replace("q_95", "q_50,w_50")}
+              src={data.picture.replace("q_95", "q_95,f_jpg")}
+              placeholder={data.picture_small.replace("q_95", "q_50,w_50,f_jpg")}
               srcSet={extractImageSizes(data)}
               artists={extractFeaturedArtists(data.tracks)}
               onClick={handleClick}
