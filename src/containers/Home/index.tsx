@@ -37,11 +37,11 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
             id={worldwideCover.id}
             type={STACKED_UI}
             title={worldwideCover.title}
-            src={worldwideCover.picture.replace("q_95", "q_95,f_jpg").replace("f_auto", "")}
+            src={worldwideCover.picture.replace("q_95", "q_95,f_jpg").replace("f_auto,", "")}
             placeholder={worldwideCover.picture_small.replace(
               "q_95",
               "q_75,w_50,f_jpg"
-            ).replace("f_auto", "")}
+            ).replace("f_auto,", "")}
             srcSet={extractImageSizes(worldwideCover)}
             artists={extractFeaturedArtists(worldwideCover.tracks)}
             onClick={handleClick}
@@ -52,11 +52,11 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
             id={moroccoCover.id}
             type={STACKED_UI}
             title={moroccoCover.title}
-            src={moroccoCover.picture.replace("q_95", "q_95,f_jpg").replace("f_auto", "")}
+            src={moroccoCover.picture.replace("q_95", "q_95,f_jpg").replace("f_auto,", "")}
             placeholder={moroccoCover.picture_small.replace(
               "q_95",
               "q_75,w_50,f_jpg"
-            ).replace("f_auto", "")}
+            ).replace("f_auto,", "")}
             srcSet={extractImageSizes(moroccoCover)}
             artists={extractFeaturedArtists(moroccoCover.tracks)}
             onClick={handleClick}
@@ -74,8 +74,8 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
               id={data.id}
               type={CARD_UI}
               title={data.title}
-              src={data.picture.replace("q_95", "q_95,f_jpg").replace("f_auto", "")}
-              placeholder={data.picture_small.replace("q_95", "q_75,w_50,f_jpg").replace("f_auto", "")}
+              src={data.picture.replace("q_95", "q_95,f_jpg").replace("f_auto,", "")}
+              placeholder={data.picture_small.replace("q_95", "q_75,w_50,f_jpg").replace("f_auto,", "")}
               srcSet={extractImageSizes(data)}
               artists={extractFeaturedArtists(data.tracks)}
               onClick={handleClick}
