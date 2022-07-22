@@ -46,7 +46,6 @@ function* requestPlaylists() {
     yield call(serilizeData, response.data);
     yield put(requestPlaylistsDataSuccess(response.data));
   } catch (err) {
-    console.log(err);
     yield put(requestPlaylistsDataError(err));
   }
 }
@@ -68,8 +67,10 @@ function* postAuthRegister(action) {
       response.user,
       action.payload.fullname
     );
+    console.log("post auth", { response, userData });
     yield put(authRegisterSuccess(userData.data));
-  } catch (err) {
+  } catch (error) {
+    console.log({ error });
     yield put(authRegisterError());
   }
 }
@@ -80,6 +81,7 @@ function* postAuthLogin(action) {
     const userData = yield call(getUserData, response.user);
     yield put(authLoginSuccess(userData.data));
   } catch (err) {
+    console.log({ err });
     const newError = err as any;
     const errorMessage =
       newError.code === "auth/wrong-password" ? "Wrong password" : undefined;
@@ -107,7 +109,7 @@ function* requestDownload(action) {
   try {
     const user = yield select(makeSelectUser());
     const userDownloads = yield select(makeSelectUserDownloads());
-    // const downloadLink = yield call(getDownloadTrack, action.payload.id); // Deprecated --token-access-bug 
+    // const downloadLink = yield call(getDownloadTrack, action.payload.id); // Deprecated --token-access-bug
     if (user.uid) {
       yield call(
         saveUserDownloadedTrack,

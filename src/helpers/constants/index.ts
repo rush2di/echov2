@@ -13,9 +13,11 @@ const authImage = {
   srcSet: "",
 };
 
+const _MOBILE_BREAKPOINT = "767px";
+
 authImage.srcSet = `
       ${authImage.sm} 320w,
       ${authImage.md} 700w, 
       ${authImage.xl} 2000w`;
 
-export { authImage };
+export { authImage, _MOBILE_BREAKPOINT };

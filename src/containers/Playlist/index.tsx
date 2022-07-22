@@ -36,8 +36,8 @@ import {
   makeSelectTrackIndex,
 } from "./selectors";
 import { artistsSum, topArtistsTracks } from "./utils";
-import "./styles.scss";
 import { isTrackLiked } from "helpers/utils/syncedPlayerUtils/styles";
+import "./styles.scss";
 
 const playlistAudioState = createStructuredSelector({
   pendingDownloadsUIDs: makeSelectPendingDownloads(),
