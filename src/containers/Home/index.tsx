@@ -56,11 +56,11 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
             id={moroccoCover.id}
             type={STACKED_UI}
             title={moroccoCover.title}
-            src={moroccoCover.picture}
+            src={moroccoCover.picture.replace("q_95", "q_95,f_jpg").replace("f_auto,", "")}
             placeholder={moroccoCover.picture_small.replace(
               "q_95",
-              "q_50,w_50"
-            )}
+              "q_75,w_50,f_jpg"
+            ).replace("f_auto,", "")}
             srcSet={extractImageSizes(moroccoCover)}
             artists={extractFeaturedArtists(moroccoCover.tracks)}
             onClick={handleClick}
