@@ -46,6 +46,8 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
   const dispatch = useDispatch();
   const { formFields, isSubmiting } = useSelector(liveAuthState);
 
+  console.log("AuthFormsContainer", { formFields });
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorFields, setErrorFields] = useState<ErrorStateType>({
     fullname: { success: false, error: false, feedback: "" },
@@ -62,7 +64,11 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
     e.preventDefault();
     const successCheck = authFormSuccessCheck(errorFields);
     const newFormFields = formFields as AuthFormFieldsType<string>;
+
+    console.log("AuthForms", newFormFields);
+
     if (successCheck) {
+      console.log("AuthForms inside successCheck", newFormFields);
       type === LOGIN_AUTH_TYPE
         ? dispatch(authLoginStart(newFormFields))
         : dispatch(authRegisterStart(newFormFields));
@@ -105,7 +111,14 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
   }, []);
 
   return (
-    <form className="authForm" autoComplete="off" onSubmit={handleSubmit}>
+    <form
+      className="authForm"
+      autoComplete="off"
+      onSubmit={(e) => {
+        console.log("catched handle submit");
+        handleSubmit(e);
+      }}
+    >
       <div className="authForm__body">
         {isRegister && (
           <InputField

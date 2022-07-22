@@ -12,6 +12,8 @@ import { isNull } from "lodash";
 
 import DisclaimerContainer from "containers/DisclaimerContainer";
 import ErrorBoundary from "components/ErrorBoundary";
+import HomeSkeleton from "containers/Home/skeleton";
+import PlaylistSkeleton from "containers/Playlist/skeleton";
 import Spinner from "components/Spinner";
 import Layout from "containers/Layout";
 
@@ -64,7 +66,7 @@ const App = () => {
       });
     });
   }, []);
-
+  
   return (
     <Router>
       <div className="app">
@@ -73,60 +75,60 @@ const App = () => {
             <ToastContainer {...toastProps} />
             {!isNull(defaultPlaylist) && <DisclaimerContainer />}
             <ErrorBoundary isError={isError}>
-              <SyncedRoute exact path="/" dependency={data}>
-                <HomePage data={data as PlaylistDataType[]} />
-              </SyncedRoute>
-              <SyncedRoute exact path="/playlist" dependency={data}>
+              <Route exact path="/">
+                {isNull(data) ? (
+                  <HomeSkeleton />
+                ) : (
+                  <HomePage data={data as PlaylistDataType[]} />
+                )}
+              </Route>
+              <Route exact path="/playlist">
                 {isNull(defaultPlaylist) ? (
                   <PlaylistPage data={data as PlaylistDataType[]} />
                 ) : (
                   <Redirect to={`/playlist/${defaultPlaylist}`} />
                 )}
-              </SyncedRoute>
-              <SyncedRoute path="/playlist/:id" dependency={data}>
-                <PlaylistPage data={data as PlaylistDataType[]} />
-              </SyncedRoute>
-              <SyncedRoute exact path="/login" dependency={data}>
+              </Route>
+              <Route path="/playlist/:id">
+                {isNull(data) ? (
+                  <PlaylistSkeleton />
+                ) : (
+                  <PlaylistPage data={data as PlaylistDataType[]} />
+                )}
+              </Route>
+              <Route exact path="/login">
                 {isNull(currentUser.uid) ? (
                   <AuthPage type={LOGIN_AUTH_TYPE} />
                 ) : (
                   <Redirect exact to="/" />
                 )}
-              </SyncedRoute>
-              <SyncedRoute exact path="/register" dependency={data}>
+              </Route>
+              <Route exact path="/register">
                 {isNull(currentUser.uid) ? (
                   <AuthPage type={REGISTER_AUTH_TYPE} />
                 ) : (
                   <Redirect exact to="/" />
                 )}
-              </SyncedRoute>
-              <SyncedRoute exact path="/downloads" dependency={currentUser.uid}>
+              </Route>
+              <Route exact path="/downloads">
                 {isNull(currentUser.uid) ? (
                   <Redirect exact to="/" />
                 ) : (
                   <Downloads currentUser={currentUser} />
                 )}
-              </SyncedRoute>
-              <SyncedRoute exact path="/likes" dependency={currentUser.uid}>
+              </Route>
+              <Route exact path="/likes">
                 {isNull(currentUser.uid) ? (
                   <Redirect exact to="/" />
                 ) : (
                   <Likes currentUser={currentUser} />
                 )}
-              </SyncedRoute>
+              </Route>
             </ErrorBoundary>
           </Layout>
         </Switch>
       </div>
     </Router>
-  );
-};
-
-const SyncedRoute = ({ dependency, path, exact = false, children }) => {
-  return (
-    <Route {...{ path, exact }}>
-      {isNull(dependency) ? <Spinner /> : children}
-    </Route>
   );
 };
 

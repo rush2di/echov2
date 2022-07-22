@@ -12,7 +12,12 @@ import {
 import { CARD_UI, STACKED_UI } from "components/PlaylistCover/constants";
 
 import { FIRST_HEADING, SECOND_HEADING } from "./constants";
-import { extractFeaturedArtists, extractImageSizes } from "./utils";
+import {
+  extractFeaturedArtists,
+  extractImageSizes,
+  fixImageFormat,
+} from "./utils";
+import Skeleton from "./skeleton";
 
 const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
   const dispatch = useDispatch();
@@ -28,6 +33,8 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
     dispatch(setDefaultPlaylist(worldwideCover.id));
   }, []);
 
+  console.log({ worldwideCover, fix: fixImageFormat([worldwideCover]) });
+
   return (
     <div className="py-1">
       <h1 className="txt-h4 txt-prim mb-2">{FIRST_HEADING}</h1>
@@ -38,10 +45,7 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
             type={STACKED_UI}
             title={worldwideCover.title}
             src={worldwideCover.picture}
-            placeholder={worldwideCover.picture_small.replace(
-              "q_95",
-              "q_50,w_50"
-            )}
+            placeholder={worldwideCover.picture_small}
             srcSet={extractImageSizes(worldwideCover)}
             artists={extractFeaturedArtists(worldwideCover.tracks)}
             onClick={handleClick}
@@ -75,7 +79,7 @@ const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
               type={CARD_UI}
               title={data.title}
               src={data.picture}
-              placeholder={data.picture_small.replace("q_95", "q_50,w_50")}
+              placeholder={data.picture_small}
               srcSet={extractImageSizes(data)}
               artists={extractFeaturedArtists(data.tracks)}
               onClick={handleClick}
