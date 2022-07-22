@@ -5,11 +5,16 @@ import createSagaMiddleware from "redux-saga";
 import rootReducer from "store/reducer";
 import rootSaga from "store/saga";
 
+const isProductionBuild = process.env.NODE_ENV === "production";
+
 const sagaMiddleWare = createSagaMiddleware();
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleWare))
+  // @ts-ignore: Unreachable code error
+  isProductionBuild
+    ? applyMiddleware(sagaMiddleWare)
+    : composeWithDevTools(applyMiddleware(sagaMiddleWare))
 );
 
 sagaMiddleWare.run(rootSaga);

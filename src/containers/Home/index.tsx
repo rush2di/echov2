@@ -17,7 +17,6 @@ import {
   extractImageSizes,
   fixImageFormat,
 } from "./utils";
-import Skeleton from "./skeleton";
 
 const HomeContainer = ({ worldwideCover, moroccoCover, data }) => {
   const dispatch = useDispatch();
