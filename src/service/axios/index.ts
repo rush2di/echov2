@@ -17,7 +17,22 @@ const getPlaylistData = async (playlistID: string | number) => {
 };
 
 const getDownloadTrack = async (trackID: string | number) => {
-  return await request.get(`/api/track/${trackID}`);
+  const options = {
+    method: "GET",
+    url: "https://t-one-youtube-converter.p.rapidapi.com/api/v1/createProcess",
+    params: {
+      url: `https://www.youtube.com/watch?v=${trackID}`,
+      format: "mp3",
+      responseFormat: "json",
+      lang: "en",
+    },
+    headers: {
+      "X-RapidAPI-Key": "cb947b6b76msh4af8d41eba1e7c1p10758djsnf74806413b8d",
+      "X-RapidAPI-Host": "t-one-youtube-converter.p.rapidapi.com",
+    },
+  };
+
+  return await axios.request(options as any);
 };
 
 const getUserData = async (user: any) => {

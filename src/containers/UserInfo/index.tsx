@@ -32,14 +32,15 @@ const UserInfo = ({ currentUser, pageType }: UserInfoProps) => {
           <Table title={`${currentUser.fullname}'s ${pageType}`}>
             {targetData.map((track) => {
               return (
-                <Avatar
-                  key={uuid()}
-                  includeLabels
-                  image={track.artist_picture}
-                  title={track.artist_name}
-                  songNames={track.title}
-                  size={SM_SIZE}
-                />
+                <li key={uuid()}>
+                  <Avatar
+                    includeLabels
+                    image={track.artist_picture}
+                    title={track.artist_name}
+                    songNames={track.title}
+                    size={SM_SIZE}
+                  />
+                </li>
               );
             })}
           </Table>

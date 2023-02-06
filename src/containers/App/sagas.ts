@@ -109,7 +109,7 @@ function* requestDownload(action) {
   try {
     const user = yield select(makeSelectUser());
     const userDownloads = yield select(makeSelectUserDownloads());
-    // const downloadLink = yield call(getDownloadTrack, action.payload.id); // Deprecated --token-access-bug
+    const downloadLink = yield call(getDownloadTrack, action.payload.id);
     if (user.uid) {
       yield call(
         saveUserDownloadedTrack,
@@ -119,7 +119,7 @@ function* requestDownload(action) {
     }
     yield put(
       requestDownloadSuccess(
-        `https://www.yt-download.org/api/button/mp3/${action.payload.id}`,
+        downloadLink,
         uniqBy([...userDownloads, action.payload], "id")
       )
     );
