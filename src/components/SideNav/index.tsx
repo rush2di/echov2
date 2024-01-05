@@ -27,24 +27,15 @@ const SideNav = ({ onItemClick, onClick, isOpen, isUserConnected }) => {
           </div>
           <div className="sideNav__body mt-3 mt-md-2">
             <h2 className="txt-sm-caps">{sideNavText.menu}</h2>
-            {menuItemsMenu.map((item) => {
-              return <MenuItem onClick={onItemClick} key={uuid()} {...item} />;
+            {menuItemsMenu.map((item, index) => {
+              return (
+                <MenuItem
+                  onClick={onItemClick}
+                  key={"menu-item-" + index}
+                  {...item}
+                />
+              );
             })}
-          </div>
-          <hr className="mx-0 my-2" />
-          <div className="sideNav__body">
-            <h2 className="txt-sm-caps">{sideNavText.account}</h2>
-            {isUserConnected
-              ? menuItemsAccount.map((item) => {
-                  return (
-                    <MenuItem onClick={onItemClick} key={uuid()} {...item} />
-                  );
-                })
-              : menuItemsAuth.map((item) => {
-                  return (
-                    <MenuItem onClick={onItemClick} key={uuid()} {...item} />
-                  );
-                })}
           </div>
         </div>
       </ScrollableArea>

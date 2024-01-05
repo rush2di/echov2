@@ -46,13 +46,13 @@ const PlaylistItem = ({
           <p className="txt-md">{title}</p>
           <p className="txt-md">{artist}</p>
           <div className="reactions">
-            <button
+            {/* <button
               tabIndex={index}
               className="like"
               onClick={(e) => handleLikeReaction(e, id)}
             >
               <FontAwesomeIcon icon={[iconPrefix, ICON_HEART]} />
-            </button>
+            </button> */}
             <button
               tabIndex={index}
               className="download"
