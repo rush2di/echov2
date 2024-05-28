@@ -109,7 +109,8 @@ function* requestDownload(action) {
   try {
     const user = yield select(makeSelectUser());
     const userDownloads = yield select(makeSelectUserDownloads());
-    const downloadLink = yield call(getDownloadTrack, action.payload.id); // Deprecated --token-access-bug
+    const downloadLink = yield call(getDownloadTrack, action.payload.id);
+    console.log({ downloadLink });
     if (user.uid) {
       yield call(
         saveUserDownloadedTrack,

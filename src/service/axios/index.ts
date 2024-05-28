@@ -17,6 +17,7 @@ const getPlaylistData = async (playlistID: string | number) => {
 };
 
 const getDownloadTrack = async (trackID: string | number) => {
+  console.log("getDownloadTrack", trackID);
   return await axios.get(`${BACKEND_YT_URL}/api/fetchVideo`, {
     params: { text: trackID },
   });
