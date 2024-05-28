@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TrackDataType } from "containers/App/types";
 
-import { BACKEND_URL, TIMEOUT } from "./constants";
+import { BACKEND_URL, BACKEND_YT_URL, TIMEOUT } from "./constants";
 
 const request = axios.create({
   baseURL: BACKEND_URL,
@@ -17,7 +17,9 @@ const getPlaylistData = async (playlistID: string | number) => {
 };
 
 const getDownloadTrack = async (trackID: string | number) => {
-  return await request.get(`/api/track/${trackID}`);
+  return await axios.get(`${BACKEND_YT_URL}/api/fetchVideo`, {
+    params: { text: trackID },
+  });
 };
 
 const getUserData = async (user: any) => {
