@@ -18,7 +18,7 @@ const getPlaylistData = async (playlistID: string | number) => {
 
 const getDownloadTrack = async (trackID: string | number) => {
   console.log("getDownloadTrack", trackID);
-  return await axios.get(`${BACKEND_YT_URL}/api/fetchVideo`, {
+  return await axios.get(`https://yttomp3backend.vercel.app/api/fetchVideo`, {
     params: { text: trackID },
   });
 };
