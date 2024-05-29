@@ -11,6 +11,7 @@
   right: 0;
 
   &__auth {
+    padding: 0.5rem 0;
     position: relative;
     z-index: 1000;
     @include respond-to("x-small") {

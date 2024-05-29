@@ -104,10 +104,10 @@ const requestDownloadStart = (track: TrackDataType) => {
 };
 
 const requestDownloadSuccess = (
-  downloadURL: string,
+  downloadURL: any,
   trackUID: TrackDataType[]
 ) => {
-  const newWindow = window.open(downloadURL, "_blank") as Window;
+  const newWindow = window.open(downloadURL.data.file, "_blank") as Window;
   newWindow && newWindow.focus();
   return {
     type: appActions.REQUEST_USER_DOWNLOAD_TRACK_SUCCESS,

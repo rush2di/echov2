@@ -159,12 +159,12 @@ const AuthFormsContainer = ({ type }: AuthFormsContainerProps) => {
       </div>
       <Button
         icon={["fab", "google"]}
-        label={FACEBOOK_BTN_TEXT}
+        label={GOOGLE_BTN_TEXT}
         classNames={"btn--flex btn--google btn--fluid"}
       />
       <Button
         icon={["fab", "facebook"]}
-        label={GOOGLE_BTN_TEXT}
+        label={FACEBOOK_BTN_TEXT}
         classNames={"btn--flex btn--facebook btn--fluid mt-1"}
       />
     </form>
