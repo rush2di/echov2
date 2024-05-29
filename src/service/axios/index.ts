@@ -27,13 +27,7 @@ const getPlaylistData = async (playlistID: string | number) => {
 };
 
 const getDownloadTrack = async (trackID: string | number) => {
-  return await AxiosService(
-    "https://yttomp3backend.vercel.app/api/fetchVideo",
-    {
-      method: "post",
-      data: { text: trackID },
-    }
-  );
+  return await request.get(`/api/download/track/${trackID}`);
 };
 
 const getUserData = async (user: any) => {
