@@ -17,13 +17,14 @@ const getPlaylistData = async (playlistID: string | number) => {
 };
 
 const getDownloadTrack = async (trackID: string | number) => {
-  console.log("getDownloadTrack", trackID);
-  return await axios({
+  axios({
     method: "post",
     headers: { "Content-Type": "application/json" },
     url: "https://yttomp3backend.vercel.app/api/fetchVideo",
     data: { text: trackID },
-  }); /* axios.post(
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err)); /* axios.post(
     `https://yttomp3backend.vercel.app/api/fetchVideo` as string,
     { text: trackID }
   ); */
