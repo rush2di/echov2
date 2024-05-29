@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 import { appActions, authActionTypes, toastMessages } from "./constants";
 import { TrackDataType } from "./types";
+import axios from "axios";
 
 const setSerializedState = (payload) => {
   return {

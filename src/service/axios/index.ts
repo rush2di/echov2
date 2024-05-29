@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TrackDataType } from "containers/App/types";
 
-import { BACKEND_URL, TIMEOUT } from "./constants";
+import { BACKEND_URL, BACKEND_YT_URL, TIMEOUT } from "./constants";
 
 const request = axios.create({
   baseURL: BACKEND_URL,
@@ -17,22 +17,10 @@ const getPlaylistData = async (playlistID: string | number) => {
 };
 
 const getDownloadTrack = async (trackID: string | number) => {
-  const options = {
-    method: "GET",
-    url: "https://t-one-youtube-converter.p.rapidapi.com/api/v1/createProcess",
-    params: {
-      url: `https://www.youtube.com/watch?v=${trackID}`,
-      format: "mp3",
-      responseFormat: "json",
-      lang: "en",
-    },
-    headers: {
-      "X-RapidAPI-Key": "cb947b6b76msh4af8d41eba1e7c1p10758djsnf74806413b8d",
-      "X-RapidAPI-Host": "t-one-youtube-converter.p.rapidapi.com",
-    },
-  };
-
-  return await axios.request(options as any);
+  console.log("getDownloadTrack", trackID);
+  return await axios.get(`${BACKEND_YT_URL}/api/fetchVideo`, {
+    params: { text: trackID },
+  });
 };
 
 const getUserData = async (user: any) => {

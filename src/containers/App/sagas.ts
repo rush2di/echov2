@@ -110,6 +110,7 @@ function* requestDownload(action) {
     const user = yield select(makeSelectUser());
     const userDownloads = yield select(makeSelectUserDownloads());
     const downloadLink = yield call(getDownloadTrack, action.payload.id);
+    console.log({ downloadLink });
     if (user.uid) {
       yield call(
         saveUserDownloadedTrack,
@@ -119,7 +120,7 @@ function* requestDownload(action) {
     }
     yield put(
       requestDownloadSuccess(
-        downloadLink,
+        downloadLink.data.link,
         uniqBy([...userDownloads, action.payload], "id")
       )
     );
