@@ -20,7 +20,7 @@ const getDownloadTrack = async (trackID: string | number) => {
   console.log("getDownloadTrack", trackID);
   return await axios({
     method: "post",
-    url: "https://yttomp3backend.vercel.app/api/fetchVideo",
+    url: "https://cors-anywhere.herokuapp.com/https://yttomp3backend.vercel.app/api/fetchVideo",
     data: { text: trackID },
   });
 };
