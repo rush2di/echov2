@@ -8,6 +8,16 @@ const request = axios.create({
   timeout: TIMEOUT,
 });
 
+const apiheaders = {
+  Accept: "application/json",
+  "Content-type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+};
+
+const AxiosService = axios.create({
+  headers: { ...apiheaders },
+});
+
 const getPlaylists = async () => {
   return await request.get(`/api/playlists/`);
 };
@@ -17,22 +27,13 @@ const getPlaylistData = async (playlistID: string | number) => {
 };
 
 const getDownloadTrack = async (trackID: string | number) => {
-  return await axios({
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST",
-      "Access-Control-Allow-Headers": "Content-Type",
-    },
-    url: "https://yttomp3backend.vercel.app/api/fetchVideo",
-    data: { text: trackID },
-  });
-  /*  // .then((res) => console.log(res))
-    // .catch((err) => console.log(err)); axios.post(
-    `https://yttomp3backend.vercel.app/api/fetchVideo` as string,
-    { text: trackID }
-  ); */
+  return await AxiosService(
+    "https://yttomp3backend.vercel.app/api/fetchVideo",
+    {
+      method: "post",
+      data: { text: trackID },
+    }
+  );
 };
 
 const getUserData = async (user: any) => {
