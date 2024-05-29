@@ -1,40 +1,38 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
+import Avatar from "components/Avatar";
 import InputField from "components/InputField";
+import DropdownMenu from "components/DropownMenu";
 
-import {
-  authLoginDefaults,
-  authRegisterDefaults,
-  inputFieldSearchBar,
-} from "./constants";
+import { inputFieldSearchBar } from "./constants";
 import { TopNavItemProps, TopNavProps } from "./types";
 import "./styles.scss";
-import Avatar from "components/Avatar";
-import DropdownMenu from "components/DropownMenu";
 
 const TopNav = ({ handleLogout, isUserConnected, userInfo }: TopNavProps) => (
   <div className="container__fluid py-1 topNav">
     <div className="row">
-      <div className="col-4 col-xsm-12">
+      <div style={{ display: "none" }} className="col-4 col-xsm-12">
         <InputField {...inputFieldSearchBar} />
       </div>
       <div className="topNav__auth ml-auto mt-1">
-        {isUserConnected && [
-          <Avatar
-            size="sm"
-            title={userInfo.fullname}
-            image={userInfo.avatar}
-          />,
-          <div className="hover-area">
-            <DropdownMenu>
-              <div>Downloads</div>
-              <div>Favorites</div>
-              <div>Copouns</div>
-              <div onClick={handleLogout}>Logout</div>
-            </DropdownMenu>
-          </div>,
-        ]}
+        {isUserConnected && (
+          <>
+            <Avatar
+              size="sm"
+              title={userInfo.fullname}
+              image={userInfo.avatar}
+            />
+            <div className="hover-area">
+              <DropdownMenu>
+                <NavLink to="/downloads">Downloads</NavLink>
+                <NavLink to="/likes">Favorites</NavLink>
+                <div>Copouns</div>
+                <div onClick={handleLogout}>Logout</div>
+              </DropdownMenu>
+            </div>
+          </>
+        )}
       </div>
     </div>
   </div>

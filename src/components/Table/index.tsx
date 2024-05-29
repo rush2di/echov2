@@ -10,16 +10,18 @@ const Table = ({ title = TABLE_TITLE, label, children }: ArtistsTableProps) => {
       <div className="Table__head">
         <h3 className="txt-btn txt-sec txt-no-wrap">{title}</h3>
         <div className="txt-muted txt-sm">
-          {label && [
-            <div className="icon mx-1">
-              <FontAwesomeIcon icon={tableIcon} />
-            </div>,
-            <p>{label}</p>,
-          ]}
+          {label && (
+            <>
+              <div className="icon mx-1">
+                <FontAwesomeIcon icon={tableIcon} />
+              </div>
+              <p>{label}</p>
+            </>
+          )}
         </div>
       </div>
       <hr className="mt-1 mb-2 mx-0" />
-      <div className="Table__body">{children}</div>
+      <ul className="Table__body">{children}</ul>
     </div>
   );
 };

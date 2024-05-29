@@ -147,14 +147,15 @@ const PlaylistContainer = ({ data }) => {
                 >
                   {topArtistsTracks(playlistTracks)?.map((val) => {
                     return (
-                      <Avatar
-                        key={uuidv4()}
-                        includeLabels
-                        image={val.artist_picture}
-                        title={val.artist_name}
-                        songNames={val.tracks}
-                        size={SM_SIZE}
-                      />
+                      <li key={uuidv4()}>
+                        <Avatar
+                          includeLabels
+                          image={val.artist_picture}
+                          title={val.artist_name}
+                          songNames={val.tracks}
+                          size={SM_SIZE}
+                        />
+                      </li>
                     );
                   })}
                 </Table>
